@@ -4,6 +4,8 @@ A Word-style Markdown reader and editor for Windows 11.
 
 MarkNote gives you the familiar ribbon, tabs and status bar of a word processor, while your documents stay plain `.md` files. No lock-in, no proprietary format.
 
+![MarkNote in live preview: Markdown on the left, the formatted document on the right](docs/screenshot-split-en.png)
+
 ## Features
 
 - **Three views:** raw Markdown with syntax highlighting, live preview (Markdown and formatted document side by side), and reading mode.
