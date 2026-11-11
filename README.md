@@ -58,6 +58,11 @@ All user interface text lives in `renderer/strings.js` as rows of `[Danish, Engl
 
 Questions and bug reports: please open an [issue](https://github.com/Cphmartinus/marknote/issues).
 
+## Code signing and privacy
+
+- [Code signing policy](CODE_SIGNING_POLICY.md)
+- [Privacy policy](PRIVACY.md): MarkNote has no telemetry and sends no data anywhere.
+
 ## License
 
 [MIT](LICENSE)
