@@ -39,7 +39,9 @@ button { font: inherit; color: inherit; cursor: default; }
 [hidden] { display: none !important; }
 
 /* Titel / hurtig adgang */
-#titlebar { display: flex; align-items: center; background: var(--chrome); color: var(--chrome-text); height: 32px; padding: 0 6px; flex: none; }
+#titlebar { display: flex; align-items: center; background: var(--chrome); color: var(--chrome-text); height: 32px; padding: 0 calc(100vw - env(titlebar-area-x, 100vw) - env(titlebar-area-width, 0px)) 0 8px; flex: none; -webkit-app-region: drag; user-select: none; }
+#titlebar button, #titlebar .qsep { -webkit-app-region: no-drag; }
+.appicon { margin-right: 8px; border-radius: 3px; -webkit-app-region: no-drag; }
 #titlebar .qat, #titlebar .qat-right { flex: 1; display: flex; align-items: center; gap: 2px; }
 #titlebar .qat-right { justify-content: flex-end; font-size: 12px; opacity: .85; padding-right: 6px; }
 #doctitle { flex: 2; text-align: center; font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

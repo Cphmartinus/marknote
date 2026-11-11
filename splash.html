@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' file:; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#2b579a;color:#fff;font-family:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;user-select:none;-webkit-app-region:drag}
+  .wrap{position:absolute;inset:0;padding:64px 40px 0}
+  .row{display:flex;align-items:center;gap:24px}
+  img{width:96px;height:96px}
+  h1{margin:0;font-size:46px;font-weight:600;letter-spacing:.2px}
+  .sub{margin-top:6px;font-size:17px;color:#cfdbee}
+  .bar{position:absolute;left:40px;right:40px;bottom:60px;height:4px;background:rgba(255,255,255,.25);overflow:hidden;border-radius:2px}
+  .bar i{position:absolute;top:0;bottom:0;width:35%;background:#fff;border-radius:2px;animation:slide 1.4s ease-in-out infinite}
+  @keyframes slide{0%{left:-35%}100%{left:100%}}
+  .msg{position:absolute;left:40px;bottom:30px;font-size:13px;color:#cfdbee}
+  .ver{position:absolute;right:40px;bottom:30px;font-size:12px;color:#9fb6da}
+</style></head>
+<body><div class="wrap"><div class="row"><img src="build/icon.png" alt=""><div><h1>MarkNote</h1><div class="sub">Markdown reader &amp; editor</div></div></div></div>
+<div class="bar"><i></i></div><div class="msg" id="m">Loading…</div><div class="ver" id="v"></div>
+<script>
+  const T={da:'Indlæser…',en:'Loading…',de:'Wird geladen…',fr:'Chargement…',es:'Cargando…',it:'Caricamento…',nl:'Laden…',pt:'A carregar…',pl:'Wczytywanie…',sv:'Läser in…',nb:'Laster…',no:'Laster…',nn:'Laster…',fi:'Ladataan…',is:'Hleð…'};
+  const q=new URLSearchParams(location.search); const l=(q.get('lang')||'en').toLowerCase().split(/[-_]/)[0];
+  document.getElementById('m').textContent=T[l]||T.en; document.getElementById('v').textContent=q.get('v')?('v'+q.get('v')):'';
+</script></body></html>

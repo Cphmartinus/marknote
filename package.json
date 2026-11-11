@@ -38,6 +38,8 @@
       "buildResources": "build"
     },
     "files": [
+      "splash.html",
+      "build/splash.bmp",
       "main.js",
       "preload.js",
       "lib/**",
@@ -75,6 +77,7 @@
       ]
     },
     "portable": {
+      "splashImage": "build/splash.bmp",
       "artifactName": "MarkNote-${version}-portable.exe"
     },
     "nsis": {

@@ -692,6 +692,10 @@
     state.theme = t; store.set('theme', t);
     document.documentElement.dataset.theme = t;
     $$('[data-set-theme]').forEach((b) => b.classList.toggle('on', b.dataset.setTheme === t));
+    if (api.setOverlay) {
+      const cs = getComputedStyle(document.documentElement);
+      api.setOverlay({ color: cs.getPropertyValue('--chrome').trim() || '#2b579a', symbol: cs.getPropertyValue('--chrome-text').trim() || '#ffffff' });
+    }
   }
   function setZoom(z) {
     z = Math.min(200, Math.max(60, z));

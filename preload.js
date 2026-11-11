@@ -21,6 +21,7 @@ contextBridge.exposeInMainWorld('api', {
   pathForFile: (f) => { try { return webUtils.getPathForFile(f); } catch (_) { return ''; } },
   systemLocale: (() => { try { return ipcRenderer.sendSync('sys:locale'); } catch (_) { return ''; } })(),
   setLang: inv('lang:set'),
+  setOverlay: inv('win:overlay'),
   onOpenPath: (cb) => ipcRenderer.on('app:open-path', (_e, p) => cb(p)),
   onRequestClose: (cb) => ipcRenderer.on('app:request-close', () => cb()),
 });

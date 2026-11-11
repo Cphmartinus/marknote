@@ -17,6 +17,10 @@ let win = null;
 let L = {};
 const S = (k, d) => L[k] || d;
 ipcMain.on('sys:locale', (e) => { e.returnValue = app.getLocale(); });
+ipcMain.handle('win:overlay', (_e, { color, symbol }) => {
+  try { if (win && typeof win.setTitleBarOverlay === 'function') win.setTitleBarOverlay({ color, symbolColor: symbol, height: 32 }); } catch (_) {}
+  return true;
+});
 ipcMain.handle('lang:set', (_e, { spell, strings, lang }) => {
   L = strings || {};
   L.lang = lang || 'da';
@@ -52,8 +56,11 @@ function fileFromArgv(argv) {
 function createWindow() {
   win = new BrowserWindow({
     width: 1280, height: 820, minWidth: 760, minHeight: 480,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: '#2b579a',
+    show: false,
     title: 'MarkNote',
+    titleBarStyle: 'hidden',
+    titleBarOverlay: { color: '#2b579a', symbolColor: '#ffffff', height: 32 },
     icon: path.join(__dirname, 'build', 'icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -63,6 +70,10 @@ function createWindow() {
   });
   win.webContents.session.setSpellCheckerLanguages(['da', 'en-US']);
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
+  win.once('ready-to-show', () => {
+    const wait = Math.max(0, SPLASH_MIN_MS - (Date.now() - splashShownAt));
+    setTimeout(() => { closeSplash(); if (win) { win.show(); win.focus(); } }, wait);
+  });
 
   win.webContents.setWindowOpenHandler(({ url }) => {
     openExternal(url);
@@ -86,8 +97,29 @@ function openExternal(url) {
 }
 
 Menu.setApplicationMenu(null);
+
+/* ---------- splash-skærm (som i Word) ---------- */
+const SPLASH_MIN_MS = 1100;
+let splash = null;
+let splashShownAt = Date.now();
+function showSplash() {
+  try {
+    splash = new BrowserWindow({
+      width: 480, height: 300, frame: false, resizable: false, movable: true, center: true,
+      alwaysOnTop: true, skipTaskbar: true, show: false, backgroundColor: '#2b579a',
+      icon: path.join(__dirname, 'build', 'icon.png'),
+      webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false },
+    });
+    splash.once('ready-to-show', () => { if (splash) { splash.show(); splashShownAt = Date.now(); } });
+    splash.loadFile(path.join(__dirname, 'splash.html'), { query: { lang: app.getLocale(), v: app.getVersion() } });
+    splash.on('closed', () => (splash = null));
+  } catch (_) { splash = null; }
+}
+function closeSplash() { if (splash && !splash.isDestroyed()) splash.destroy(); splash = null; }
+
 app.whenReady().then(() => {
   pendingOpen = fileFromArgv(process.argv.slice(1));
+  showSplash();
   createWindow();
 });
 app.on('window-all-closed', () => app.quit());
