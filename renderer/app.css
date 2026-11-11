@@ -149,7 +149,7 @@ input[type=range] { accent-color: var(--accent); width: 110px; }
 
 #previewWrap { overflow-y: auto; background: var(--desk); }
 #preview { background: var(--paper); color: var(--doc-text); max-width: 860px; margin: 22px auto 40px; padding: 56px 64px; box-shadow: var(--shadow); min-height: 70vh; }
-.mode-split #preview { margin: 14px; max-width: none; padding: 36px 44px; }
+.mode-split #preview { margin: 0; max-width: none; padding: 18px 28px 40vh; box-shadow: none; min-height: 100%; }
 .mode-split #previewWrap { background: var(--desk); }
 #preview.empty::before { content: "Ingenting at vise endnu – begynd at skrive i editoren."; color: var(--muted); }
 
