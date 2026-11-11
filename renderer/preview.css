@@ -1,0 +1,58 @@
+/* Dokumentets udseende (bruges i forhåndsvisning, HTML- og PDF-eksport) */
+.md {
+  font-family: var(--doc-font, "Segoe UI", Calibri, Arial, sans-serif);
+  font-size: var(--doc-size, 14px);
+  line-height: 1.65;
+  color: var(--doc-text, #1b1b1b);
+  overflow-wrap: break-word;
+}
+.md > :first-child { margin-top: 0; }
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
+  font-family: var(--head-font, "Calibri Light", "Segoe UI Semilight", "Segoe UI", sans-serif);
+  color: var(--doc-head, #2f5496);
+  line-height: 1.25; margin: 1.4em 0 .45em; font-weight: 600;
+}
+.md h1 { font-size: 2em; font-weight: 400; }
+.md h2 { font-size: 1.55em; font-weight: 400; }
+.md h3 { font-size: 1.25em; }
+.md h4 { font-size: 1.1em; font-style: italic; }
+.md h5 { font-size: 1em; }
+.md h6 { font-size: 1em; color: #595959; }
+.md p { margin: 0 0 .85em; }
+.md a { color: var(--doc-link, #0563c1); }
+.md blockquote {
+  margin: 1em 0; padding: .1em 1em; color: var(--doc-muted, #555);
+  border-left: 4px solid var(--doc-rule, #c7cfe0); background: var(--doc-quote, rgba(127,127,127,.07));
+}
+.md code {
+  font-family: Consolas, "Cascadia Mono", "Courier New", monospace; font-size: .92em;
+  background: var(--doc-code, rgba(127,127,127,.15)); padding: .1em .35em; border-radius: 3px;
+}
+.md pre {
+  background: var(--doc-codeblock, #f4f5f7); border: 1px solid var(--doc-rule, #dde1e8);
+  border-radius: 4px; padding: .8em 1em; overflow: auto; line-height: 1.45;
+}
+.md pre code { background: none; padding: 0; font-size: .9em; }
+.md table { border-collapse: collapse; margin: 1em 0; min-width: 40%; }
+.md th, .md td { border: 1px solid var(--doc-rule, #c8ccd4); padding: .4em .8em; }
+.md th { background: var(--doc-th, #e7ecf4); font-weight: 600; }
+.md img { max-width: 100%; height: auto; }
+.md hr { border: 0; border-top: 1px solid var(--doc-rule, #c8ccd4); margin: 1.5em 0; }
+.md ul, .md ol { padding-left: 1.8em; margin: 0 0 .85em; }
+.md li > ul, .md li > ol { margin: .2em 0; }
+.md li:has(> input[type=checkbox]) { list-style: none; margin-left: -1.4em; }
+.md input[type=checkbox] { margin-right: .5em; }
+.md mark { background: #fff176; color: #222; padding: 0 .15em; border-radius: 2px; }
+.md .math-block { text-align: center; margin: 1em 0; overflow-x: auto; }
+.md .md-comment { display: inline-block; font-size: .85em; background: #fff4ce; color: #5b4a00; border-left: 3px solid #e3b400; padding: .1em .6em; margin: .2em 0; border-radius: 2px; }
+.md .md-comment::before { content: "\1F4AC  "; }
+.md sup.fnref a { text-decoration: none; font-weight: 600; }
+.md .footnotes { font-size: .88em; color: var(--doc-muted, #555); }
+.md .footnotes hr { margin: 2em 0 .8em; width: 30%; margin-left: 0; }
+.md .footnotes ol { padding-left: 1.4em; }
+.md .fnback { text-decoration: none; }
+@media print {
+  .md pre { white-space: pre-wrap; }
+  .md h1, .md h2, .md h3 { break-after: avoid; }
+  .md table, .md pre, .md blockquote, .md img { break-inside: avoid; }
+}
