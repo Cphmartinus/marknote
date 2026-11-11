@@ -22,9 +22,18 @@ MarkNote gives you the familiar ribbon, tabs and status bar of a word processor,
 
 ## Download
 
-Prebuilt Windows executables are built by GitHub Actions and attached to the releases of this repository. The portable `.exe` needs no installation. The installer also associates `.md` files with MarkNote.
+Get the latest Windows build from the [Releases page](https://github.com/Cphmartinus/marknote/releases/latest):
 
-> **Note:** The executables are not code-signed yet, so Windows SmartScreen may show a warning the first time you run one. Choose **More info → Run anyway**.
+- `MarkNote-<version>-portable.exe`: runs without installation.
+- `MarkNote-Setup-<version>.exe`: installer that also associates `.md` files with MarkNote.
+
+Releases are built from this repository by GitHub Actions, see [`.github/workflows/build.yml`](.github/workflows/build.yml).
+
+### Code signing
+
+The executables are **not code-signed yet**, so Windows SmartScreen may show a warning the first time you run one. Choose **More info → Run anyway**.
+
+We have applied for free code signing for open source projects from [SignPath Foundation](https://signpath.org) (provided via [SignPath.io](https://signpath.io)). Once approved, releases will be signed and this section will say so. See the [code signing policy](CODE_SIGNING_POLICY.md) and the [privacy policy](PRIVACY.md).
 
 ## Build from source
 
