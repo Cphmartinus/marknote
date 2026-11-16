@@ -912,8 +912,8 @@
       .node rect, rect.actor, .classGroup rect { rx: 6px; ry: 6px; }
       .node rect, .node polygon, .node circle, rect.actor, .classGroup rect, .note {
         filter: drop-shadow(0 1px 2px rgba(0, 0, 0, ${dark ? 0.45 : 0.12})); }
-      .edgeLabel, .edgeLabel rect, .labelBkg { background: ${c.bg}; fill: ${c.bg}; }
-      .edgeLabel text, .edgeLabel span { fill: ${c.muted}; color: ${c.muted}; font-size: 13px; }
+      .edgeLabel rect { fill: ${c.bg} !important; stroke: ${c.line}; stroke-width: 1px; opacity: 1 !important; }
+      .edgeLabel text, .edgeLabel tspan { fill: ${c.text} !important; font-size: 13.5px; }
       .messageText { font-weight: 500; }
       .titleText, .pieTitleText { font-weight: 600; }
       .grid .tick line { stroke: ${c.grid}; } .grid path { stroke-width: 0; }
@@ -952,6 +952,20 @@
     mermaidCache.set(key, res);
     return res;
   }
+  /* Tekst på pile vises i en lille boks på linjen, som i Visio */
+  function boxEdgeLabels(root) {
+    root.querySelectorAll('.edgeLabel rect').forEach((r) => {
+      const w = parseFloat(r.getAttribute('width')), h = parseFloat(r.getAttribute('height'));
+      if (!w || !h || r.getAttribute('data-wd')) return;
+      const px = 7, py = 1;
+      r.setAttribute('x', parseFloat(r.getAttribute('x') || 0) - px);
+      r.setAttribute('y', parseFloat(r.getAttribute('y') || 0) - py);
+      r.setAttribute('width', w + 2 * px);
+      r.setAttribute('height', h + 2 * py);
+      r.setAttribute('rx', 4); r.setAttribute('ry', 4);
+      r.setAttribute('data-wd', '1');
+    });
+  }
   async function renderMermaidIn(root, forceTheme) {
     const theme = forceTheme || (state.theme === 'dark' ? 'dark' : 'light');
     for (const b of [...root.querySelectorAll('.mermaid-block')]) {
@@ -959,7 +973,7 @@
       const r = await mermaidSvg(src, theme);
       if (root === preview && !b.isConnected) continue;
       b.innerHTML = '';
-      if (r.svg) { b.classList.remove('mermaid-error'); b.innerHTML = r.svg; b.title = rich() && root === preview ? t('Dobbeltklik for at redigere') : ''; }
+      if (r.svg) { b.classList.remove('mermaid-error'); b.innerHTML = r.svg; boxEdgeLabels(b); b.title = rich() && root === preview ? t('Dobbeltklik for at redigere') : ''; }
       else {
         b.classList.add('mermaid-error');
         const msg = document.createElement('div'); msg.className = 'mermaid-msg'; msg.textContent = t('Diagrammet kunne ikke tegnes') + ': ' + r.error;
