@@ -123,7 +123,8 @@ input[type=range] { accent-color: var(--accent); width: 110px; }
 .mode-raw #previewWrap, .mode-read #editorWrap { display: none; }
 #preview[contenteditable=true] { outline: none; caret-color: var(--doc-text); cursor: text; }
 #preview[contenteditable=true] td:empty::after, #preview[contenteditable=true] th:empty::after { content: "\200b"; }
-#preview .wd-math, #preview .math-block { cursor: default; }
+#preview .wd-math, #preview .math-block, #preview .mermaid-block { cursor: default; }
+#preview[contenteditable=true] .mermaid-block:hover { outline: 1px dashed var(--accent); }
 #preview[contenteditable=true] .wd-math:hover, #preview[contenteditable=true] .math-block:hover { outline: 1px dashed var(--accent); }
 .mode-raw #editorWrap { border-right: 0; }
 

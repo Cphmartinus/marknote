@@ -285,7 +285,7 @@ function suggestName(docPath, title, ext) {
   return path.join(docPath ? path.dirname(docPath) : app.getPath('documents'), base + '.' + ext);
 }
 
-ipcMain.handle('export:run', async (_e, { kind, md, html, title, docPath, math, fontFamily, fontSize }) => {
+ipcMain.handle('export:run', async (_e, { kind, md, html, title, docPath, math, fontFamily, fontSize, diagrams }) => {
   const filters = {
     pdf: [{ name: 'PDF', extensions: ['pdf'] }],
     docx: [{ name: 'Word (.docx)', extensions: ['docx'] }],
@@ -301,6 +301,7 @@ ipcMain.handle('export:run', async (_e, { kind, md, html, title, docPath, math, 
     else if (kind === 'html') fs.writeFileSync(r.filePath, wrapHtml({ title, body: html, baseDir: docDirOf(docPath), math, extraCss }), 'utf8');
     else if (kind === 'docx') {
       const buf = await toDocx(md, {
+        diagrams: Array.isArray(diagrams) ? diagrams : [],
         loadImage(href) {
           try {
             if (/^https?:/i.test(href)) return null;

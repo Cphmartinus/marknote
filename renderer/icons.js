@@ -26,6 +26,7 @@
     comment: '<path d="M4 5h16v11H10l-4 4v-4H4z"/>',
     sigma: T(4, 20, 22, 'Σ', 600),
     sigma2: T(2, 18, 18, '$$', 700),
+    diagram: '<rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M10 5.5h4M17.5 8v8"/>',
     hr: '<path d="M3 12h18M6 6h12M6 18h12" stroke-dasharray="2 2"/><path d="M3 12h18"/>',
     raw: T(1, 17, 13, '&lt;/&gt;', 700),
     split: '<rect x="3" y="4" width="18" height="16"/><path d="M12 4v16M5.5 8h4M5.5 12h4M14.5 8h4M14.5 12h4"/>',

@@ -51,6 +51,12 @@
 .md .footnotes hr { margin: 2em 0 .8em; width: 30%; margin-left: 0; }
 .md .footnotes ol { padding-left: 1.4em; }
 .md .fnback { text-decoration: none; }
+.md .mermaid-block { text-align: center; margin: 1em 0; overflow-x: auto; }
+.md .mermaid-block svg { max-width: 100%; max-height: 520px; height: auto; }
+.md .mermaid-block pre.mermaid-src { text-align: left; }
+.md .mermaid-error { text-align: left; border: 1px solid #e3b4b4; background: #fdf1f1; border-radius: 4px; padding: .6em .8em; }
+.md .mermaid-error .mermaid-msg { color: #a4262c; font-size: .9em; margin-bottom: .4em; }
+.md .mermaid-error pre { margin: 0; }
 @media print {
   .md pre { white-space: pre-wrap; }
   .md h1, .md h2, .md h3 { break-after: avoid; }

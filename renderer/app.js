@@ -110,10 +110,11 @@
     preview.innerHTML = html || (wy ? '<p><br></p>' : '');
     preview.classList.toggle('empty', !ed.value.trim() && !wy);
     if (wy) {
-      $$('.wd-math, .math-block, .footnotes, sup.fnref', preview).forEach((n) => n.setAttribute('contenteditable', 'false'));
+      $$('.wd-math, .math-block, .footnotes, sup.fnref, .mermaid-block', preview).forEach((n) => n.setAttribute('contenteditable', 'false'));
       $$('input[type=checkbox]', preview).forEach((n) => n.removeAttribute('disabled'));
     }
     previewWrap.scrollTop = y;
+    if (preview.querySelector('.mermaid-block')) renderMermaidIn(preview);
   }
 
   preview.addEventListener('click', async (e) => {
@@ -692,6 +693,7 @@
     state.theme = t; store.set('theme', t);
     document.documentElement.dataset.theme = t;
     $$('[data-set-theme]').forEach((b) => b.classList.toggle('on', b.dataset.setTheme === t));
+    if (typeof mermaidCache !== 'undefined' && mermaidCache.size) { mermaidCache.clear(); renderPreview(); }
     if (api.setOverlay) {
       const cs = getComputedStyle(document.documentElement);
       api.setOverlay({ color: cs.getPropertyValue('--chrome').trim() || '#2b579a', symbol: cs.getPropertyValue('--chrome-text').trim() || '#ffffff' });
@@ -826,8 +828,20 @@
 
   /* ---------- eksport ---------- */
   async function doExport(kind) {
-    const html = renderHtml(false, false);
+    let html = renderHtml(false, false);
+    const diagrams = [];
+    if (html.includes('mermaid-block')) {
+      const box = document.createElement('div');
+      box.innerHTML = html;
+      await renderMermaidIn(box, 'light');
+      for (const b of box.querySelectorAll('.mermaid-block')) {
+        const svg = b.querySelector('svg');
+        if (svg && kind === 'docx') { const png = await svgToPng(svg); if (png) diagrams.push({ src: mmGet(b), ...png }); }
+      }
+      html = box.innerHTML;
+    }
     const r = await api.exportAs({
+      diagrams,
       kind, md: ed.value, html, title: state.path ? docName().replace(/\.[^.]+$/, '') : state.untitled,
       docPath: state.path || state.virtual, math: html.includes('class="katex'),
       fontFamily: getComputedStyle(document.documentElement).getPropertyValue('--doc-font').trim() || null,
@@ -835,6 +849,96 @@
     });
     if (!r) return;
     if (r.error) toast(t('Eksport mislykkedes: {0}', r.error), 6000); else toast(t('Eksporteret: {0}', r.path.split(/[\\/]/).pop()), 3500);
+  }
+
+  /* ---------- Mermaid-diagrammer ---------- */
+  let mermaidReady = null, mermaidTheme = null, mmId = 0;
+  const mermaidCache = new Map();
+  function loadMermaid() {
+    if (mermaidReady) return mermaidReady;
+    mermaidReady = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'vendor/mermaid.min.js';
+      s.onload = () => resolve(window.mermaid);
+      s.onerror = () => { mermaidReady = null; reject(new Error('mermaid could not be loaded')); };
+      document.head.append(s);
+    });
+    return mermaidReady;
+  }
+  const mmGet = (el) => { try { return decodeURIComponent(el.getAttribute('data-mermaid') || ''); } catch (_) { return el.getAttribute('data-mermaid') || ''; } };
+  function diagramTemplate() {
+    return 'flowchart LR\n  A[' + t('Start') + '] --> B{' + t('Beslutning') + '}\n  B -->|' + t('Ja') + '| C[' + t('Udfør') + ']\n  B -->|' + t('Nej') + '| D[' + t('Slut') + ']';
+  }
+  async function mermaidSvg(src, theme) {
+    const key = theme + '\u0000' + src;
+    if (mermaidCache.has(key)) return mermaidCache.get(key);
+    let res;
+    try {
+      const m = await loadMermaid();
+      if (mermaidTheme !== theme) {
+        m.initialize({ startOnLoad: false, securityLevel: 'strict', theme: theme === 'dark' ? 'dark' : 'default',
+          htmlLabels: false, flowchart: { htmlLabels: false }, fontFamily: '"Segoe UI", Arial, sans-serif' });
+        mermaidTheme = theme;
+      }
+      await m.parse(src);
+      const id = 'wdm' + (++mmId);
+      try { res = { svg: (await m.render(id, src)).svg }; } finally { const junk = document.getElementById('d' + id); if (junk) junk.remove(); }
+    } catch (e) {
+      res = { error: String((e && (e.message || e.str)) || e).split('\n')[0] };
+    }
+    if (mermaidCache.size > 60) mermaidCache.delete(mermaidCache.keys().next().value);
+    mermaidCache.set(key, res);
+    return res;
+  }
+  async function renderMermaidIn(root, forceTheme) {
+    const theme = forceTheme || (state.theme === 'dark' ? 'dark' : 'light');
+    for (const b of [...root.querySelectorAll('.mermaid-block')]) {
+      const src = mmGet(b);
+      const r = await mermaidSvg(src, theme);
+      if (root === preview && !b.isConnected) continue;
+      b.innerHTML = '';
+      if (r.svg) { b.classList.remove('mermaid-error'); b.innerHTML = r.svg; b.title = rich() && root === preview ? t('Dobbeltklik for at redigere') : ''; }
+      else {
+        b.classList.add('mermaid-error');
+        const msg = document.createElement('div'); msg.className = 'mermaid-msg'; msg.textContent = t('Diagrammet kunne ikke tegnes') + ': ' + r.error;
+        const pre = document.createElement('pre'); pre.textContent = src;
+        b.append(msg, pre);
+      }
+    }
+  }
+  function svgToPng(svg) {
+    return new Promise((resolve) => {
+      try {
+        const vb = svg.viewBox && svg.viewBox.baseVal;
+        const w = Math.max(1, Math.round((vb && vb.width) || svg.getBoundingClientRect().width || 600));
+        const h = Math.max(1, Math.round((vb && vb.height) || svg.getBoundingClientRect().height || 400));
+        const clone = svg.cloneNode(true);
+        clone.setAttribute('width', w); clone.setAttribute('height', h); clone.style.maxWidth = 'none';
+        if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        const xml = new XMLSerializer().serializeToString(clone);
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const k = 2, c = document.createElement('canvas');
+            c.width = w * k; c.height = h * k;
+            const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height);
+            g.drawImage(img, 0, 0, c.width, c.height);
+            resolve({ png: c.toDataURL('image/png').split(',')[1], width: w, height: h });
+          } catch (_) { resolve(null); }
+        };
+        img.onerror = () => resolve(null);
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(xml)));
+      } catch (_) { resolve(null); }
+    });
+  }
+  function askCode(title, label, value) {
+    const body = document.createElement('div');
+    const l = document.createElement('label'); l.className = 'f'; l.append(label);
+    const ta = document.createElement('textarea'); ta.value = value; ta.rows = 12; ta.spellcheck = false;
+    ta.style.cssText = 'font-family:Consolas,monospace;font-size:13px;min-height:220px;resize:vertical';
+    l.append(ta); body.append(l);
+    return modal({ title, body, wide: true, buttons: [{ text: t('Annuller') }, { text: t('OK'), primary: true, value: () => ta.value.replace(/\s+$/, '') }] })
+      .then((v) => (v === undefined ? null : v));
   }
 
   /* ---------- WYSIWYG ---------- */
@@ -849,6 +953,7 @@
   } });
   td.addRule('mark', { filter: 'mark', replacement: (c) => '==' + c + '==' });
   td.addRule('mathInline', { filter: (n) => n.nodeName === 'SPAN' && n.classList.contains('wd-math'), replacement: (_c, n) => '$' + n.getAttribute('data-tex') + '$' });
+  td.addRule('mermaid', { filter: (n) => n.nodeName === 'DIV' && n.classList.contains('mermaid-block'), replacement: (_c, n) => '\n\n```mermaid\n' + mmGet(n).replace(/\n+$/, '') + '\n```\n\n' });
   td.addRule('mathBlock', { filter: (n) => n.nodeName === 'DIV' && n.classList.contains('math-block'), replacement: (_c, n) => '\n\n$$\n' + n.getAttribute('data-tex') + '\n$$\n\n' });
   td.addRule('fnref', { filter: (n) => n.nodeName === 'SUP' && n.classList.contains('fnref'), replacement: (_c, n) => '[^' + n.getAttribute('data-fn') + ']' });
   td.addRule('fnsection', { filter: (n) => n.nodeName === 'SECTION' && n.classList.contains('footnotes'), replacement: () => '' });
@@ -913,6 +1018,10 @@
     code: () => wins('<code>' + esc(wsel() || t('kode')) + '</code>'),
     codeblock: () => wins('<pre><code>' + esc(wsel() || 'kode') + '</code></pre><p><br></p>'),
     hr: () => wex('insertHorizontalRule'),
+    diagram: () => {
+      wins('<div class="mermaid-block" contenteditable="false" data-mermaid="' + encodeURIComponent(diagramTemplate()) + '"></div><p><br></p>');
+      renderMermaidIn(preview).then(wysiwygSync);
+    },
     math: () => wins('<span class="wd-math" data-tex="' + esc(wsel() || 'E = mc^2') + '" contenteditable="false">' + md.math(wsel() || 'E = mc^2', false) + '</span>&nbsp;'),
     mathblock: () => wins('<div class="math-block" data-tex="E = mc^2" contenteditable="false">' + md.math('E = mc^2', true) + '</div><p><br></p>'),
     link: async () => {
@@ -947,6 +1056,16 @@
   };
   preview.addEventListener('dblclick', async (e) => {
     if (!rich()) return;
+    const dg = e.target.closest('.mermaid-block');
+    if (dg) {
+      const v = await askCode(t('Rediger diagram (Mermaid)'), t('Diagramkode'), mmGet(dg));
+      if (v === null) return;
+      dg.setAttribute('data-mermaid', encodeURIComponent(v));
+      dg.innerHTML = '';
+      await renderMermaidIn(dg.parentElement || preview);
+      wysiwygSync();
+      return;
+    }
     const m = e.target.closest('.wd-math, .math-block'); if (!m) return;
     const r = await ask({ title: t('Rediger formel (LaTeX)'), fields: [{ id: 'tex', label: 'LaTeX', value: m.getAttribute('data-tex') }] });
     if (!r || !r.tex) return;
@@ -956,7 +1075,7 @@
   });
 
   /* ---------- kommandoer ---------- */
-  const EDIT_CMDS = new Set(['bold', 'italic', 'strike', 'highlight', 'ul', 'ol', 'task', 'indent', 'outdent', 'quote', 'code', 'codeblock', 'table', 'image', 'link', 'footnote', 'comment', 'math', 'mathblock', 'hr', 'undo', 'redo']);
+  const EDIT_CMDS = new Set(['bold', 'italic', 'strike', 'highlight', 'ul', 'ol', 'task', 'indent', 'outdent', 'quote', 'code', 'codeblock', 'table', 'image', 'link', 'footnote', 'comment', 'math', 'mathblock', 'hr', 'diagram', 'undo', 'redo']);
   const CMDS = {
     new: cmdNew, open: cmdOpen, save: () => save(false), saveAs: () => save(true),
     reveal: () => state.path ? api.showInFolder(state.path) : toast(t('Dokumentet er ikke gemt endnu')),
@@ -971,6 +1090,7 @@
     math: () => wrap('$', '$', 'E = mc^2'),
     mathblock: () => { const s = ed.value.slice(ed.selectionStart, ed.selectionEnd); insertBlock('$$\n' + (s || 'E = mc^2') + '\n$$'); },
     hr: () => insertBlock('---'),
+    diagram: () => insertBlock('```mermaid\n' + diagramTemplate() + '\n```'),
     toggleRibbon: () => toggleRibbon(),
     exportPdf: () => doExport('pdf'), exportDocx: () => doExport('docx'), exportHtml: () => doExport('html'), exportMd: () => doExport('md'),
     history: cmdHistory, snapshot: () => snapshot(false),

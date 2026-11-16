@@ -14,6 +14,7 @@ MarkNote gives you the familiar ribbon, tabs and status bar of a word processor,
 - **WYSIWYG editing:** edit directly in the formatted document in live preview and reading mode. Both panes stay in sync.
 - **Ribbon interface:** Home, Insert, View, Export & Tools and Help tabs. Hover over a button to see its shortcut and the Markdown it produces. `Ctrl+F1` hides the ribbon.
 - **Insert:** interactive table builder, images with automatic relative paths (drag and drop supported), links, footnotes, invisible comments and LaTeX formulas.
+- **Mermaid diagrams:** flowcharts, sequence diagrams, Gantt charts, pie charts and more, written as text and drawn automatically. Included in PDF, DOCX and HTML exports.
 - **Tabs:** several documents at once, with unsaved-changes markers.
 - **Open Word and HTML files:** `.docx` and `.html` files are converted to Markdown when opened.
 - **Export:** PDF, DOCX (real Word format), standalone HTML and plain `.md`.
