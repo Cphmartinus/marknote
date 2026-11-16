@@ -866,6 +866,69 @@
     return mermaidReady;
   }
   const mmGet = (el) => { try { return decodeURIComponent(el.getAttribute('data-mermaid') || ''); } catch (_) { return el.getAttribute('data-mermaid') || ''; } };
+  /* Office-lignende udseende for diagrammer (lys og mørk) */
+  function mermaidConfig(theme) {
+    const dark = theme === 'dark';
+    const font = '"Segoe UI", "Segoe UI Variable Text", Calibri, Arial, sans-serif';
+    const office = ['#4472C4', '#ED7D31', '#A5A5A5', '#FFC000', '#5B9BD5', '#70AD47', '#264478', '#9E480E', '#636363', '#997300', '#255E91', '#43682B'];
+    const c = dark ? {
+      bg: '#242424', node: '#24344f', border: '#6aa7ff', text: '#e8ebf1', muted: '#aab3c2', line: '#8fa3c4',
+      alt: '#2c2c2c', note: '#4a4220', noteBorder: '#b8962a', cluster: '#2a3140', clusterBorder: '#46536a', grid: '#3a3a3a',
+    } : {
+      bg: '#ffffff', node: '#e9eff9', border: '#2b579a', text: '#1b1f27', muted: '#5b6475', line: '#5b6b85',
+      alt: '#f6f8fc', note: '#fff4ce', noteBorder: '#e3b400', cluster: '#f3f6fb', clusterBorder: '#c8d3e6', grid: '#e3e8f0',
+    };
+    const tv = {
+      darkMode: dark, background: c.bg, fontFamily: font, fontSize: '15px',
+      primaryColor: c.node, primaryBorderColor: c.border, primaryTextColor: c.text,
+      secondaryColor: dark ? '#3a2d1f' : '#fdebdc', secondaryBorderColor: '#ED7D31', secondaryTextColor: c.text,
+      tertiaryColor: c.cluster, tertiaryBorderColor: c.clusterBorder, tertiaryTextColor: c.text,
+      mainBkg: c.node, nodeBorder: c.border, nodeTextColor: c.text, textColor: c.text, titleColor: c.text,
+      lineColor: c.line, defaultLinkColor: c.line, arrowheadColor: c.line,
+      edgeLabelBackground: c.bg, clusterBkg: c.cluster, clusterBorder: c.clusterBorder,
+      noteBkgColor: c.note, noteBorderColor: c.noteBorder, noteTextColor: c.text,
+      // sekvensdiagram
+      actorBkg: c.node, actorBorder: c.border, actorTextColor: c.text, actorLineColor: c.clusterBorder,
+      signalColor: c.line, signalTextColor: c.text, labelBoxBkgColor: c.node, labelBoxBorderColor: c.border,
+      labelTextColor: c.text, loopTextColor: c.text, activationBkgColor: c.cluster, activationBorderColor: c.border,
+      sequenceNumberColor: '#ffffff',
+      // gantt
+      sectionBkgColor: c.alt, altSectionBkgColor: c.bg, sectionBkgColor2: c.alt, gridColor: c.grid,
+      taskBkgColor: '#4472C4', taskBorderColor: '#2b579a', taskTextColor: '#ffffff', taskTextLightColor: '#ffffff',
+      taskTextOutsideColor: c.text, taskTextDarkColor: c.text,
+      activeTaskBkgColor: '#5B9BD5', activeTaskBorderColor: '#2b579a',
+      doneTaskBkgColor: dark ? '#5a5a5a' : '#BFBFBF', doneTaskBorderColor: dark ? '#7a7a7a' : '#A5A5A5',
+      critBkgColor: '#ED7D31', critBorderColor: '#C55A11', todayLineColor: '#ED7D31',
+      // cirkeldiagram
+      pieStrokeColor: c.bg, pieStrokeWidth: '2px', pieOuterStrokeWidth: '0px', pieSectionTextColor: '#ffffff',
+      pieSectionTextSize: '15px', pieTitleTextSize: '20px', pieTitleTextColor: c.text, pieLegendTextColor: c.text,
+      pieLegendTextSize: '14px', pieOpacity: '1',
+      // klassediagram m.m.
+      classText: c.text,
+    };
+    office.forEach((col, i) => { tv['pie' + (i + 1)] = col; tv['cScale' + i] = col; tv['cScaleLabel' + i] = '#ffffff'; });
+    const css = `
+      .node rect, .node polygon, .node circle, .node path, .actor, .classGroup rect, .label-container { stroke-width: 1.4px; }
+      .node rect, rect.actor, .classGroup rect { rx: 6px; ry: 6px; }
+      .node rect, .node polygon, .node circle, rect.actor, .classGroup rect, .note {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, ${dark ? 0.45 : 0.12})); }
+      .edgeLabel, .edgeLabel rect, .labelBkg { background: ${c.bg}; fill: ${c.bg}; }
+      .edgeLabel text, .edgeLabel span { fill: ${c.muted}; color: ${c.muted}; font-size: 13px; }
+      .messageText { font-weight: 500; }
+      .titleText, .pieTitleText { font-weight: 600; }
+      .grid .tick line { stroke: ${c.grid}; } .grid path { stroke-width: 0; }
+      .task, .task0, .task1, .task2, .task3 { rx: 3px; ry: 3px; }
+      .sectionTitle { fill: ${c.text} !important; font-weight: 600; }
+      .pieCircle { stroke-width: 2px; }`;
+    return {
+      startOnLoad: false, securityLevel: 'strict', theme: 'base', themeVariables: tv, themeCSS: css,
+      fontFamily: font, htmlLabels: false,
+      flowchart: { htmlLabels: false, curve: 'basis', nodeSpacing: 46, rankSpacing: 56, padding: 14, diagramPadding: 10 },
+      sequence: { actorMargin: 60, boxMargin: 8, noteMargin: 12, messageMargin: 36, mirrorActors: false, useMaxWidth: true },
+      gantt: { barHeight: 26, barGap: 6, topPadding: 56, leftPadding: 110, fontSize: 13, sectionFontSize: 13, gridLineStartPadding: 40 },
+      pie: { textPosition: 0.68 },
+    };
+  }
   function diagramTemplate() {
     return 'flowchart LR\n  A[' + t('Start') + '] --> B{' + t('Beslutning') + '}\n  B -->|' + t('Ja') + '| C[' + t('Udfør') + ']\n  B -->|' + t('Nej') + '| D[' + t('Slut') + ']';
   }
@@ -876,8 +939,7 @@
     try {
       const m = await loadMermaid();
       if (mermaidTheme !== theme) {
-        m.initialize({ startOnLoad: false, securityLevel: 'strict', theme: theme === 'dark' ? 'dark' : 'default',
-          htmlLabels: false, flowchart: { htmlLabels: false }, fontFamily: '"Segoe UI", Arial, sans-serif' });
+        m.initialize(mermaidConfig(theme));
         mermaidTheme = theme;
       }
       await m.parse(src);
