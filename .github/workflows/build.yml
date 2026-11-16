@@ -29,4 +29,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.version != '' && inputs.version || github.ref_name }}
-        run: gh release create "$TAG" dist/*.exe --target "${{ github.sha }}" --title "MarkNote $TAG" --generate-notes
+        run: |
+          if [ -f "release-notes/$TAG.md" ]; then NOTES=(--notes-file "release-notes/$TAG.md"); else NOTES=(--generate-notes); fi
+          gh release create "$TAG" dist/*.exe --target "${{ github.sha }}" --title "MarkNote $TAG" "${NOTES[@]}"

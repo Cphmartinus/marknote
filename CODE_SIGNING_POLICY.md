@@ -1,6 +1,6 @@
 # Code signing policy
 
-Free code signing is applied for from [SignPath Foundation](https://signpath.org) (via [SignPath.io](https://signpath.io)). Until the application is approved, releases are not signed. After approval, this will read: "Free code signing provided by SignPath.io, certificate by SignPath Foundation."
+We plan to apply for free code signing from [SignPath Foundation](https://signpath.org) (via [SignPath.io](https://signpath.io)). Until an application is approved, releases are not signed. After approval, this will read: "Free code signing provided by SignPath.io, certificate by SignPath Foundation."
 
 This page describes how the Windows executables of **MarkNote** are built and signed.
 

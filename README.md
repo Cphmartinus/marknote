@@ -4,7 +4,9 @@ A Word-style Markdown reader and editor for Windows 11.
 
 MarkNote gives you the familiar ribbon, tabs and status bar of a word processor, while your documents stay plain `.md` files. No lock-in, no proprietary format.
 
-![MarkNote in live preview: Markdown on the left, the formatted document on the right](docs/screenshot-split-en.png)
+![Typing Markdown on the left while the formatted document updates on the right](docs/demo.gif)
+
+**[Download for Windows](https://github.com/Cphmartinus/marknote/releases/latest)** · [Website](https://cphmartinus.github.io/marknote/) · [Danish user guide (Word)](docs/MarkNote-vejledning.docx)
 
 ## Features
 
@@ -33,7 +35,7 @@ Releases are built from this repository by GitHub Actions, see [`.github/workflo
 
 The executables are **not code-signed yet**, so Windows SmartScreen may show a warning the first time you run one. Choose **More info → Run anyway**.
 
-We have applied for free code signing for open source projects from [SignPath Foundation](https://signpath.org) (provided via [SignPath.io](https://signpath.io)). Once approved, releases will be signed and this section will say so. See the [code signing policy](CODE_SIGNING_POLICY.md) and the [privacy policy](PRIVACY.md).
+We plan to apply for free code signing for open source projects from [SignPath Foundation](https://signpath.org) (provided via [SignPath.io](https://signpath.io)). If approved, releases will be signed and this section will say so. See the [code signing policy](CODE_SIGNING_POLICY.md) and the [privacy policy](PRIVACY.md).
 
 ## Build from source
 

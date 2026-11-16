@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MarkNote – Markdown editor in the style of Word</title>
+<meta name="description" content="MarkNote is a free, open source Markdown reader and editor for Windows with a Word-style ribbon, live preview, WYSIWYG editing, DOCX/PDF export and 13 languages.">
+<meta property="og:title" content="MarkNote – Markdown editor in the style of Word">
+<meta property="og:description" content="Free, open source Markdown reader and editor for Windows with a Word-style ribbon, live preview and WYSIWYG editing.">
+<meta property="og:image" content="https://cphmartinus.github.io/marknote/social-preview.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+  :root {
+    --blue: #2b579a; --blue-dark: #1f4a86; --ink: #1b1f27; --muted: #5b6475; --line: #dfe4ec;
+    --bg: #ffffff; --soft: #f3f6fb; --card: #ffffff; --on-blue: #ffffff; --on-blue-muted: #d6e2f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e8ebf1; --muted: #a9b2c3; --line: #2c3442; --bg: #12161d; --soft: #181e27; --card: #1b222c; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero { background: var(--blue); color: var(--on-blue); padding: 28px 0 0; overflow: hidden; }
+  nav { display: flex; align-items: center; gap: 12px; }
+  nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; text-decoration: none; }
+  nav .brand img { width: 30px; height: 30px; border-radius: 6px; }
+  nav .links { margin-left: auto; display: flex; gap: 22px; font-size: 15px; }
+  nav .links a { text-decoration: none; color: var(--on-blue-muted); }
+  nav .links a:hover { color: #fff; }
+  .hero-body { padding: 64px 0 40px; max-width: 720px; }
+  h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.08; margin: 0 0 18px; font-weight: 600; letter-spacing: -.5px; }
+  .lead { font-size: 20px; color: var(--on-blue-muted); margin: 0 0 30px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px; }
+  .btn.primary { background: #fff; color: var(--blue); }
+  .btn.primary:hover { background: #eaf0fa; }
+  .btn.ghost { color: #fff; border: 1px solid rgba(255,255,255,.45); }
+  .btn.ghost:hover { background: rgba(255,255,255,.1); }
+  .small { font-size: 14px; color: var(--on-blue-muted); margin-top: 14px; }
+  .shot { margin: 8px auto -1px; max-width: 980px; }
+  .shot img { display: block; width: 100%; height: auto; border-radius: 10px 10px 0 0; box-shadow: 0 -4px 40px rgba(0,0,0,.35); }
+
+  section { padding: 72px 0; }
+  section.alt { background: var(--soft); }
+  h2 { font-size: 32px; margin: 0 0 10px; font-weight: 600; letter-spacing: -.3px; }
+  .sub { color: var(--muted); margin: 0 0 36px; max-width: 640px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .ico { width: 36px; height: 36px; border-radius: 8px; background: var(--blue); color: #fff; display: grid; place-items: center; margin-bottom: 14px; }
+  .ico svg { width: 20px; height: 20px; }
+
+  .steps { counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .step { position: relative; padding: 22px 22px 22px 66px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .step::before { counter-increment: s; content: counter(s); position: absolute; left: 20px; top: 20px; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-weight: 600; }
+  .step h3 { margin: 0 0 4px; font-size: 17px; }
+  .step p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  code { font-family: Consolas, "Cascadia Mono", monospace; font-size: .92em; background: rgba(127,127,127,.15); padding: 1px 5px; border-radius: 4px; }
+  .note { margin-top: 22px; padding: 14px 18px; border-left: 4px solid #e3b400; background: rgba(227,180,0,.1); border-radius: 4px; font-size: 15.5px; }
+
+  .langs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .langs span { border: 1px solid var(--line); background: var(--card); padding: 6px 12px; border-radius: 999px; font-size: 15px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: 15px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    nav .links { gap: 14px; }
+    nav .links a.hide-sm { display: none; }
+    .hero-body { padding: 44px 0 30px; }
+    section { padding: 52px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#"><img src="icon.png" alt="">MarkNote</a>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#download" class="hide-sm">Download</a>
+        <a href="https://github.com/Cphmartinus/marknote">GitHub</a>
+      </div>
+    </nav>
+    <div class="hero-body">
+      <h1>Markdown, the way you know it from Word</h1>
+      <p class="lead">MarkNote is a free Markdown reader and editor for Windows. Use the familiar ribbon to format your text, edit directly in the formatted page, and keep every document as a plain <code style="background:rgba(255,255,255,.15)">.md</code> file.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/Cphmartinus/marknote/releases/latest">Download for Windows</a>
+        <a class="btn ghost" href="https://github.com/Cphmartinus/marknote">View source on GitHub</a>
+      </div>
+      <p class="small">Windows 10 and 11 · Free and open source (MIT) · No account, no telemetry</p>
+    </div>
+    <div class="shot"><img src="demo.gif" width="960" height="544" alt="Typing Markdown on the left while the formatted document updates on the right, then switching to reading mode"></div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <h2>Everything you need to write in Markdown</h2>
+    <p class="sub">The clean, future-proof format of Markdown, with the buttons and shortcuts of a word processor.</p>
+    <div class="grid">
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/></svg></div><h3>Live preview and WYSIWYG</h3><p>Write Markdown on the left and see it formatted on the right, or type straight into the formatted page. Both stay in sync.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div><h3>A ribbon you already know</h3><p>Home, Insert, View and Export tabs. Hover over a button to see its shortcut and the Markdown it produces.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></div><h3>Open Word files</h3><p>Open a <code>.docx</code> or <code>.html</code> file and it is converted to Markdown automatically, images included.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div><h3>Export anywhere</h3><p>Save as PDF, a real Word document (DOCX), a standalone HTML page or plain Markdown.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M9 4v16"/></svg></div><h3>Tables, footnotes and formulas</h3><p>Interactive table builder, images with relative paths, footnotes, hidden comments and LaTeX formulas.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Never lose your work</h3><p>Automatic snapshots let you restore earlier versions. Work on several documents at once in tabs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Speaks your language</h2>
+    <p class="sub">MarkNote follows your Windows language and can be switched at any time.</p>
+    <div class="langs">
+      <span>Dansk</span><span>English</span><span>Deutsch</span><span>Français</span><span>Español</span><span>Italiano</span><span>Nederlands</span><span>Português</span><span>Polski</span><span>Svenska</span><span>Norsk</span><span>Suomi</span><span>Íslenska</span>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <h2>Get started</h2>
+    <p class="sub">Download the latest version from the releases page.</p>
+    <div class="steps">
+      <div class="step"><h3>Download</h3><p>Choose <code>MarkNote-Setup.exe</code> to install (fastest start, opens <code>.md</code> files) or <code>MarkNote-portable.exe</code> to run without installing.</p></div>
+      <div class="step"><h3>Start MarkNote</h3><p>The first time, Windows may show a SmartScreen warning because the app is not code-signed yet. Choose <strong>More info → Run anyway</strong>.</p></div>
+      <div class="step"><h3>Write</h3><p>Open a Markdown or Word file, or start typing. Press <code>F1</code> for built-in help.</p></div>
+    </div>
+    <p style="margin-top:28px"><a class="btn primary" style="background:var(--blue);color:#fff" href="https://github.com/Cphmartinus/marknote/releases/latest">Download the latest release</a></p>
+    <div class="note">A Danish user guide (Word format) is available: <a href="MarkNote-vejledning.docx">MarkNote-vejledning.docx</a>.</div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Private by design</h2>
+    <p class="sub" style="margin-bottom:0">MarkNote runs entirely on your computer. It has no account, no telemetry and no ads, and it does not send your documents anywhere. Read the <a href="https://github.com/Cphmartinus/marknote/blob/main/PRIVACY.md">privacy policy</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>MarkNote · MIT License</span>
+    <span><a href="https://github.com/Cphmartinus/marknote">Source code</a> · <a href="https://github.com/Cphmartinus/marknote/issues">Report an issue</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CODE_SIGNING_POLICY.md">Code signing policy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
