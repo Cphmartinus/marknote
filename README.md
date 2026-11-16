@@ -6,7 +6,7 @@ MarkNote gives you the familiar ribbon, tabs and status bar of a word processor,
 
 ![Typing Markdown on the left while the formatted document updates on the right](docs/demo.gif)
 
-**[Download for Windows](https://github.com/Cphmartinus/marknote/releases/latest)** · [Website](https://cphmartinus.github.io/marknote/) · [Danish user guide (Word)](docs/MarkNote-vejledning.docx)
+**[Download for Windows](https://github.com/Cphmartinus/marknote/releases/latest)** · [Website](https://cphmartinus.github.io/marknote/) · User guide (Word): [English](docs/MarkNote-user-guide.docx) · [Danish](docs/MarkNote-vejledning.docx)
 
 ## Features
 
