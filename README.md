@@ -19,6 +19,7 @@ MarkNote gives you the familiar ribbon, tabs and status bar of a word processor,
 - **Open Word and HTML files:** `.docx` and `.html` files are converted to Markdown when opened.
 - **Export:** PDF, DOCX (real Word format), standalone HTML and plain `.md`.
 - **Version history:** automatic snapshots that can be restored.
+- **Updates:** MarkNote checks GitHub for new versions (can be turned off) and can download and install them in the installer edition.
 - **Find and replace** with regular expression support.
 - **Themes:** Light, Dark, Sepia and Word Blue.
 - **13 languages:** Danish, English, German, French, Spanish, Italian, Dutch, Portuguese, Polish, Swedish, Norwegian (Bokmål), Finnish and Icelandic. MarkNote follows your Windows language by default and you can change it in the status bar or on the Help tab.

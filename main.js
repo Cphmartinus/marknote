@@ -1,5 +1,5 @@
 'use strict';
-const { app, BrowserWindow, ipcMain, dialog, shell, Menu, nativeImage } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, shell, Menu, nativeImage, net } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -17,6 +17,84 @@ let win = null;
 let L = {};
 const S = (k, d) => L[k] || d;
 ipcMain.on('sys:locale', (e) => { e.returnValue = app.getLocale(); });
+/* ---------- opdateringer ---------- */
+const REPO = 'Cphmartinus/marknote';
+const RELEASE_DL = 'https://github.com/' + REPO + '/releases/download/';
+const isPortable = () => !!process.env.PORTABLE_EXECUTABLE_FILE;
+function cmpVer(a, b) {
+  const pa = String(a).replace(/^v/i, '').split(/[.+-]/).map((n) => parseInt(n, 10) || 0);
+  const pb = String(b).replace(/^v/i, '').split(/[.+-]/).map((n) => parseInt(n, 10) || 0);
+  for (let i = 0; i < 3; i++) if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) - (pb[i] || 0);
+  return 0;
+}
+let pendingInstaller = null;
+ipcMain.handle('update:check', async () => {
+  try {
+    const res = await net.fetch('https://api.github.com/repos/' + REPO + '/releases/latest', {
+      headers: { 'User-Agent': 'MarkNote', Accept: 'application/vnd.github+json' },
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    const latest = String(d.tag_name || '').replace(/^v/i, '');
+    const current = app.getVersion();
+    const assets = Array.isArray(d.assets) ? d.assets : [];
+    const setup = assets.find((a) => /^MarkNote-Setup-.*\.exe$/i.test(a.name));
+    return {
+      current, latest, newer: !!latest && cmpVer(latest, current) > 0,
+      url: d.html_url, notes: String(d.body || ''), portable: isPortable(),
+      canInstall: process.platform === 'win32' && app.isPackaged && !isPortable() && !!setup,
+      setup: setup ? { name: setup.name, url: setup.browser_download_url, size: setup.size, digest: setup.digest || '' } : null,
+    };
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+ipcMain.handle('update:download', async (_e, asset) => {
+  try {
+    if (!asset || typeof asset.url !== 'string' || !asset.url.startsWith(RELEASE_DL) || !/\.exe$/i.test(asset.name || '')) {
+      return { error: 'invalid asset' };
+    }
+    const dir = path.join(app.getPath('temp'), 'marknote-update');
+    fs.mkdirSync(dir, { recursive: true });
+    const file = path.join(dir, path.basename(asset.name));
+    const res = await net.fetch(asset.url);
+    if (!res.ok || !res.body) throw new Error('HTTP ' + res.status);
+    const total = Number(res.headers.get('content-length')) || Number(asset.size) || 0;
+    const hash = crypto.createHash('sha256');
+    const out = fs.createWriteStream(file);
+    const reader = res.body.getReader();
+    let got = 0, last = -1;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const buf = Buffer.from(value);
+      hash.update(buf);
+      got += buf.length;
+      if (!out.write(buf)) await new Promise((r) => out.once('drain', r));
+      const pct = total ? Math.min(100, Math.floor((got * 100) / total)) : 0;
+      if (pct !== last) { last = pct; if (win) win.webContents.send('update:progress', pct); }
+    }
+    await new Promise((resolve, reject) => out.end((err) => (err ? reject(err) : resolve())));
+    const hex = hash.digest('hex');
+    if (asset.digest && /^sha256:/i.test(asset.digest) && asset.digest.slice(7).toLowerCase() !== hex) {
+      fs.unlink(file, () => {});
+      return { error: 'checksum' };
+    }
+    pendingInstaller = file;
+    return { ok: true };
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+ipcMain.handle('update:install', () => {
+  if (!pendingInstaller || !fs.existsSync(pendingInstaller)) return false;
+  const { spawn } = require('child_process');
+  spawn(pendingInstaller, [], { detached: true, stdio: 'ignore' }).unref();
+  forceClose = true;
+  app.quit();
+  return true;
+});
+
 ipcMain.handle('win:overlay', (_e, { color, symbol }) => {
   try { if (win && typeof win.setTitleBarOverlay === 'function') win.setTitleBarOverlay({ color, symbolColor: symbol, height: 32 }); } catch (_) {}
   return true;

@@ -340,13 +340,16 @@
     applyOpened(await api.readFile(p));
   }
   api.onOpenPath && api.onOpenPath(openPath);
-  api.onRequestClose && api.onRequestClose(async () => {
+  async function confirmAllDocs() {
     for (const d of [...docs]) {
       if (!docs.includes(d) || !docDirty(d)) continue;
       activate(d.id);
-      if (!(await confirmDiscard())) return;
+      if (!(await confirmDiscard())) return false;
     }
-    api.closeConfirmed();
+    return true;
+  }
+  api.onRequestClose && api.onRequestClose(async () => {
+    if (await confirmAllDocs()) api.closeConfirmed();
   });
 
   /* ---------- snapshots ---------- */
@@ -1155,7 +1158,7 @@
   const CMDS = {
     new: cmdNew, open: cmdOpen, save: () => save(false), saveAs: () => save(true),
     reveal: () => state.path ? api.showInFolder(state.path) : toast(t('Dokumentet er ikke gemt endnu')),
-    about: cmdAbout, help: cmdHelp, shortcuts: cmdShortcuts, contact: cmdContact,
+    about: cmdAbout, checkUpdate: () => checkForUpdates(false), help: cmdHelp, shortcuts: cmdShortcuts, contact: cmdContact,
     undo: () => { ed.focus(); document.execCommand('undo'); onChange(); },
     redo: () => { ed.focus(); document.execCommand('redo'); onChange(); },
     bold: () => wrap('**'), italic: () => wrap('*'), strike: () => wrap('~~'), highlight: () => wrap('=='),
@@ -1317,6 +1320,69 @@
   });
   document.addEventListener('mousedown', () => { tip.hidden = true; clearTimeout(tipT); });
 
+  /* ---------- opdateringer ---------- */
+  let updInfo = null;
+  function showUpdateBar(info) {
+    updInfo = info;
+    $('#updText').textContent = t('MarkNote {0} er tilgængelig', info.latest);
+    $('#updatebar').hidden = false;
+  }
+  $('#updShow').onclick = () => { if (updInfo) showUpdateDialog(updInfo); };
+  $('#updSkip').onclick = () => { if (updInfo) store.set('skipVersion', updInfo.latest); $('#updatebar').hidden = true; };
+  $('#updClose').onclick = () => { $('#updatebar').hidden = true; };
+  async function checkForUpdates(silent) {
+    if (!api.updateCheck) return;
+    if (!silent) toast(t('Søger efter opdateringer…'), 2000);
+    const info = await api.updateCheck();
+    store.set('lastUpdateCheck', Date.now());
+    if (!info || info.error) { if (!silent) toast(t('Kunne ikke søge efter opdateringer: {0}', info ? info.error : '?'), 6000); return; }
+    if (!info.newer) { if (!silent) toast(t('Du har den nyeste version ({0}).', info.current), 3500); return; }
+    if (silent) { if (store.get('skipVersion', '') !== info.latest) showUpdateBar(info); }
+    else showUpdateDialog(info);
+  }
+  async function showUpdateDialog(info) {
+    $('#updatebar').hidden = true;
+    const body = document.createElement('div');
+    const p = document.createElement('p'); p.style.margin = '0';
+    p.textContent = t('Du har version {0}.', info.current) + (info.portable ? ' ' + t('Du bruger den bærbare udgave. Hent den nye version på udgivelsessiden, og erstat den gamle fil.') : '');
+    body.append(p);
+    if (info.notes.trim()) {
+      const notes = document.createElement('div'); notes.className = 'upd-notes md';
+      notes.innerHTML = sanitize(md.render(info.notes), false);
+      notes.addEventListener('click', (e) => { const a = e.target.closest('a'); if (a) { e.preventDefault(); api.openExternal && api.openExternal(a.getAttribute('href')); } });
+      body.append(notes);
+    }
+    const buttons = [{ text: t('Senere') }, { text: t('Åbn udgivelsessiden'), primary: !info.canInstall, value: () => 'page' }];
+    if (info.canInstall) buttons.push({ text: t('Hent og installer'), primary: true, value: () => 'install' });
+    const r = await modal({ title: t('MarkNote {0} er tilgængelig', info.latest), body, wide: true, buttons });
+    if (r === 'page') api.openExternal && api.openExternal(info.url);
+    if (r === 'install') downloadAndInstall(info);
+  }
+  async function downloadAndInstall(info) {
+    const box = document.createElement('div');
+    const txt = document.createElement('p'); txt.style.margin = '0 0 8px'; txt.textContent = t('Henter opdatering… {0} %', 0);
+    const bar = document.createElement('div'); bar.className = 'upd-progress'; const fill = document.createElement('i'); bar.append(fill);
+    box.append(txt, bar);
+    const ov = document.createElement('div'); ov.className = 'overlay';
+    const dlg = document.createElement('div'); dlg.className = 'dlg';
+    const h = document.createElement('h3'); h.textContent = t('MarkNote {0} er tilgængelig', info.latest);
+    const bd = document.createElement('div'); bd.className = 'body'; bd.append(box);
+    dlg.append(h, bd); ov.append(dlg); $('#modalRoot').append(ov);
+    if (api.onUpdateProgress && !downloadAndInstall.hooked) {
+      downloadAndInstall.hooked = true;
+      api.onUpdateProgress((pct) => { const f = $('.upd-progress i'); if (f) f.style.width = pct + '%'; const tx = f && f.closest('.body').querySelector('p'); if (tx) tx.textContent = t('Henter opdatering… {0} %', pct); });
+    }
+    const res = await api.updateDownload(info.setup);
+    ov.remove();
+    if (!res || res.error) {
+      toast(res && res.error === 'checksum' ? t('Den hentede fil er beskadiget. Prøv igen.') : t('Opdateringen kunne ikke hentes: {0}', res ? res.error : '?'), 6000);
+      return;
+    }
+    const msg = document.createElement('p'); msg.textContent = t('Opdateringen er hentet og klar til at blive installeret. MarkNote lukker, og installationen starter.');
+    const go = await modal({ title: t('MarkNote {0} er tilgængelig', info.latest), body: msg, buttons: [{ text: t('Senere') }, { text: t('Installer nu'), primary: true, value: () => true }] });
+    if (go && (await confirmAllDocs())) api.updateInstall();
+  }
+
   /* ---------- sprog ---------- */
   const I18N = window.WDi18n;
   const sysLang = I18N.detect(api.systemLocale || navigator.language);
@@ -1381,5 +1447,10 @@
   ed.setSelectionRange(0, 0);
   ed.focus();
   applyLanguage(store.get('lang', 'auto'));
-  window.__wd = { applyLanguage, ed, state, setMode, setTheme, run, loadDoc, applyOpened };
+  $('#optUpdates').checked = store.get('autoUpdate', true);
+  $('#optUpdates').addEventListener('change', (e) => store.set('autoUpdate', e.target.checked));
+  if (store.get('autoUpdate', true) && Date.now() - store.get('lastUpdateCheck', 0) > 20 * 3600 * 1000) {
+    setTimeout(() => checkForUpdates(true), 5000);
+  }
+  window.__wd = { checkForUpdates, showUpdateBar, applyLanguage, ed, state, setMode, setTheme, run, loadDoc, applyOpened };
 })();

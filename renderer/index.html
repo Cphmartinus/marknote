@@ -210,6 +210,13 @@
         </div>
         <div class="label">Sprog</div>
       </div>
+      <div class="group">
+        <div class="items">
+          <button class="rb big" data-cmd="checkUpdate" data-tip="Søg efter opdateringer|Tjekker GitHub for en nyere version af MarkNote"><i data-i="update"></i><span>Søg efter opdateringer</span></button>
+          <div class="col-chk"><label class="chk"><input type="checkbox" id="optUpdates"> Søg automatisk efter opdateringer</label></div>
+        </div>
+        <div class="label">Opdateringer</div>
+      </div>
     </div>
 
     <!-- Eksport & Værktøjer -->
@@ -257,6 +264,14 @@
       <button class="fb t" id="fRepl">Erstat</button>
       <button class="fb t" id="fReplAll">Erstat alle</button>
     </div>
+  </div>
+
+  <div id="updatebar" hidden>
+    <i data-i="update"></i>
+    <span id="updText"></span>
+    <button class="fb t" id="updShow">Vis</button>
+    <button class="fb t" id="updSkip">Spring denne version over</button>
+    <button class="fb x" id="updClose" title="Senere">✕</button>
   </div>
 
   <div id="doctabs"></div>

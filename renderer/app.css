@@ -208,3 +208,18 @@ input[type=range] { accent-color: var(--accent); width: 110px; }
 .sb-sel { background: rgba(255,255,255,.15); color: inherit; border: 0; border-radius: 3px; height: 20px; font: inherit; font-size: 12px; max-width: 130px; }
 .sb-sel option { color: #000; }
 .f2 { display: flex; flex-direction: column; gap: 3px; }
+
+/* Opdateringsbjælke */
+#updatebar { display: flex; align-items: center; gap: 10px; padding: 6px 12px; background: #fff4ce; color: #3b2f00; border-bottom: 1px solid #e3cf80; flex: none; font-size: 13px; }
+[data-theme=dark] #updatebar { background: #3d3412; color: #f1e3b0; border-color: #5c4e1c; }
+#updatebar svg { width: 18px; height: 18px; flex: none; }
+#updatebar #updText { flex: 1; font-weight: 600; }
+#updatebar .fb.x { margin-left: 0; }
+.col-chk { display: flex; align-items: center; padding: 0 6px 0 4px; max-width: 170px; }
+.col-chk .chk { white-space: normal; line-height: 1.25; }
+.upd-notes { max-height: 320px; overflow: auto; border: 1px solid var(--input-border); border-radius: 4px; background: var(--input-bg); padding: 4px 14px; }
+.upd-notes h2 { font-size: 16px; margin: 10px 0 6px; }
+.upd-notes h3 { font-size: 14px; margin: 10px 0 4px; }
+.upd-notes ul { padding-left: 20px; margin: 4px 0; }
+.upd-progress { height: 6px; background: var(--ribbon-border); border-radius: 3px; overflow: hidden; }
+.upd-progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
