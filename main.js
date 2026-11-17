@@ -17,6 +17,7 @@ let win = null;
 let L = {};
 const S = (k, d) => L[k] || d;
 ipcMain.on('sys:locale', (e) => { e.returnValue = app.getLocale(); });
+ipcMain.on('app:version', (e) => { e.returnValue = app.getVersion(); });
 /* ---------- opdateringer ---------- */
 const REPO = 'Cphmartinus/marknote';
 const RELEASE_DL = 'https://github.com/' + REPO + '/releases/download/';

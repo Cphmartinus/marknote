@@ -607,7 +607,8 @@
   }
   async function cmdAbout() {
     const b = document.createElement('div');
-    b.innerHTML = '<p><b>MarkNote</b> – ' + t('Markdown-læser og -editor i Microsoft Word-stil.') + '</p><p>' + t('Dokumenter gemmes som helt almindelige <code>.md</code>-filer. Hold musen over en knap for at se genvej og Markdown-syntaks.') + '</p><p>' + t('Spørgsmål? Kontakt <b>Martin Piffet</b>:') + ' <a href="https://github.com/Cphmartinus/marknote/issues" class="maillink">GitHub Issues</a></p><p class="muted">' + t('Tip: <b>Ctrl+F1</b> skjuler båndet. Træk en .md-fil ind i vinduet for at åbne den.') + '</p>';
+    b.innerHTML = '<p><b>MarkNote</b> – ' + t('Markdown-læser og -editor i Microsoft Word-stil.') + '</p><p>' + t('Dokumenter gemmes som helt almindelige <code>.md</code>-filer. Hold musen over en knap for at se genvej og Markdown-syntaks.') + '</p><p>' + supportHtml() + '</p><p class="muted">' + t('Tip: <b>Ctrl+F1</b> skjuler båndet. Træk en .md-fil ind i vinduet for at åbne den.') + '</p>';
+    if (api.appVersion) { const v = document.createElement('p'); v.className = 'muted'; v.textContent = t('Version {0}', api.appVersion) + ' · MIT'; b.prepend(v); }
     await modal({ title: t('Om MarkNote'), body: b, buttons: [{ text: t('Luk'), primary: true }] });
   }
 
@@ -621,7 +622,7 @@
 
 
   /* ---------- hjælp ---------- */
-  const contactHtml = () => t('Har du spørgsmål til programmet, er du velkommen til at kontakte <b>Martin Piffet</b> på {0}.', '<a href="https://github.com/Cphmartinus/marknote/issues" class="maillink">GitHub Issues</a>');
+  const supportHtml = () => t('Spørgsmål og fejl kan rapporteres som en sag på {0}.', '<a href="https://github.com/Cphmartinus/marknote/issues" class="maillink">GitHub Issues</a>');
   const li = (k) => '<li>' + t(k) + '</li>';
   function helpHtml() {
     return '<div class="help"><p>' + t('<b>MarkNote</b> er en Markdown-læser og -editor i Microsoft Word-stil. Dokumenterne gemmes som helt almindelige <code>.md</code>-filer, så du aldrig er låst til et bestemt program.') + '</p>' +
@@ -646,7 +647,7 @@
        'Første gang du retter i det formaterede dokument, kan Markdown-teksten blive skrevet om i en ensartet stil.',
        '<b>Fodnoter</b> oprettes i Markdown-ruden (Live preview eller Rå Markdown).',
        '<b>Sprog</b>: Programmet følger som standard Windows’ sprog. Du kan skifte sprog nederst til højre eller under fanen Hjælp.'].map(li).join('') + '</ul>' +
-      '<h4>' + t('Kontakt') + '</h4><p>' + contactHtml() + '</p></div>';
+      '<h4>' + t('Support') + '</h4><p>' + supportHtml() + '</p></div>';
   }
   function shortcutsHtml() {
     const k = (x) => '<kbd>' + x + '</kbd>', c = (x) => '<code>' + x + '</code>';
@@ -678,7 +679,6 @@
   }
   const cmdHelp = () => showHtml(t('Hjælp') + ' – MarkNote', helpHtml());
   const cmdShortcuts = () => showHtml(t('Genveje og Markdown-syntaks'), shortcutsHtml());
-  const cmdContact = () => showHtml(t('Kontakt'), '<div class="help"><p>' + contactHtml() + '</p></div>');
   document.addEventListener('click', (e) => { const a = e.target.closest('.maillink'); if (a) { e.preventDefault(); api.openExternal && api.openExternal(a.getAttribute('href')); } });
 
   /* ---------- tilstande, temaer, bånd ---------- */
@@ -1158,7 +1158,9 @@
   const CMDS = {
     new: cmdNew, open: cmdOpen, save: () => save(false), saveAs: () => save(true),
     reveal: () => state.path ? api.showInFolder(state.path) : toast(t('Dokumentet er ikke gemt endnu')),
-    about: cmdAbout, checkUpdate: () => checkForUpdates(false), help: cmdHelp, shortcuts: cmdShortcuts, contact: cmdContact,
+    about: cmdAbout, checkUpdate: () => checkForUpdates(false), help: cmdHelp, shortcuts: cmdShortcuts,
+    reportIssue: () => api.openExternal && api.openExternal('https://github.com/Cphmartinus/marknote/issues/new'),
+    projectPage: () => api.openExternal && api.openExternal('https://github.com/Cphmartinus/marknote'),
     undo: () => { ed.focus(); document.execCommand('undo'); onChange(); },
     redo: () => { ed.focus(); document.execCommand('redo'); onChange(); },
     bold: () => wrap('**'), italic: () => wrap('*'), strike: () => wrap('~~'), highlight: () => wrap('=='),
@@ -1403,7 +1405,7 @@
     $('#ed').lang = code;
     $('#langSel').title = t('Sprog');
     fillLangSel();
-    $('#contactLine').innerHTML = t('Spørgsmål om programmet? Kontakt <b>Martin Piffet</b>:') + '<br><a href="https://github.com/Cphmartinus/marknote/issues" class="maillink">GitHub Issues</a>';
+    $('#verLabel').textContent = api.appVersion ? t('Version {0}', api.appVersion) : '';
     api.setLang && api.setLang({ spell: I18N.SPELL[code], lang: code, strings: {
       openTitle: t('Åbn dokument'), saveTitle: t('Gem dokument'), filterAll: t('Alle filer'), exportTitle: t('Eksportér'),
       imageTitle: t('Indsæt billede'), imageFilter: t('Billeder') } });

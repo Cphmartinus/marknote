@@ -20,6 +20,7 @@ contextBridge.exposeInMainWorld('api', {
   showInFolder: inv('shell:show'),
   pathForFile: (f) => { try { return webUtils.getPathForFile(f); } catch (_) { return ''; } },
   systemLocale: (() => { try { return ipcRenderer.sendSync('sys:locale'); } catch (_) { return ''; } })(),
+  appVersion: (() => { try { return ipcRenderer.sendSync('app:version'); } catch (_) { return ''; } })(),
   setLang: inv('lang:set'),
   setOverlay: inv('win:overlay'),
   updateCheck: inv('update:check'),

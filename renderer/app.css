@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; cursor: default; }
 .rb:hover { background: var(--btn-hover); border-color: var(--ribbon-border); }
 .rb:active, .rb.on { background: var(--btn-active); border-color: var(--accent); }
 .rb.big svg { width: 30px; height: 30px; margin-top: 1px; }
-.rb.big span { font-size: 11.5px; line-height: 1.15; text-align: center; max-width: 76px; }
+.rb.big span { font-size: 11.5px; line-height: 1.15; text-align: center; max-width: 92px; hyphens: manual; overflow-wrap: break-word; }
 .rb.sm { flex-direction: row; min-width: 30px; height: 28px; justify-content: center; padding: 0 5px; font-size: 14px; }
 .rb.sm svg { width: 20px; height: 20px; }
 .rb .t { font-family: Georgia, serif; }
@@ -215,11 +215,17 @@ input[type=range] { accent-color: var(--accent); width: 110px; }
 #updatebar svg { width: 18px; height: 18px; flex: none; }
 #updatebar #updText { flex: 1; font-weight: 600; }
 #updatebar .fb.x { margin-left: 0; }
-.col-chk { display: flex; align-items: center; padding: 0 6px 0 4px; max-width: 170px; }
-.col-chk .chk { white-space: normal; line-height: 1.25; }
 .upd-notes { max-height: 320px; overflow: auto; border: 1px solid var(--input-border); border-radius: 4px; background: var(--input-bg); padding: 4px 14px; }
 .upd-notes h2 { font-size: 16px; margin: 10px 0 6px; }
 .upd-notes h3 { font-size: 14px; margin: 10px 0 4px; }
 .upd-notes ul { padding-left: 20px; margin: 4px 0; }
 .upd-progress { height: 6px; background: var(--ribbon-border); border-radius: 3px; overflow: hidden; }
 .upd-progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+/* Hjælp-fanen */
+.lang-pick { display: flex; align-items: center; gap: 8px; padding: 4px 4px 0; }
+.lang-pick svg { width: 26px; height: 26px; color: var(--accent); flex: none; }
+.upd-col { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 6px 6px 0 4px; max-width: 190px; }
+.upd-col .chk { white-space: normal; line-height: 1.25; align-items: flex-start; }
+.upd-col .chk input { margin-top: 2px; }
+.upd-col #verLabel { font-size: 11.5px; }

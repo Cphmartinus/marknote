@@ -194,26 +194,32 @@
     <div class="panel" data-panel="help" hidden>
       <div class="group">
         <div class="items">
-          <button class="rb big" data-cmd="help" data-tip="Hjælp|F1|Vejledning i brug af programmet"><i data-i="info"></i><span>Hjælp</span></button>
-          <button class="rb big" data-cmd="shortcuts" data-tip="Genveje og Markdown-syntaks|Oversigt"><i data-i="raw"></i><span>Genveje</span></button>
-          <button class="rb big" data-cmd="contact" data-tip="Kontakt Martin Piffet|GitHub Issues"><i data-i="comment"></i><span>Kontakt</span></button>
+          <button class="rb big" data-cmd="help" data-tip="Hjælp|F1"><i data-i="help"></i><span>Hjælp</span></button>
+          <button class="rb big" data-cmd="shortcuts" data-tip="Genveje og Markdown-syntaks|Oversigt"><i data-i="keyboard"></i><span>Genveje</span></button>
+          <button class="rb big" data-cmd="about" data-tip="Om MarkNote|Version og licens"><i data-i="info"></i><span>Om MarkNote</span></button>
         </div>
-        <div class="label">Hjælp og support</div>
-      </div>
-      <div class="group grow">
-        <div class="items col"><span id="contactLine"></span></div>
-        <div class="label">Kontakt</div>
+        <div class="label">Hjælp</div>
       </div>
       <div class="group">
-        <div class="items col">
-          <label class="f2">Sprog / Language<select id="langSel2" class="sel wide"></select></label>
+        <div class="items">
+          <button class="rb big" data-cmd="reportIssue" data-tip="Rapportér et problem|Opret en sag på GitHub, hvis du har et spørgsmål eller har fundet en fejl"><i data-i="bug"></i><span>Rapportér et problem</span></button>
+          <button class="rb big" data-cmd="projectPage" data-tip="Projektside|Åbn MarkNotes side på GitHub med download, kildekode og vejledninger"><i data-i="web"></i><span>Projektside</span></button>
+        </div>
+        <div class="label">Support</div>
+      </div>
+      <div class="group">
+        <div class="items">
+          <div class="lang-pick"><i data-i="globe"></i><select id="langSel2" class="sel wide" aria-label="Sprog / Language" title="Sprog / Language"></select></div>
         </div>
         <div class="label">Sprog</div>
       </div>
       <div class="group">
         <div class="items">
           <button class="rb big" data-cmd="checkUpdate" data-tip="Søg efter opdateringer|Tjekker GitHub for en nyere version af MarkNote"><i data-i="update"></i><span>Søg efter opdateringer</span></button>
-          <div class="col-chk"><label class="chk"><input type="checkbox" id="optUpdates"> Søg automatisk efter opdateringer</label></div>
+          <div class="upd-col">
+            <label class="chk"><input type="checkbox" id="optUpdates"> Søg automatisk efter opdateringer</label>
+            <span class="muted" id="verLabel"></span>
+          </div>
         </div>
         <div class="label">Opdateringer</div>
       </div>

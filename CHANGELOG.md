@@ -2,8 +2,10 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
-## Unreleased
+## 1.1.0 – 2026-11-17
 
+- Mermaid diagrams: insert from the Insert tab, drawn in the preview, editable with a double-click, included in PDF, DOCX and HTML exports
+- Redesigned Help tab with Help, Shortcuts, About, Report a problem, Project page, language and updates
 - Check for updates: automatic daily check (can be turned off) and a button on the Help tab. The installer edition can download, verify and install the new version; the portable edition opens the release page
 - Arrow labels in diagrams are shown in a small box on the line
 - Office-style look for diagrams in light and dark theme
