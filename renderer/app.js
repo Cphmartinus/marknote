@@ -1020,6 +1020,31 @@
       .then((v) => (v === undefined ? null : v));
   }
 
+  /* Visuel diagrameditor (diagram-editor.js) */
+  function openDiagramEditor(code) {
+    return window.WDDiagram.open(code, {
+      t,
+      render: (src) => mermaidSvg(src, state.theme === 'dark' ? 'dark' : 'light'),
+      decorate: boxEdgeLabels,
+    });
+  }
+  async function diagramInSource() {
+    const v = ed.value, pos = ed.selectionStart;
+    const re = /^```mermaid[ \t]*\n([\s\S]*?)\n?```[ \t]*$/gm;
+    let m, hit = null;
+    while ((m = re.exec(v))) { if (pos >= m.index && pos <= m.index + m[0].length) { hit = m; break; } }
+    if (hit) {
+      const start = hit.index + hit[0].indexOf('\n') + 1, end = start + hit[1].length;
+      const code = await openDiagramEditor(hit[1]);
+      if (code === null) return ed.focus();
+      replaceRange(start, end, code, start);
+    } else {
+      const code = await openDiagramEditor('');
+      if (code === null) return ed.focus();
+      insertBlock('```mermaid\n' + code + '\n```');
+    }
+  }
+
   /* ---------- WYSIWYG ---------- */
   const td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced', bulletListMarker: '-', emDelimiter: '*', strongDelimiter: '**', hr: '---' });
   if (window.turndownPluginGfm) td.use(turndownPluginGfm.gfm);
@@ -1097,8 +1122,12 @@
     code: () => wins('<code>' + esc(wsel() || t('kode')) + '</code>'),
     codeblock: () => wins('<pre><code>' + esc(wsel() || 'kode') + '</code></pre><p><br></p>'),
     hr: () => wex('insertHorizontalRule'),
-    diagram: () => {
-      wins('<div class="mermaid-block" contenteditable="false" data-mermaid="' + encodeURIComponent(diagramTemplate()) + '"></div><p><br></p>');
+    diagram: async () => {
+      const saved = lastRange;
+      const code = await openDiagramEditor('');
+      lastRange = saved; restoreRange();
+      if (code === null) return;
+      wins('<div class="mermaid-block" contenteditable="false" data-mermaid="' + encodeURIComponent(code) + '"></div><p><br></p>');
       renderMermaidIn(preview).then(wysiwygSync);
     },
     math: () => wins('<span class="wd-math" data-tex="' + esc(wsel() || 'E = mc^2') + '" contenteditable="false">' + md.math(wsel() || 'E = mc^2', false) + '</span>&nbsp;'),
@@ -1137,7 +1166,7 @@
     if (!rich()) return;
     const dg = e.target.closest('.mermaid-block');
     if (dg) {
-      const v = await askCode(t('Rediger diagram (Mermaid)'), t('Diagramkode'), mmGet(dg));
+      const v = await openDiagramEditor(mmGet(dg));
       if (v === null) return;
       dg.setAttribute('data-mermaid', encodeURIComponent(v));
       dg.innerHTML = '';
@@ -1171,7 +1200,7 @@
     math: () => wrap('$', '$', 'E = mc^2'),
     mathblock: () => { const s = ed.value.slice(ed.selectionStart, ed.selectionEnd); insertBlock('$$\n' + (s || 'E = mc^2') + '\n$$'); },
     hr: () => insertBlock('---'),
-    diagram: () => insertBlock('```mermaid\n' + diagramTemplate() + '\n```'),
+    diagram: () => diagramInSource(),
     toggleRibbon: () => toggleRibbon(),
     exportPdf: () => doExport('pdf'), exportDocx: () => doExport('docx'), exportHtml: () => doExport('html'), exportMd: () => doExport('md'),
     history: cmdHistory, snapshot: () => snapshot(false),

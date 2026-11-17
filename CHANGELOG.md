@@ -2,6 +2,11 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
+## Unreleased
+
+- Visual diagram editor: create flowcharts, sequence diagrams, pie charts and Gantt charts by filling in tables, with a live preview. Diagrams the editor cannot read open on the Code tab
+- User guides are attached to releases
+
 ## 1.1.0 – 2026-11-17
 
 - Mermaid diagrams: insert from the Insert tab, drawn in the preview, editable with a double-click, included in PDF, DOCX and HTML exports
