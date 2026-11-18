@@ -1085,11 +1085,61 @@
   preview.addEventListener('change', (e) => {
     if (rich() && e.target.type === 'checkbox') { e.target.toggleAttribute('checked', e.target.checked); wysiwygSync(); }
   });
+  /* Sæt ind: Ctrl+V beholder formateringen (som i Word), Ctrl+Shift+V kun teksten */
+  let plainPasteAt = 0;
+  document.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'v') plainPasteAt = Date.now(); }, true);
+  function cleanPasteHtml(html) {
+    if (!html || !window.DOMPurify) return '';
+    const doc = new DOMParser().parseFromString(String(html).replace(/<!--[\s\S]*?-->/g, ''), 'text/html');
+    // Google Docs pakker alt ind i <b style="font-weight:normal">; Docs/web markerer fed og kursiv med style
+    doc.querySelectorAll('b[id^="docs-internal-guid"]').forEach((b) => b.replaceWith(...b.childNodes));
+    doc.querySelectorAll('span[style]').forEach((sp) => {
+      const st = sp.style, tags = [];
+      if (/^(bold|bolder|[6-9]00)$/.test(st.fontWeight)) tags.push('strong');
+      if (st.fontStyle === 'italic') tags.push('em');
+      if (/line-through/.test(st.textDecorationLine || st.textDecoration || '')) tags.push('s');
+      tags.forEach((tg) => { const el = doc.createElement(tg); el.append(...sp.childNodes); sp.append(el); });
+    });
+    resolveImages = false;
+    const out = DOMPurify.sanitize(doc.body.innerHTML, {
+      ALLOWED_TAGS: ['p', 'br', 'b', 'strong', 'i', 'em', 's', 'strike', 'del', 'mark', 'code', 'pre', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'ul', 'ol', 'li', 'a', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'hr', 'img', 'sup', 'sub'],
+      ALLOWED_ATTR: ['href', 'src', 'alt', 'title'],
+      ALLOWED_URI_REGEXP: /^(?:https?|mailto):/i,
+    });
+    resolveImages = true;
+    return out.replace(/<img(?![^>]*\ssrc=)[^>]*>/gi, '').trim();
+  }
+  function insertPaste(pane, text, html, fromMenu) {
+    const clean = html ? cleanPasteHtml(html) : '';
+    const hasRich = clean && (clean.replace(/<[^>]*>/g, '').trim() || /<(img|hr|table)\b/i.test(clean));
+    if (pane === 'preview') {
+      if (fromMenu) restoreRange(); else preview.focus();
+      if (hasRich) document.execCommand('insertHTML', false, clean);
+      else if (text) document.execCommand('insertText', false, text);
+      return;
+    }
+    let out = text || '';
+    if (hasRich) {
+      const m = td.turndown(clean).replace(/\n{3,}/g, '\n\n').trim();
+      if (m) {
+        out = m;
+        // blokke (overskrifter, lister, flere afsnit) skal stå på egne linjer med luft omkring
+        if (/\n/.test(m) || /^(#{1,6}\s|[-*+]\s|\d+\.\s|>|```|\|)/.test(m)) {
+          const before = ed.value.slice(0, ed.selectionStart), after = ed.value.slice(ed.selectionEnd);
+          if (before && !/\n\n$/.test(before)) out = (/\n$/.test(before) ? '\n' : '\n\n') + out;
+          if (after && !/^\n\n/.test(after)) out += /^\n/.test(after) ? '\n' : '\n\n';
+        }
+      }
+    }
+    if (out) replaceRange(ed.selectionStart, ed.selectionEnd, out);
+    else ed.focus();
+  }
   preview.addEventListener('paste', (e) => {
     if (!rich()) return;
     e.preventDefault();
-    const t = e.clipboardData.getData('text/plain');
-    if (t) document.execCommand('insertText', false, t);
+    const plain = Date.now() - plainPasteAt < 1000; plainPasteAt = 0;
+    insertPaste('preview', e.clipboardData.getData('text/plain'), plain ? '' : e.clipboardData.getData('text/html'));
   });
   let lastRange = null;
   document.addEventListener('selectionchange', () => {
@@ -1311,6 +1361,7 @@
     }
   });
   ed.addEventListener('paste', (e) => {
+    plainPasteAt = 0;
     const t = e.clipboardData && e.clipboardData.getData('text/plain');
     if (t && /^https?:\/\/\S+$/.test(t.trim()) && ed.selectionStart !== ed.selectionEnd) {
       e.preventDefault();
@@ -1376,13 +1427,35 @@
     let mini = null;
     if (editable) {
       mini = cxEl('div', 'cx-mini');
-      const hs = document.createElement('select');
-      [['0', 'Brødtekst'], ['1', 'Overskrift 1'], ['2', 'Overskrift 2'], ['3', 'Overskrift 3'], ['4', 'Overskrift 4']].forEach(([v, k]) => hs.add(new Option(t(k), v)));
-      if (pane === 'preview') { const h = ev.target.closest('#preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6'); hs.value = h ? String(Math.min(4, +h.tagName[1])) : '0'; }
-      else hs.value = String(Math.min(4, +($('#headingSel').value || 0)));
-      hs.title = t('Overskrift');
-      hs.addEventListener('change', () => { const n = +hs.value; closeContextMenu(); applyHeading(n); });
-      mini.append(hs);
+      const styles = [['0', 'Brødtekst'], ['1', 'Overskrift 1'], ['2', 'Overskrift 2'], ['3', 'Overskrift 3'], ['4', 'Overskrift 4']];
+      let cur = '0';
+      if (pane === 'preview') { const h = ev.target.closest('#preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6'); cur = h ? String(Math.min(4, +h.tagName[1])) : '0'; }
+      else cur = String(Math.min(4, +($('#headingSel').value || 0)));
+      const dd = cxEl('button', 'cx-dd', '<span></span>');
+      dd.type = 'button'; dd.title = t('Overskrift');
+      dd.setAttribute('aria-haspopup', 'listbox');
+      dd.firstChild.textContent = t(styles.find((s) => s[0] === cur)[1]);
+      let list = null;
+      const closeList = () => { if (list) { list.remove(); list = null; dd.classList.remove('open'); } };
+      dd.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (list) return closeList();
+        list = cxEl('div', 'cx-ddlist'); list.setAttribute('role', 'listbox');
+        styles.forEach(([v, k]) => {
+          const it = cxEl('div', 'cx-ddi', '<span class="ck"></span><span class="lb"></span>');
+          it.dataset.v = v; it.setAttribute('role', 'option');
+          if (v === cur) { it.firstChild.textContent = '✓'; it.setAttribute('aria-selected', 'true'); }
+          it.lastChild.textContent = t(k);
+          it.addEventListener('click', act(() => applyHeading(+v)));
+          list.append(it);
+        });
+        cxLayer.append(list); dd.classList.add('open');
+        const r = dd.getBoundingClientRect(), h = list.offsetHeight;
+        list.style.left = Math.min(r.left, innerWidth - list.offsetWidth - 4) + 'px';
+        list.style.top = (r.bottom + 4 + h > innerHeight - 4 ? Math.max(4, r.top - h - 4) : r.bottom + 4) + 'px';
+      });
+      cxLayer.addEventListener('mousedown', (e) => { if (list && !list.contains(e.target) && !dd.contains(e.target)) closeList(); });
+      mini.append(dd);
       const tb = (icon, html, cmd, tip) => { const b = cxEl('button', 'cx-tb', icon ? WDicon(icon) : html); b.title = tip; b.addEventListener('click', runCmd(cmd)); return b; };
       mini.append(tb(null, '<b>B</b>', 'bold', t('Fed') + ' (Ctrl+B)'), tb(null, '<i style="font-family:Georgia,serif">I</i>', 'italic', t('Kursiv') + ' (Ctrl+I)'),
         tb(null, '<s>S</s>', 'strike', t('Gennemstreget')), tb(null, '<span class="hl-ico">ab</span>', 'highlight', t('Fremhævning')),
@@ -1415,8 +1488,19 @@
     if (editable) {
       const ph = cxEl('div', 'cx-pastehead', WDicon('paste') + '<span></span>'); ph.lastChild.textContent = t('Indstillinger for Sæt ind:');
       const row = cxEl('div', 'cx-pasterow');
-      const pb = (icon, tip, a) => { const b = cxEl('button', '', WDicon(icon)); b.title = tip; b.addEventListener('click', edit(a)); return b; };
-      row.append(pb('paste', t('Sæt ind') + ' (Ctrl+V)', 'paste'), pb('pastetext', t('Behold kun tekst') + ' (Ctrl+Shift+V)', 'pasteAndMatchStyle'));
+      const pb = (icon, tip, keep) => {
+        const b = cxEl('button', '', WDicon(icon)); b.title = tip;
+        b.addEventListener('click', act(async () => {
+          const c = api.readClipboard ? await api.readClipboard() : { text: '', html: '' };
+          insertPaste(pane, c.text, keep ? c.html : '', true);
+        }));
+        return b;
+      };
+      const keepTip = t('Behold kildeformatering') + (pane === 'ed' ? ' – ' + t('konverteres til Markdown') : ' (Ctrl+V)');
+      const textTip = t('Behold kun tekst') + (pane === 'ed' ? ' (Ctrl+V)' : ' (Ctrl+Shift+V)');
+      const bKeep = pb('paste', keepTip, true), bText = pb('pastetext', textTip, false);
+      row.append(bKeep, bText);
+      if (api.readClipboard) api.readClipboard().then((c) => { if (!c.text && !c.html) { bKeep.disabled = bText.disabled = true; } else if (!c.html) bKeep.disabled = true; }).catch(() => {});
       menu.append(ph, row, hr());
       menu.append(item('link', t('Link…'), 'Ctrl+K', runCmd('link')));
       const ins = item('insert', t('Indsæt'), '', null, { sub: true });

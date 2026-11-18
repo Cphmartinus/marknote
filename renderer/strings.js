@@ -5100,6 +5100,36 @@ window.WD_STRINGS = [
 "Afrita"
 ],
 [
+"Behold kildeformatering",
+"Keep Source Formatting",
+"Ursprüngliche Formatierung beibehalten",
+"Conserver la mise en forme source",
+"Mantener formato de origen",
+"Mantieni formattazione originale",
+"Bronopmaak behouden",
+"Manter Formatação Original",
+"Zachowaj formatowanie źródłowe",
+"Behåll källformatering",
+"Behold kildeformatering",
+"Säilytä lähteen muotoilu",
+"Halda upprunasniði"
+],
+[
+"konverteres til Markdown",
+"converted to Markdown",
+"in Markdown umgewandelt",
+"converti en Markdown",
+"convertido a Markdown",
+"convertito in Markdown",
+"omgezet naar Markdown",
+"convertido em Markdown",
+"konwertowane na Markdown",
+"konverteras till Markdown",
+"konverteres til Markdown",
+"muunnetaan Markdowniksi",
+"breytt í Markdown"
+],
+[
 "Indstillinger for Sæt ind:",
 "Paste Options:",
 "Einfügeoptionen:",

@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld('api', {
   openExternal: inv('app:openExternal'),
   editAction: inv('edit:action'),
   copyText: inv('clip:write'),
+  readClipboard: inv('clip:read'),
   pickImage: inv('image:pick'),
   imageRel: inv('image:rel'),
   snapSave: inv('snap:save'),

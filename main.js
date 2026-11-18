@@ -346,6 +346,7 @@ ipcMain.handle('edit:action', (_e, action) => {
   return true;
 });
 ipcMain.handle('clip:write', (_e, text) => { clipboard.writeText(String(text || '')); return true; });
+ipcMain.handle('clip:read', () => ({ text: clipboard.readText(), html: clipboard.readHTML() }));
 
 /* ---------- billeder ---------- */
 ipcMain.handle('image:pick', async (_e, docPath) => {

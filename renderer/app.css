@@ -274,7 +274,17 @@ input[type=range] { accent-color: var(--accent); width: 110px; }
 .cx-layer { position: fixed; inset: 0; z-index: 1500; }
 .cx-mini, .cx-menu, .cx-sub { position: fixed; background: var(--cx-bg); color: var(--cx-text); border: 1px solid var(--cx-border); border-radius: 8px; box-shadow: 0 8px 28px rgba(0,0,0,.28); }
 .cx-mini { display: flex; align-items: center; gap: 2px; padding: 4px 6px; }
-.cx-mini select { height: 28px; background: var(--cx-bg); color: inherit; border: 1px solid var(--cx-border); border-radius: 4px; font: inherit; font-size: 12.5px; padding: 0 4px; margin-right: 4px; }
+.cx-mini .cx-dd { height: 28px; min-width: 124px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--cx-bg); color: inherit; border: 1px solid var(--cx-border); border-radius: 4px; font: inherit; font-size: 12.5px; padding: 0 8px; margin-right: 4px; cursor: default; }
+.cx-mini .cx-dd::after { content: ""; border: 4px solid transparent; border-top-color: currentColor; margin-top: 4px; opacity: .7; }
+.cx-mini .cx-dd:hover, .cx-mini .cx-dd.open { background: var(--cx-hover); }
+.cx-ddlist { position: fixed; background: var(--cx-bg); color: var(--cx-text); border: 1px solid var(--cx-border); border-radius: 8px; box-shadow: 0 8px 28px rgba(0,0,0,.28); padding: 4px; min-width: 200px; }
+.cx-ddi { display: grid; grid-template-columns: 18px 1fr; align-items: center; gap: 6px; min-height: 30px; padding: 3px 12px 3px 6px; border-radius: 4px; white-space: nowrap; cursor: default; font-size: 13px; }
+.cx-ddi:hover { background: var(--cx-hover); }
+.cx-ddi .ck { color: var(--cx-accent); font-size: 12px; text-align: center; }
+.cx-ddi[data-v="1"] .lb { font-size: 19px; font-weight: 600; color: var(--cx-accent); }
+.cx-ddi[data-v="2"] .lb { font-size: 16.5px; font-weight: 600; color: var(--cx-accent); }
+.cx-ddi[data-v="3"] .lb { font-size: 14.5px; font-weight: 600; color: var(--cx-accent); }
+.cx-ddi[data-v="4"] .lb { font-size: 13.5px; font-weight: 600; font-style: italic; color: var(--cx-accent); }
 .cx-mini .cx-tb { width: 30px; height: 30px; display: grid; place-items: center; border: 0; background: none; color: inherit; border-radius: 4px; font-size: 14px; }
 .cx-mini .cx-tb svg { width: 18px; height: 18px; }
 .cx-mini .cx-tb:hover { background: var(--cx-hover); }
