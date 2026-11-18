@@ -2,7 +2,7 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
-## Unreleased
+## 1.2.1 – 2026-11-18
 
 - Fixed: MarkNote could hang on the loading screen after installation (until Windows was restarted) when a second copy was started while another was running or still loading
 - The window is now always shown within 15 seconds, and a load error shows a message instead of a loading screen that never closes
