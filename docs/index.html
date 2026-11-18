@@ -3,181 +3,434 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MarkNote – Markdown editor in the style of Word</title>
-<meta name="description" content="MarkNote is a free, open source Markdown reader and editor for Windows with a Word-style ribbon, live preview, WYSIWYG editing, DOCX/PDF export and 13 languages.">
-<meta property="og:title" content="MarkNote – Markdown editor in the style of Word">
-<meta property="og:description" content="Free, open source Markdown reader and editor for Windows with a Word-style ribbon, live preview and WYSIWYG editing.">
+<title>MarkNote – Markdown, set like a Word document</title>
+<meta name="description" content="MarkNote is a free, open source Markdown reader and editor for Windows with a Word-style ribbon, live preview, WYSIWYG editing, a visual diagram editor, DOCX/PDF export and 13 languages.">
+<meta property="og:title" content="MarkNote – Markdown, set like a Word document">
+<meta property="og:description" content="Free, open source Markdown editor for Windows with a Word-style ribbon, live preview, WYSIWYG editing and diagrams without code.">
 <meta property="og:image" content="https://cphmartinus.github.io/marknote/social-preview.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2b579a">
 <link rel="icon" type="image/png" href="icon.png">
+<link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* ---------- fonts (self-hosted, SIL OFL) ---------- */
+  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+
+  /* ---------- tokens: one hue (Word blue), paper canvas, one marker accent ---------- */
   :root {
-    --blue: #2b579a; --blue-dark: #1f4a86; --ink: #1b1f27; --muted: #5b6475; --line: #dfe4ec;
-    --bg: #ffffff; --soft: #f3f6fb; --card: #ffffff; --on-blue: #ffffff; --on-blue-muted: #d6e2f3;
+    --paper: #f3f5f9; --paper-2: #e8ecf4; --card: #ffffff;
+    --ink: #0e1a2f; --ink-2: #44506a; --rule: #d3dae6;
+    --blue: #2b579a; --blue-deep: #17345f; --blue-soft: #dfe7f4;
+    --marker: #ffe066;
+    --on-blue: #ffffff; --on-blue-2: #c9d7ee;
+    --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+    --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", Consolas, monospace;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    --u: 8px;
+    --wrap: 1180px;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --ink: #e8ebf1; --muted: #a9b2c3; --line: #2c3442; --bg: #12161d; --soft: #181e27; --card: #1b222c; }
+    :root { --paper: #0b1322; --paper-2: #111c30; --card: #142038; --ink: #e9eef7; --ink-2: #a5b1c7; --rule: #24324d; --blue: #7aa5ef; --blue-soft: #1a2b48; --marker: #c9a521; }
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--sans); overflow-x: hidden; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 calc(var(--u) * 3); }
+  .mono { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; }
+  .serif { font-family: var(--serif); font-weight: 400; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
-  header.hero { background: var(--blue); color: var(--on-blue); padding: 28px 0 0; overflow: hidden; }
-  nav { display: flex; align-items: center; gap: 12px; }
-  nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; text-decoration: none; }
-  nav .brand img { width: 30px; height: 30px; border-radius: 6px; }
-  nav .links { margin-left: auto; display: flex; gap: 22px; font-size: 15px; }
-  nav .links a { text-decoration: none; color: var(--on-blue-muted); }
-  nav .links a:hover { color: #fff; }
-  .hero-body { padding: 64px 0 40px; max-width: 720px; }
-  h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.08; margin: 0 0 18px; font-weight: 600; letter-spacing: -.5px; }
-  .lead { font-size: 20px; color: var(--on-blue-muted); margin: 0 0 30px; }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px; }
-  .btn.primary { background: #fff; color: var(--blue); }
-  .btn.primary:hover { background: #eaf0fa; }
-  .btn.ghost { color: #fff; border: 1px solid rgba(255,255,255,.45); }
-  .btn.ghost:hover { background: rgba(255,255,255,.1); }
-  .small { font-size: 14px; color: var(--on-blue-muted); margin-top: 14px; }
-  .shot { margin: 8px auto -1px; max-width: 980px; }
-  .shot img { display: block; width: 100%; height: auto; border-radius: 10px 10px 0 0; box-shadow: 0 -4px 40px rgba(0,0,0,.35); }
+  /* marker sweep (==highlight==) */
+  .mk { background: linear-gradient(transparent 58%, var(--marker) 58%, var(--marker) 92%, transparent 92%) no-repeat 0 0 / 0% 100%; transition: background-size 1.1s var(--ease) .35s; padding: 0 .06em; }
+  .mk.in { background-size: 100% 100%; }
 
-  section { padding: 72px 0; }
-  section.alt { background: var(--soft); }
-  h2 { font-size: 32px; margin: 0 0 10px; font-weight: 600; letter-spacing: -.3px; }
-  .sub { color: var(--muted); margin: 0 0 36px; max-width: 640px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
-  .card h3 { margin: 0 0 6px; font-size: 18px; }
-  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
-  .ico { width: 36px; height: 36px; border-radius: 8px; background: var(--blue); color: #fff; display: grid; place-items: center; margin-bottom: 14px; }
-  .ico svg { width: 20px; height: 20px; }
+  /* scroll progress */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--marker); transform-origin: 0 50%; transform: scaleX(0); z-index: 60; }
 
-  .steps { counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
-  .step { position: relative; padding: 22px 22px 22px 66px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
-  .step::before { counter-increment: s; content: counter(s); position: absolute; left: 20px; top: 20px; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-weight: 600; }
-  .step h3 { margin: 0 0 4px; font-size: 17px; }
-  .step p { margin: 0; color: var(--muted); font-size: 15.5px; }
-  code { font-family: Consolas, "Cascadia Mono", monospace; font-size: .92em; background: rgba(127,127,127,.15); padding: 1px 5px; border-radius: 4px; }
-  .note { margin-top: 22px; padding: 14px 18px; border-left: 4px solid #e3b400; background: rgba(227,180,0,.1); border-radius: 4px; font-size: 15.5px; }
+  /* ---------- sticky bar ---------- */
+  .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transform: translateY(-100%); transition: transform .6s var(--ease); background: color-mix(in srgb, var(--paper) 82%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
+  .bar.on { transform: none; }
+  .bar .wrap { display: flex; align-items: center; height: 60px; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -.01em; }
+  .brand img { width: 28px; height: 28px; border-radius: 6px; }
+  .bar nav { margin-left: auto; display: flex; gap: 22px; align-items: center; font-size: 15px; }
+  .bar nav a { text-decoration: none; color: var(--ink-2); }
+  .bar nav a:hover { color: var(--ink); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; transition: transform .5s var(--ease), background-color .3s, box-shadow .5s var(--ease); will-change: transform; }
+  .btn svg { width: 18px; height: 18px; transition: transform .5s var(--ease); }
+  .btn:hover svg { transform: translateY(2px); }
+  .btn.solid { background: var(--blue); color: #fff; box-shadow: 0 10px 30px -12px rgba(43,87,154,.65); }
+  .btn.solid:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(43,87,154,.7); }
+  .btn.ghost { border: 1px solid var(--rule); color: var(--ink); }
+  .btn.ghost:hover { background: var(--card); }
+  .btn.sm { padding: 9px 16px; font-size: 14.5px; }
+  .on-blue .btn.solid { background: #fff; color: var(--blue-deep); }
+  .on-blue .btn.ghost { color: #fff; border-color: rgba(255,255,255,.35); }
+  .on-blue .btn.ghost:hover { background: rgba(255,255,255,.08); }
 
-  .show { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
-  .show figure { margin: 0; }
-  .show img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 6px 24px rgba(0,0,0,.12); }
-  .show figcaption { margin-top: 12px; color: var(--muted); font-size: 15.5px; }
-  .show figcaption strong { color: var(--ink); display: block; font-size: 17px; margin-bottom: 2px; }
-  @media (max-width: 760px) { .show { grid-template-columns: 1fr; } }
-  .new { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); background: rgba(43,87,154,.12); padding: 2px 7px; border-radius: 999px; margin-left: 6px; vertical-align: 2px; }
-  .langs { display: flex; flex-wrap: wrap; gap: 8px; }
-  .langs span { border: 1px solid var(--line); background: var(--card); padding: 6px 12px; border-radius: 999px; font-size: 15px; }
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: calc(var(--u) * 3) 0 0; background: var(--blue); color: var(--on-blue); overflow: hidden; isolation: isolate; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+    background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 48px 48px; mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 70%); }
+  .hero .top { display: flex; align-items: center; gap: 20px; }
+  .hero .top nav { margin-left: auto; display: flex; gap: 26px; font-size: 15px; }
+  .hero .top nav a { text-decoration: none; color: var(--on-blue-2); }
+  .hero .top nav a:hover { color: #fff; }
+  .hero-body { padding: clamp(48px, 7vw, 88px) 0 clamp(40px, 5vw, 56px); }
+  .eyebrow { color: var(--on-blue-2); display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .eyebrow i { display: block; width: 36px; height: 1px; background: currentColor; opacity: .6; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(50px, 9.4vw, 140px); line-height: .94; letter-spacing: -.025em; margin: 0; }
+  h1 .mk { white-space: nowrap; }
+  h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
+  h1 .line > span { display: inline-block; transform: translateY(105%); transition: transform 1.25s var(--ease); }
+  h1 em { font-style: italic; color: #fff; }
+  .loaded h1 .line > span { transform: none; }
+  .loaded h1 .line:nth-child(2) > span { transition-delay: .09s; }
+  .loaded h1 .line:nth-child(3) > span { transition-delay: .18s; }
+  .hero .mk { background-image: linear-gradient(transparent 80%, var(--marker) 80%, var(--marker) 88%, transparent 88%); transition-delay: 1.05s; }
+  .hero-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; margin-top: clamp(32px, 5vw, 56px); }
+  .lead { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; color: var(--on-blue-2); margin: 0; max-width: 34em; }
+  .lead strong { color: #fff; font-weight: 500; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .meta { margin-top: 22px; color: var(--on-blue-2); opacity: .9; }
+  .fade { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
+  .loaded .fade { opacity: 1; transform: none; }
+  .loaded .fade.d1 { transition-delay: .45s; } .loaded .fade.d2 { transition-delay: .58s; } .loaded .fade.d3 { transition-delay: .7s; }
 
-  footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: 15px; }
-  footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; }
-  footer a { color: var(--muted); }
+  .stage { perspective: 1600px; padding-bottom: 0; }
+  .screen { --tilt: 16deg; --lift: 0px; max-width: 1040px; margin: 0 auto; transform-origin: 50% 0; transform: rotateX(var(--tilt)) translateY(var(--lift)) scale(.97); will-change: transform; border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 -10px 80px -10px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.12); opacity: 0; transition: opacity 1.2s var(--ease) .55s; background: #fff; }
+  .loaded .screen { opacity: 1; }
+  .screen img { width: 100%; height: auto; }
 
+  /* ---------- section heads ---------- */
+  section { padding: clamp(80px, 11vw, 150px) 0; position: relative; }
+  .kicker { color: var(--blue); display: flex; gap: 14px; align-items: center; margin-bottom: 22px; }
+  .kicker b { font-weight: 500; color: var(--ink-2); }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.6vw, 84px); line-height: 1; letter-spacing: -.02em; margin: 0 0 22px; max-width: 14ch; }
+  h2 em { color: var(--blue); }
+  .sub { color: var(--ink-2); font-size: 19px; max-width: 34em; margin: 0; }
+
+  /* reveal */
+  [data-r] { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1.2s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+  [data-r].in { opacity: 1; transform: none; }
+
+  /* ---------- story (sticky scrollytelling) ---------- */
+  .story { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); margin-top: clamp(48px, 7vw, 90px); }
+  .steps { display: flex; flex-direction: column; }
+  .step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding: 20px 0; opacity: .32; transition: opacity .7s var(--ease); }
+  .step.active { opacity: 1; }
+  .step .no { font-family: var(--mono); color: var(--blue); font-size: 13px; letter-spacing: .1em; margin-bottom: 14px; }
+  .step h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.04; margin: 0 0 14px; letter-spacing: -.01em; }
+  .step p { color: var(--ink-2); margin: 0; max-width: 28em; }
+  .step .inline-shot { display: none; }
+  .plates { position: sticky; top: 14vh; height: 72vh; display: flex; align-items: center; }
+  .plates .frame { position: relative; width: 100%; aspect-ratio: 5 / 3; border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 30px 80px -30px rgba(14,26,47,.45), 0 0 0 1px var(--rule); }
+  .plates img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; opacity: 0; transform: scale(1.04); transition: opacity .9s var(--ease), transform 1.4s var(--ease); }
+  .plates img.on { opacity: 1; transform: none; }
+  .dots { position: absolute; right: -28px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; }
+  .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--rule); transition: background .4s, transform .6s var(--ease); }
+  .dots i.on { background: var(--blue); transform: scale(1.6); }
+
+  /* ---------- index of features ---------- */
+  .alt { background: var(--paper-2); }
+  .index { margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(32px, 5vw, 72px); }
+  .row { display: grid; grid-template-columns: 56px 1fr; gap: 6px 18px; padding: 26px 0 28px; border-bottom: 1px solid var(--rule); position: relative; }
+  .row::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: 0 50%; transition: transform .9s var(--ease); }
+  .row:hover::after { transform: scaleX(1); }
+  .row .n { font-family: var(--mono); font-size: 13px; color: var(--blue); padding-top: 7px; letter-spacing: .06em; }
+  .row h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0; letter-spacing: -.005em; }
+  .row h3 small { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: var(--marker); padding: 2px 6px; border-radius: 3px; margin-left: 8px; vertical-align: 6px; }
+  .row p { grid-column: 2; margin: 0; color: var(--ink-2); font-size: 16px; }
+  .row code { font-family: var(--mono); font-size: .88em; background: var(--blue-soft); padding: 1px 5px; border-radius: 3px; }
+
+  /* ---------- languages marquee ---------- */
+  .langs { padding: clamp(56px, 7vw, 90px) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; }
+  .langs .lbl { margin-bottom: 26px; color: var(--ink-2); }
+  .marquee { display: flex; width: max-content; animation: slide 46s linear infinite; }
+  .marquee span { font-family: var(--serif); font-size: clamp(44px, 6.4vw, 96px); line-height: 1; padding-right: .6em; white-space: nowrap; letter-spacing: -.015em; }
+  .marquee span:nth-child(odd) { font-style: italic; color: var(--blue); }
+  .marquee span::after { content: "·"; padding-left: .6em; color: var(--rule); font-style: normal; }
+  .langs:hover .marquee { animation-play-state: paused; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- statement (privacy) ---------- */
+  .statement { background: var(--blue-deep); color: #fff; }
+  @media (prefers-color-scheme: dark) { .statement { background: #08101d; } }
+  .statement .kicker { color: var(--marker); }
+  .statement .kicker b { color: #b9c7e2; }
+  .statement h2 { max-width: 13ch; font-size: clamp(48px, 7.6vw, 120px); }
+  .statement h2 em { color: var(--marker); }
+  .statement .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid rgba(255,255,255,.15); padding-top: 32px; }
+  .statement .cols h3 { font-family: var(--mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 10px; color: #fff; }
+  .statement .cols p { margin: 0; color: #b9c7e2; font-size: 16px; }
+  .statement a { color: #fff; }
+
+  /* ---------- get started ---------- */
+  .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); margin-top: clamp(40px, 6vw, 72px); counter-reset: s; }
+  .start-grid div { border-top: 2px solid var(--ink); padding-top: 22px; }
+  .start-grid .big { font-family: var(--serif); font-size: 72px; line-height: .8; color: var(--blue); display: block; margin-bottom: 18px; }
+  .start-grid h3 { margin: 0 0 8px; font-size: 19px; font-weight: 600; }
+  .start-grid p { margin: 0; color: var(--ink-2); font-size: 16px; }
+  .start-grid code { font-family: var(--mono); font-size: .86em; background: var(--blue-soft); padding: 1px 5px; border-radius: 3px; }
+  .finale { margin-top: clamp(48px, 7vw, 88px); display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+  .finale .note { color: var(--ink-2); font-size: 15.5px; }
+
+  footer { border-top: 1px solid var(--rule); padding: 36px 0 44px; color: var(--ink-2); font-size: 15px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 28px; }
+  footer a { color: var(--ink-2); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .hero-foot { grid-template-columns: 1fr; gap: 28px; }
+    .story { grid-template-columns: 1fr; }
+    .plates { display: none; }
+    .step { min-height: 0; opacity: 1; padding: 0 0 56px; }
+    .step .inline-shot { display: block; margin-top: 22px; border-radius: 10px; box-shadow: 0 20px 50px -24px rgba(14,26,47,.45), 0 0 0 1px var(--rule); }
+    .index { grid-template-columns: 1fr; }
+    .statement .cols, .start-grid { grid-template-columns: 1fr; }
+  }
   @media (max-width: 640px) {
     body { font-size: 16px; }
-    nav .links { gap: 14px; }
-    nav .links a.hide-sm { display: none; }
-    .hero-body { padding: 44px 0 30px; }
-    section { padding: 52px 0; }
+    .wrap { padding: 0 16px; }
+    .hero .top nav a.hide-sm, .bar nav a.hide-sm { display: none; }
+    .row { grid-template-columns: 40px 1fr; }
+    .row h3 { font-size: 24px; }
+  }
+
+  /* ---------- reduced motion: everything visible, nothing moves ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    h1 .line > span, .fade, [data-r], .screen { transform: none !important; opacity: 1 !important; }
+    .mk { background-size: 100% 100%; }
+    .step { opacity: 1; }
+    .progress { display: none; }
   }
 </style>
 </head>
 <body>
 
-<header class="hero">
+<div class="progress" aria-hidden="true"></div>
+
+<header class="bar" aria-label="Site">
   <div class="wrap">
+    <a class="brand" href="#top"><img src="icon.png" alt="">MarkNote</a>
     <nav>
-      <a class="brand" href="#"><img src="icon.png" alt="">MarkNote</a>
-      <div class="links">
-        <a href="#features">Features</a>
-        <a href="#download" class="hide-sm">Download</a>
-        <a href="https://github.com/Cphmartinus/marknote">GitHub</a>
-      </div>
+      <a href="#story" class="hide-sm">Tour</a>
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="https://github.com/Cphmartinus/marknote" class="hide-sm">GitHub</a>
+      <a class="btn solid sm" href="https://github.com/Cphmartinus/marknote/releases/latest">Download</a>
     </nav>
-    <div class="hero-body">
-      <h1>Markdown, the way you know it from Word</h1>
-      <p class="lead">MarkNote is a free Markdown reader and editor for Windows. Use the familiar ribbon and right-click menu to format your text, build diagrams without code, edit directly in the formatted page, and keep every document as a plain <code style="background:rgba(255,255,255,.15)">.md</code> file.</p>
-      <div class="cta">
-        <a class="btn primary" href="https://github.com/Cphmartinus/marknote/releases/latest">Download for Windows</a>
-        <a class="btn ghost" href="https://github.com/Cphmartinus/marknote">View source on GitHub</a>
-      </div>
-      <p class="small">Windows 10 and 11 · Free and open source (MIT) · No account, no telemetry</p>
-    </div>
-    <div class="shot"><img src="demo.gif" width="960" height="544" alt="Writing Markdown side by side, building a flowchart in the diagram editor, opening the Word-style right-click menu and switching to reading mode"></div>
   </div>
 </header>
 
-<section id="features">
+<header class="hero on-blue" id="top">
   <div class="wrap">
-    <h2>Everything you need to write in Markdown</h2>
-    <p class="sub">The clean, future-proof format of Markdown, with the buttons and shortcuts of a word processor.</p>
-    <div class="grid">
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/></svg></div><h3>Live preview and WYSIWYG</h3><p>Write Markdown on the left and see it formatted on the right, or type straight into the formatted page. Both stay in sync.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div><h3>A ribbon you already know</h3><p>Home, Insert, View, Export and Help tabs, one blue title bar and a right-click menu with a formatting bar, just like Word.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M10 5.5h4M17.5 8v8"/></svg></div><h3>Diagrams without code<span class="new">New</span></h3><p>Build flowcharts, sequence diagrams, pie charts and Gantt charts by filling in simple tables. They are saved as Mermaid in your Markdown file.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></div><h3>Open Word files</h3><p>Open a <code>.docx</code> or <code>.html</code> file and it is converted to Markdown automatically, images included.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div><h3>Export anywhere</h3><p>Save as PDF, a real Word document (DOCX) or a standalone HTML page. Diagrams and formulas come along.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M9 4v16"/></svg></div><h3>Tables, footnotes and formulas</h3><p>Interactive table builder, images with relative paths, footnotes, hidden comments and LaTeX formulas.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Never lose your work</h3><p>Automatic snapshots let you restore earlier versions. Work on several documents at once in tabs.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg></div><h3>Stays up to date<span class="new">New</span></h3><p>MarkNote tells you when a new version is out and the installer edition can download and install it for you.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></div><h3>13 languages</h3><p>Follows your Windows language, from Danish and English to Polish and Icelandic, and can be switched any time.</p></div>
+    <div class="top">
+      <a class="brand" href="#top"><img src="icon.png" alt="">MarkNote</a>
+      <nav>
+        <a href="#story">Tour</a>
+        <a href="#features" class="hide-sm">Features</a>
+        <a href="https://github.com/Cphmartinus/marknote">GitHub</a>
+      </nav>
+    </div>
+
+    <div class="hero-body">
+      <p class="eyebrow mono fade"><i></i>Free for Windows · Open source</p>
+      <h1>
+        <span class="line"><span>Markdown,</span></span>
+        <span class="line"><span><em>set</em> like a</span></span>
+        <span class="line"><span><span class="mk" data-mk>Word document.</span></span></span>
+      </h1>
+      <div class="hero-foot">
+        <div>
+          <p class="lead fade d1">The ribbon, the right-click menu and the blue title bar you already know, with <strong>plain <code style="font-family:var(--mono);font-size:.9em">.md</code> files</strong> underneath. Build diagrams without code, open Word files, and export to PDF and DOCX.</p>
+          <p class="meta mono fade d3">Windows 10 &amp; 11 · MIT licence · No account · No telemetry</p>
+        </div>
+        <div class="cta fade d2">
+          <a class="btn solid" href="https://github.com/Cphmartinus/marknote/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>Download for Windows</a>
+          <a class="btn ghost" href="#story">Take the tour</a>
+        </div>
+      </div>
     </div>
   </div>
-</section>
-
-<section class="alt" id="tour">
-  <div class="wrap">
-    <h2>Take a closer look</h2>
-    <p class="sub">Familiar tools for the things that are hard to do in plain Markdown.</p>
-    <div class="show">
-      <figure><img src="diagram-editor.png" width="1200" height="720" alt="The diagram editor with a list of steps and connections on the left and the drawn flowchart on the right" loading="lazy"><figcaption><strong>The diagram editor</strong>Add steps, pick shapes and colours, connect them and label the arrows. The preview updates as you type.</figcaption></figure>
-      <figure><img src="context-menu.png" width="1200" height="720" alt="The right-click menu with a formatting bar above and cut, copy, paste options, link, insert and new comment below" loading="lazy"><figcaption><strong>A right-click menu like Word's</strong>Format text from the mini toolbar, paste as plain text, insert tables and diagrams, or add a comment.</figcaption></figure>
-    </div>
+  <div class="stage">
+    <div class="screen" id="screen"><img src="demo.gif" width="960" height="576" alt="Writing Markdown side by side, building a flowchart in the diagram editor, opening the Word-style right-click menu and switching to reading mode"></div>
   </div>
-</section>
+</header>
 
-<section>
-  <div class="wrap">
-    <h2>Speaks your language</h2>
-    <p class="sub">MarkNote follows your Windows language and can be switched at any time.</p>
-    <div class="langs">
+<main>
+  <section id="story">
+    <div class="wrap">
+      <p class="kicker mono" data-r>01 <b>— How it works</b></p>
+      <h2 data-r style="--d:1">From plain text to a <em>finished page</em>.</h2>
+      <p class="sub" data-r style="--d:2">Four moments that make Markdown feel like a word processor.</p>
+
+      <div class="story">
+        <div class="steps">
+          <article class="step" data-step="0">
+            <p class="no">01 / WRITE</p>
+            <h3>Type Markdown, see the document.</h3>
+            <p>Markdown on the left, the formatted page on the right. Type in either pane and the other follows, so you can work the way you prefer.</p>
+            <img class="inline-shot" src="story-write.webp" width="1800" height="1080" alt="Live preview with Markdown on the left and the formatted document on the right" loading="lazy">
+          </article>
+          <article class="step" data-step="1">
+            <p class="no">02 / DIAGRAM</p>
+            <h3>Diagrams without a line of code.</h3>
+            <p>Add steps, pick shapes and colours, connect them and label the arrows. Flowcharts, sequence diagrams, pie and Gantt charts are drawn as you type.</p>
+            <img class="inline-shot" src="diagram-editor.webp" width="1200" height="720" alt="The diagram editor with steps and connections on the left and the drawn flowchart on the right" loading="lazy">
+          </article>
+          <article class="step" data-step="2">
+            <p class="no">03 / FORMAT</p>
+            <h3>Right-click, just like in Word.</h3>
+            <p>A mini toolbar for headings, bold, highlight and lists, paste options, an Insert menu and New comment, exactly where your mouse already is.</p>
+            <img class="inline-shot" src="context-menu.webp" width="1200" height="720" alt="The Word-style right-click menu with a formatting bar and paste options" loading="lazy">
+          </article>
+          <article class="step" data-step="3">
+            <p class="no">04 / SHARE</p>
+            <h3>Read it, then send it as Word or PDF.</h3>
+            <p>Reading mode shows the document as a page. Export to a real DOCX, a PDF or a standalone web page, with diagrams and formulas included.</p>
+            <img class="inline-shot" src="story-read.webp" width="1800" height="1080" alt="Reading mode showing the formatted document as a page, with the Export and Tools tab open" loading="lazy">
+          </article>
+        </div>
+        <div class="plates" aria-hidden="true">
+          <div class="frame">
+            <img src="story-write.webp" alt="" class="on">
+            <img src="diagram-editor.webp" alt="" loading="lazy">
+            <img src="context-menu.webp" alt="" loading="lazy">
+            <img src="story-read.webp" alt="" loading="lazy">
+            <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="features">
+    <div class="wrap">
+      <p class="kicker mono" data-r>02 <b>— Everything included</b></p>
+      <h2 data-r style="--d:1">The tools you reach for, <em>in one place</em>.</h2>
+      <div class="index">
+        <div class="row" data-r><span class="n">01</span><h3>Three views</h3><p>Raw Markdown with syntax colours, live preview side by side, and a clean reading mode.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">02</span><h3>Diagram editor <small>New</small></h3><p>Flowcharts, sequence diagrams, pie and Gantt charts from simple tables, saved as Mermaid.</p></div>
+        <div class="row" data-r><span class="n">03</span><h3>Word-style everything</h3><p>Ribbon, blue title bar, right-click menu with a mini toolbar, tooltips that teach the syntax.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">04</span><h3>Open Word files</h3><p>A <code>.docx</code> or <code>.html</code> file is converted to Markdown when you open it, images included.</p></div>
+        <div class="row" data-r><span class="n">05</span><h3>Export anywhere</h3><p>PDF, a real Word document, a standalone web page or plain <code>.md</code>.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">06</span><h3>Tables, footnotes, formulas</h3><p>Interactive table builder, relative image paths, footnotes, hidden comments and LaTeX.</p></div>
+        <div class="row" data-r><span class="n">07</span><h3>Never lose your work</h3><p>Automatic snapshots you can restore, and several documents open at once in tabs.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">08</span><h3>Stays up to date <small>New</small></h3><p>MarkNote tells you when a new version is out, and the installer can update itself.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="langs" aria-label="Available in 13 languages">
+    <div class="wrap"><p class="lbl mono" data-r>03 — Speaks 13 languages, follows your Windows setting</p></div>
+    <div class="marquee" aria-hidden="true">
+      <span>Dansk</span><span>English</span><span>Deutsch</span><span>Français</span><span>Español</span><span>Italiano</span><span>Nederlands</span><span>Português</span><span>Polski</span><span>Svenska</span><span>Norsk</span><span>Suomi</span><span>Íslenska</span>
       <span>Dansk</span><span>English</span><span>Deutsch</span><span>Français</span><span>Español</span><span>Italiano</span><span>Nederlands</span><span>Português</span><span>Polski</span><span>Svenska</span><span>Norsk</span><span>Suomi</span><span>Íslenska</span>
     </div>
+    <p class="wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Danish, English, German, French, Spanish, Italian, Dutch, Portuguese, Polish, Swedish, Norwegian, Finnish and Icelandic.</p>
   </div>
-</section>
 
-<section id="download">
-  <div class="wrap">
-    <h2>Get started</h2>
-    <p class="sub">Download the latest version from the releases page.</p>
-    <div class="steps">
-      <div class="step"><h3>Download</h3><p>Choose <code>MarkNote-Setup.exe</code> (recommended: fastest start, opens <code>.md</code> files and installs future updates for you) or <code>MarkNote-portable.exe</code> to run without installing.</p></div>
-      <div class="step"><h3>Start MarkNote</h3><p>The first time, Windows may show a SmartScreen warning because the app is not code-signed yet. Choose <strong>More info → Run anyway</strong>.</p></div>
-      <div class="step"><h3>Write</h3><p>Open a Markdown or Word file, or start typing. Press <code>F1</code> for built-in help, and use <em>Help → Check for updates</em> to stay current.</p></div>
+  <section class="statement">
+    <div class="wrap">
+      <p class="kicker mono" data-r>04 <b>— Privacy</b></p>
+      <h2 data-r style="--d:1">Your words stay <em>yours</em>.</h2>
+      <div class="cols">
+        <div data-r><h3>On your computer</h3><p>MarkNote runs entirely offline. Documents are read and written only when you open or save them.</p></div>
+        <div data-r style="--d:1"><h3>No account, no tracking</h3><p>No telemetry, no analytics, no ads. Nothing to sign up for.</p></div>
+        <div data-r style="--d:2"><h3>One question a day</h3><p>At most once a day it asks GitHub whether a new version exists. You can turn that off. <a href="https://github.com/Cphmartinus/marknote/blob/main/PRIVACY.md">Privacy policy</a></p></div>
+      </div>
     </div>
-    <p style="margin-top:28px"><a class="btn primary" style="background:var(--blue);color:#fff" href="https://github.com/Cphmartinus/marknote/releases/latest">Download the latest release</a></p>
-    <div class="note">User guides in Word format: <a href="MarkNote-user-guide.docx">English</a> · <a href="MarkNote-vejledning.docx">Danish (dansk)</a>.</div>
-  </div>
-</section>
+  </section>
 
-<section class="alt">
-  <div class="wrap">
-    <h2>Private by design</h2>
-    <p class="sub" style="margin-bottom:0">MarkNote runs entirely on your computer. It has no account, no telemetry and no ads, and it never sends your documents anywhere. The only thing it asks the internet is GitHub, at most once a day, whether a new version exists, and you can turn that off. Read the <a href="https://github.com/Cphmartinus/marknote/blob/main/PRIVACY.md">privacy policy</a>.</p>
-  </div>
-</section>
+  <section id="download">
+    <div class="wrap">
+      <p class="kicker mono" data-r>05 <b>— Get started</b></p>
+      <h2 data-r style="--d:1">Up and running in <em>a minute</em>.</h2>
+      <div class="start-grid">
+        <div data-r><span class="big">1</span><h3>Download</h3><p><code>MarkNote-Setup.exe</code> is recommended: fastest start, opens <code>.md</code> files and installs future updates for you. Prefer no install? Use the portable exe.</p></div>
+        <div data-r style="--d:1"><span class="big">2</span><h3>Start MarkNote</h3><p>The app is not code-signed yet, so Windows may show a SmartScreen warning the first time. Choose <strong>More info → Run anyway</strong>.</p></div>
+        <div data-r style="--d:2"><span class="big">3</span><h3>Write</h3><p>Open a Markdown or Word file, or just start typing. Press <code>F1</code> for help.</p></div>
+      </div>
+      <div class="finale" data-r>
+        <a class="btn solid" href="https://github.com/Cphmartinus/marknote/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>Download the latest release</a>
+        <span class="note">User guides in Word: <a href="MarkNote-user-guide.docx">English</a> · <a href="MarkNote-vejledning.docx">Danish</a></span>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
   <div class="wrap">
-    <span>MarkNote · MIT License</span>
-    <span><a href="https://github.com/Cphmartinus/marknote">Source code</a> · <a href="https://github.com/Cphmartinus/marknote/issues">Report an issue</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CODE_SIGNING_POLICY.md">Code signing policy</a></span>
+    <span>MarkNote · MIT licence · Fonts: Instrument Serif &amp; IBM Plex (SIL OFL)</span>
+    <span><a href="https://github.com/Cphmartinus/marknote">Source code</a> · <a href="https://github.com/Cphmartinus/marknote/issues">Report an issue</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CHANGELOG.md">Changelog</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CODE_SIGNING_POLICY.md">Code signing policy</a></span>
   </div>
 </footer>
 
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+
+  /* 1. load sequence: wait for fonts (max 700 ms), then play the hero timeline */
+  var go = function () { document.body.classList.add('loaded'); setTimeout(function () { var m = document.querySelector('.hero [data-mk]'); if (m) m.classList.add('in'); }, 50); };
+  if (document.fonts && document.fonts.ready && !reduce) { Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 700); })]).then(go); } else go();
+
+  /* 2. reveal once on scroll */
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' }) : null;
+  document.querySelectorAll('[data-r], .mk:not([data-mk])').forEach(function (el) { if (io && !reduce) io.observe(el); else el.classList.add('in'); });
+
+  /* 3. scroll-linked: hero screen un-tilts, progress bar, sticky bar */
+  var screen = document.getElementById('screen'), bar = document.querySelector('.bar'), prog = document.querySelector('.progress');
+  var ticking = false;
+  function onScroll() {
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight;
+    var max = document.documentElement.scrollHeight - vh;
+    if (prog) prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    bar.classList.toggle('on', y > vh * 0.75);
+    if (!reduce && screen) {
+      var r = screen.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.9)));
+      var e = 1 - Math.pow(1 - p, 3);
+      screen.style.setProperty('--tilt', (16 * (1 - e)).toFixed(2) + 'deg');
+      screen.style.transform = 'rotateX(' + (16 * (1 - e)).toFixed(2) + 'deg) scale(' + (0.97 + 0.03 * e).toFixed(4) + ')';
+    }
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* 4. scrollytelling: the step in the middle of the viewport picks the plate */
+  var plates = document.querySelectorAll('.plates img'), dots = document.querySelectorAll('.dots i'), steps = document.querySelectorAll('.step');
+  function activate(i) {
+    steps.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    plates.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+    dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+  }
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) activate(+e.target.getAttribute('data-step')); });
+    }, { rootMargin: '-48% 0px -48% 0px' });
+    steps.forEach(function (s) { so.observe(s); });
+  }
+  activate(0);
+})();
+</script>
 </body>
 </html>
