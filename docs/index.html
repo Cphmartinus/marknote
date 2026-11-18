@@ -149,6 +149,14 @@
     "@type": "Answer",
     "text": "Not at the moment. MarkNote is made for Windows 10 and Windows 11."
    }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I support the developer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "MarkNote is free and always will be. If it saves you time, you can buy the developer a coffee on Ko-fi: https://ko-fi.com/martincph. Reporting bugs, suggesting features and telling others about MarkNote helps too."
+   }
   }
  ]
 }
@@ -416,7 +424,7 @@
     .faq details::details-content { height: 0; overflow: clip; transition: height .6s var(--ease), content-visibility .6s allow-discrete; }
     .faq details[open]::details-content { height: auto; }
   }
-  .start-grid a { color: var(--blue); }
+  .start-grid a, .faq .a a { color: var(--blue); }
 
   /* ---------- responsive ---------- */
   @media (max-width: 900px) {
@@ -655,6 +663,7 @@ flowchart LR
         <details data-r><summary>Why does Windows show a SmartScreen warning?</summary><div class="a"><p>MarkNote is not code-signed yet, so Windows does not recognise the publisher. Choose More info → Run anyway. The source code is public and every release is built by GitHub Actions from that code.</p></div></details>
         <details data-r><summary>Does MarkNote work offline?</summary><div class="a"><p>Yes. Everything runs on your computer. The only network request is an optional check for new versions on GitHub, at most once a day, and you can turn it off.</p></div></details>
         <details data-r><summary>Is there a version for Mac or Linux?</summary><div class="a"><p>Not at the moment. MarkNote is made for Windows 10 and Windows 11.</p></div></details>
+        <details data-r><summary>How can I support the developer?</summary><div class="a"><p>MarkNote is free and always will be. If it saves you time, you can buy the developer a coffee on <a href="https://ko-fi.com/martincph" rel="noopener">Ko-fi</a>. Reporting bugs, suggesting features and telling others about MarkNote helps too.</p></div></details>
       </div>
     </div>
   </section>
