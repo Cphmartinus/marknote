@@ -7,6 +7,7 @@ All notable changes to MarkNote are listed here. Release notes for each version 
 - Fixed: the text style dropdown in the right-click menu could not be opened. It is now a Word-style list with previews of Body text and Heading 1–4
 - Fixed: the two paste buttons gave the same result. Keep Source Formatting (Ctrl+V) now keeps headings, bold, italic, links, lists and tables from Word, Google Docs and web pages; Keep Text Only (Ctrl+Shift+V) pastes plain text. In the Markdown pane, Keep Source Formatting converts the formatting to Markdown
 - The diagram editor's section heading now reads "Steps"
+- Help tab: new Support the project button after Project page, linking to Ko-fi
 
 ## 1.2.3 – 2026-11-18
 

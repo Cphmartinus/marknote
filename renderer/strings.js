@@ -4080,6 +4080,36 @@ window.WD_STRINGS = [
 "Stofnaðu mál á GitHub ef þú ert með spurningu eða hefur fundið villu"
 ],
 [
+"Støt projektet",
+"Support the project",
+"Projekt unterstützen",
+"Soutenir le projet",
+"Apoyar el proyecto",
+"Sostieni il progetto",
+"Steun het project",
+"Apoiar o projeto",
+"Wesprzyj projekt",
+"Stöd projektet",
+"Støtt prosjektet",
+"Tue projektia",
+"Styðja verkefnið"
+],
+[
+"Køb en kop kaffe til udvikleren på Ko-fi, hvis MarkNote er nyttig for dig",
+"Buy the developer a coffee on Ko-fi if MarkNote is useful to you",
+"Spendiere dem Entwickler auf Ko-fi einen Kaffee, wenn MarkNote dir nützt",
+"Offrez un café au développeur sur Ko-fi si MarkNote vous est utile",
+"Invita a un café al desarrollador en Ko-fi si MarkNote te resulta útil",
+"Offri un caffè allo sviluppatore su Ko-fi se MarkNote ti è utile",
+"Trakteer de ontwikkelaar op koffie via Ko-fi als MarkNote nuttig voor je is",
+"Pague um café ao programador no Ko-fi se o MarkNote lhe for útil",
+"Postaw twórcy kawę na Ko-fi, jeśli MarkNote jest dla ciebie przydatny",
+"Bjud utvecklaren på en kaffe via Ko-fi om MarkNote är användbart för dig",
+"Spander en kaffe på utvikleren via Ko-fi hvis MarkNote er nyttig for deg",
+"Tarjoa kehittäjälle kahvi Ko-fissa, jos MarkNote on sinulle hyödyllinen",
+"Bjóddu forritaranum upp á kaffi á Ko-fi ef MarkNote nýtist þér"
+],
+[
 "Projektside",
 "Project page",
 "Projektseite",

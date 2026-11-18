@@ -1232,6 +1232,7 @@
     about: cmdAbout, checkUpdate: () => checkForUpdates(false), help: cmdHelp, shortcuts: cmdShortcuts,
     reportIssue: () => api.openExternal && api.openExternal('https://github.com/Cphmartinus/marknote/issues/new'),
     projectPage: () => api.openExternal && api.openExternal('https://github.com/Cphmartinus/marknote'),
+    supportProject: () => api.openExternal && api.openExternal('https://ko-fi.com/martincph'),
     undo: () => { ed.focus(); document.execCommand('undo'); onChange(); },
     redo: () => { ed.focus(); document.execCommand('redo'); onChange(); },
     bold: () => wrap('**'), italic: () => wrap('*'), strike: () => wrap('~~'), highlight: () => wrap('=='),
