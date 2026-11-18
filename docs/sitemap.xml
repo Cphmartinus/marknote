@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://cphmartinus.github.io/marknote/</loc>
     <lastmod>2026-11-18</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote in two minutes</video:title>
+      <video:description>A two-minute tour of MarkNote, a free Markdown editor for Windows with a Word-style ribbon, live preview, a diagram editor and export to Word and PDF.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 </urlset>

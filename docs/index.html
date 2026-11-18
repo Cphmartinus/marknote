@@ -44,7 +44,7 @@
  "installUrl": "https://github.com/Cphmartinus/marknote/releases/latest",
  "license": "https://opensource.org/licenses/MIT",
  "image": "https://cphmartinus.github.io/marknote/icon.png",
- "video": {"@type": "VideoObject", "name": "MarkNote demo", "description": "Writing Markdown side by side, building a flowchart in the diagram editor, the Word-style right-click menu and reading mode.", "thumbnailUrl": "https://cphmartinus.github.io/marknote/demo-poster.webp", "contentUrl": "https://cphmartinus.github.io/marknote/demo.mp4", "uploadDate": "2026-11-18"},
+ "video": {"@type": "VideoObject", "name": "MarkNote in two minutes", "description": "A two-minute tour of MarkNote with voice-over: live preview, editing in the page, the Word-style right-click menu, the diagram editor, opening Word files, export, find and replace, reading mode, themes and languages.", "thumbnailUrl": ["https://cphmartinus.github.io/marknote/marknote-tour.jpg"], "contentUrl": "https://cphmartinus.github.io/marknote/marknote-tour.mp4", "embedUrl": "https://cphmartinus.github.io/marknote/#video", "uploadDate": "2026-11-18", "duration": "PT2M3S", "inLanguage": "en"},
  "screenshot": [
   "https://cphmartinus.github.io/marknote/story-write.webp",
   "https://cphmartinus.github.io/marknote/diagram-editor.webp",
@@ -426,6 +426,22 @@
   }
   .start-grid a, .faq .a a { color: var(--blue); }
 
+  /* ---------- two-minute tour video ---------- */
+  .tourvid { padding: clamp(64px, 8vw, 110px) 0 clamp(16px, 3vw, 40px); }
+  .tv-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px 48px; margin-bottom: clamp(28px, 4vw, 48px); }
+  .tv-head h2 { margin-bottom: 0; }
+  .tv-head .sub { max-width: 24em; }
+  .tv-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #0e1a2f; box-shadow: 0 40px 90px -40px rgba(14,26,47,.55), 0 0 0 1px var(--rule); }
+  .tv-frame video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .tv-play { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; border: 0; padding: 0; cursor: pointer; color: #fff;
+    background: linear-gradient(rgba(14,26,47,.12), rgba(14,26,47,.42)); font: 500 12.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; transition: background-color .5s var(--ease); }
+  .tv-play .tri { width: clamp(74px, 8vw, 104px); aspect-ratio: 1; border-radius: 50%; background: var(--word); position: relative;
+    box-shadow: 0 0 0 6px rgba(255,255,255,.92), 0 24px 60px -12px rgba(0,0,0,.6); transition: transform .6s var(--ease); }
+  .tv-play .tri::after { content: ""; position: absolute; left: 55%; top: 50%; transform: translate(-50%, -50%); border-style: solid; border-width: 16px 0 16px 27px; border-color: transparent transparent transparent #fff; }
+  .tv-play:hover .tri, .tv-play:focus-visible .tri { transform: scale(1.08); }
+  .tv-play .lbl { background: rgba(14,26,47,.86); padding: 8px 15px; border-radius: 999px; }
+  .tv-frame.playing .tv-play { display: none; }
+
   /* ---------- responsive ---------- */
   @media (max-width: 900px) {
     .hero-foot { grid-template-columns: 1fr; gap: 28px; }
@@ -446,6 +462,10 @@
     .row { grid-template-columns: 40px 1fr; }
     .row h3 { font-size: 24px; }
     .setter h2 { font-size: 34px; margin-bottom: 0; }
+    .tv-play { gap: 10px; font-size: 10.5px; }
+    .tv-play .tri { width: 56px; box-shadow: 0 0 0 4px rgba(255,255,255,.92), 0 14px 36px -10px rgba(0,0,0,.6); }
+    .tv-play .tri::after { border-width: 11px 0 11px 18px; }
+    .tv-play .lbl { padding: 6px 11px; }
     .ln { margin-bottom: 10px; }
     .ln .raw { font-size: 12px; }
     .out.o-p, .out.o-task { font-size: 15px; }
@@ -510,7 +530,7 @@
         </div>
         <div class="cta fade d2">
           <a class="btn solid" data-dl href="https://github.com/Cphmartinus/marknote/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>Download for Windows</a>
-          <a class="btn ghost" href="#story">Take the tour</a>
+          <a class="btn ghost" href="#video">Watch the 2-min tour</a>
         </div>
       </div>
     </div>
@@ -521,6 +541,26 @@
 </header>
 
 <main>
+  <section class="tourvid" id="video" aria-labelledby="video-h">
+    <div class="wrap">
+      <div class="tv-head">
+        <div>
+          <p class="kicker mono" data-r>— <b>The two-minute tour</b></p>
+          <h2 id="video-h" data-r style="--d:1">See it <em>in action</em>.</h2>
+        </div>
+        <p class="sub" data-r style="--d:2">Every feature in two minutes, with voice-over and English subtitles.</p>
+      </div>
+      <div class="tv-frame" data-r style="--d:2">
+        <video id="tour" controls preload="none" playsinline width="1920" height="1080" poster="marknote-tour.webp" aria-label="MarkNote in two minutes: a tour of the features with voice-over">
+          <source src="marknote-tour.mp4" type="video/mp4">
+          <track kind="subtitles" src="marknote-tour.en.vtt" srclang="en" label="English">
+          <a href="marknote-tour.mp4">Download the two-minute tour (MP4)</a>
+        </video>
+        <button class="tv-play" type="button" aria-label="Play the two-minute tour"><span class="tri" aria-hidden="true"></span><span class="lbl">Play · 2:03 · Sound on</span></button>
+      </div>
+    </div>
+  </section>
+
   <section class="setter" aria-labelledby="setter-h">
     <div class="setter-track">
       <div class="setter-pin">
@@ -724,6 +764,15 @@ flowchart LR
   /* 1b. demo video plays only when motion is welcome */
   var demo = document.getElementById('demo');
   if (demo && !reduce && demo.play) { var pr = demo.play(); if (pr && pr['catch']) pr['catch'](function () {}); }
+
+  /* 1c. two-minute tour: our own play button, then the browser's controls */
+  var tour = document.getElementById('tour'), tourBtn = document.querySelector('.tv-play');
+  if (tour && tourBtn) {
+    tour.controls = false;
+    var startTour = function () { tour.controls = true; tour.parentNode.classList.add('playing'); if (demo && demo.pause) demo.pause(); };
+    tourBtn.addEventListener('click', function () { startTour(); var pt = tour.play(); if (pt && pt['catch']) pt['catch'](function () {}); });
+    tour.addEventListener('play', startTour);
+  }
 
   /* 2. reveal once on scroll */
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {

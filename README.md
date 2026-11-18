@@ -6,7 +6,13 @@ MarkNote gives you the familiar ribbon, title bar, right-click menu and status b
 
 ![Writing Markdown side by side, building a flowchart in the diagram editor, opening the Word-style right-click menu and switching to reading mode](docs/demo.gif)
 
-**[Download for Windows](https://github.com/Cphmartinus/marknote/releases/latest)** · [Website](https://cphmartinus.github.io/marknote/) · User guide (Word): [English](https://github.com/Cphmartinus/marknote/raw/main/docs/MarkNote-user-guide.docx) · [Danish](https://github.com/Cphmartinus/marknote/raw/main/docs/MarkNote-vejledning.docx)
+**[Download for Windows](https://github.com/Cphmartinus/marknote/releases/latest)** · [Watch the 2-minute tour](https://cphmartinus.github.io/marknote/#video) · [Website](https://cphmartinus.github.io/marknote/) · User guide (Word): [English](https://github.com/Cphmartinus/marknote/raw/main/docs/MarkNote-user-guide.docx) · [Danish](https://github.com/Cphmartinus/marknote/raw/main/docs/MarkNote-vejledning.docx)
+
+## Two-minute tour
+
+[![Watch the two-minute tour of MarkNote, with voice-over and subtitles](docs/marknote-tour-thumb.jpg)](https://cphmartinus.github.io/marknote/#video)
+
+Every feature in two minutes, with voice-over and English subtitles. [Download the MP4](https://github.com/Cphmartinus/marknote/raw/main/docs/marknote-tour.mp4) if you prefer to watch it offline.
 
 ## Features
 
