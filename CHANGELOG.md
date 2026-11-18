@@ -2,6 +2,10 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
+## Unreleased
+
+- Fixed: start-up sometimes took about 15 seconds on Windows because the window waited for a signal that does not always arrive while it is hidden. The window is now shown as soon as its content has loaded
+
 ## 1.2.2 – 2026-11-18
 
 - Word-style right-click menu with a formatting bar (heading, bold, italic, strikethrough, highlight, code, lists, new comment), Cut, Copy, Paste options, Link, Insert submenu, New comment and Select all. Links get Open link and Copy link address; diagrams get Edit diagram

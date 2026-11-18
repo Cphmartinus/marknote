@@ -214,6 +214,10 @@ function createWindow() {
   win.webContents.on('did-finish-load', () => {
     rendererReady = true;
     log('did-finish-load');
+    // Vis vinduet, så snart indholdet er indlæst. 'ready-to-show' udebliver nogle gange på Windows,
+    // mens vinduet er skjult, så det kan ikke bruges alene.
+    const wait = Math.max(0, SPLASH_MIN_MS - (Date.now() - splashShownAt));
+    setTimeout(() => showMain('loaded'), wait);
     if (pendingOpen) { win.webContents.send('app:open-path', pendingOpen); pendingOpen = null; }
   });
 }
