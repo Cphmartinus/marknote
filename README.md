@@ -16,6 +16,7 @@ MarkNote gives you the familiar ribbon, tabs and status bar of a word processor,
 - **Insert:** interactive table builder, images with automatic relative paths (drag and drop supported), links, footnotes, invisible comments and LaTeX formulas.
 - **Diagrams without code:** a visual diagram editor for flowcharts, sequence diagrams, pie charts and Gantt charts. Fill in simple tables and see the diagram drawn instantly. Diagrams are stored as Mermaid code in the Markdown file, can be edited as code too, and are included in PDF, DOCX and HTML exports.
 - **Tabs:** several documents at once, with unsaved-changes markers.
+- **Right-click menu** in the style of Word, with a formatting bar and paste options.
 - **Open Word and HTML files:** `.docx` and `.html` files are converted to Markdown when opened.
 - **Export:** PDF, DOCX (real Word format), standalone HTML and plain `.md`.
 - **Version history:** automatic snapshots that can be restored.

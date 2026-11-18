@@ -11,6 +11,8 @@ contextBridge.exposeInMainWorld('api', {
   confirm: inv('dialog:confirm'),
   closeConfirmed: inv('app:closeConfirmed'),
   openExternal: inv('app:openExternal'),
+  editAction: inv('edit:action'),
+  copyText: inv('clip:write'),
   pickImage: inv('image:pick'),
   imageRel: inv('image:rel'),
   snapSave: inv('snap:save'),

@@ -1,5 +1,5 @@
 'use strict';
-const { app, BrowserWindow, ipcMain, dialog, shell, Menu, nativeImage, net } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, shell, Menu, nativeImage, net, clipboard } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -336,6 +336,12 @@ ipcMain.handle('dialog:confirm', async (_e, { message, detail, buttons }) => {
 });
 ipcMain.handle('app:closeConfirmed', () => { forceClose = true; win && win.close(); });
 ipcMain.handle('app:openExternal', (_e, url) => openExternal(url));
+ipcMain.handle('edit:action', (_e, action) => {
+  if (!win || !['cut', 'copy', 'paste', 'pasteAndMatchStyle', 'selectAll'].includes(action)) return false;
+  win.webContents[action]();
+  return true;
+});
+ipcMain.handle('clip:write', (_e, text) => { clipboard.writeText(String(text || '')); return true; });
 
 /* ---------- billeder ---------- */
 ipcMain.handle('image:pick', async (_e, docPath) => {

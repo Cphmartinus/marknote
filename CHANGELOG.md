@@ -2,6 +2,10 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
+## 1.2.2 – 2026-11-18
+
+- Word-style right-click menu with a formatting bar (heading, bold, italic, strikethrough, highlight, code, lists, new comment), Cut, Copy, Paste options, Link, Insert submenu, New comment and Select all. Links get Open link and Copy link address; diagrams get Edit diagram
+
 ## 1.2.1 – 2026-11-18
 
 - Fixed: MarkNote could hang on the loading screen after installation (until Windows was restarted) when a second copy was started while another was running or still loading

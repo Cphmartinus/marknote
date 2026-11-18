@@ -1165,15 +1165,7 @@
   preview.addEventListener('dblclick', async (e) => {
     if (!rich()) return;
     const dg = e.target.closest('.mermaid-block');
-    if (dg) {
-      const v = await openDiagramEditor(mmGet(dg));
-      if (v === null) return;
-      dg.setAttribute('data-mermaid', encodeURIComponent(v));
-      dg.innerHTML = '';
-      await renderMermaidIn(dg.parentElement || preview);
-      wysiwygSync();
-      return;
-    }
+    if (dg) { editDiagramBlock(dg); return; }
     const m = e.target.closest('.wd-math, .math-block'); if (!m) return;
     const r = await ask({ title: t('Rediger formel (LaTeX)'), fields: [{ id: 'tex', label: 'LaTeX', value: m.getAttribute('data-tex') }] });
     if (!r || !r.tex) return;
@@ -1350,6 +1342,130 @@
     }, 450);
   });
   document.addEventListener('mousedown', () => { tip.hidden = true; clearTimeout(tipT); });
+
+  async function editDiagramBlock(dg) {
+    if (!dg || !dg.isConnected) return;
+    const v = await openDiagramEditor(mmGet(dg));
+    if (v === null) return;
+    dg.setAttribute('data-mermaid', encodeURIComponent(v));
+    dg.innerHTML = '';
+    await renderMermaidIn(dg.parentElement || preview);
+    wysiwygSync();
+  }
+
+  /* ---------- højrekliksmenu (Word-stil) ---------- */
+  let cxLayer = null;
+  function closeContextMenu() { if (cxLayer) { cxLayer.remove(); cxLayer = null; } }
+  function cxEl(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function showContextMenu(ev) {
+    closeContextMenu();
+    const pane = ev.target.closest('#ed') ? 'ed' : 'preview';
+    if (pane === 'preview' && rich()) lastPane = 'preview';
+    const link = pane === 'preview' ? ev.target.closest('#preview a[href]') : null;
+    const diagram = pane === 'preview' ? ev.target.closest('.mermaid-block') : null;
+    const hasSel = pane === 'ed' ? ed.selectionStart !== ed.selectionEnd : !!String(getSelection()).trim();
+    const editable = pane === 'ed' || rich();
+    const act = (fn) => (e) => { e.preventDefault(); closeContextMenu(); fn(); };
+    const runCmd = (c) => act(() => run(c));
+    const edit = (a) => act(() => { if (pane === 'ed') ed.focus(); else preview.focus(); api.editAction && api.editAction(a); });
+    cxLayer = cxEl('div', 'cx-layer');
+    cxLayer.addEventListener('mousedown', (e) => { if (e.target === cxLayer) closeContextMenu(); else e.preventDefault(); });
+    cxLayer.addEventListener('contextmenu', (e) => { e.preventDefault(); if (e.target === cxLayer) closeContextMenu(); });
+
+    // --- formateringslinje (som Words minilinje) ---
+    let mini = null;
+    if (editable) {
+      mini = cxEl('div', 'cx-mini');
+      const hs = document.createElement('select');
+      [['0', 'Brødtekst'], ['1', 'Overskrift 1'], ['2', 'Overskrift 2'], ['3', 'Overskrift 3'], ['4', 'Overskrift 4']].forEach(([v, k]) => hs.add(new Option(t(k), v)));
+      if (pane === 'preview') { const h = ev.target.closest('#preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6'); hs.value = h ? String(Math.min(4, +h.tagName[1])) : '0'; }
+      else hs.value = String(Math.min(4, +($('#headingSel').value || 0)));
+      hs.title = t('Overskrift');
+      hs.addEventListener('change', () => { const n = +hs.value; closeContextMenu(); applyHeading(n); });
+      mini.append(hs);
+      const tb = (icon, html, cmd, tip) => { const b = cxEl('button', 'cx-tb', icon ? WDicon(icon) : html); b.title = tip; b.addEventListener('click', runCmd(cmd)); return b; };
+      mini.append(tb(null, '<b>B</b>', 'bold', t('Fed') + ' (Ctrl+B)'), tb(null, '<i style="font-family:Georgia,serif">I</i>', 'italic', t('Kursiv') + ' (Ctrl+I)'),
+        tb(null, '<s>S</s>', 'strike', t('Gennemstreget')), tb(null, '<span class="hl-ico">ab</span>', 'highlight', t('Fremhævning')),
+        tb('code', null, 'code', t('Indlejret kode') + ' (Ctrl+E)'), cxEl('span', 'cx-sep'),
+        tb('ul', null, 'ul', t('Punktopstilling')), tb('ol', null, 'ol', t('Nummereret liste')), tb('task', null, 'task', t('Tjekliste')), cxEl('span', 'cx-sep'));
+      const nc = cxEl('button', 'cx-big', WDicon('newcomment') + '<span></span>'); nc.lastChild.textContent = t('Ny kommentar');
+      nc.addEventListener('click', runCmd('comment'));
+      mini.append(nc);
+      cxLayer.append(mini);
+    }
+
+    // --- menu ---
+    const menu = cxEl('div', 'cx-menu');
+    const item = (icon, label, key, onclick, opts = {}) => {
+      const it = cxEl('div', 'cx-item' + (opts.disabled ? ' disabled' : ''));
+      it.innerHTML = (icon ? WDicon(icon) : '<span></span>') + '<span></span><span class="cx-key"></span><span class="cx-arrow">' + (opts.sub ? WDicon('chevright') : '') + '</span>';
+      it.children[1].textContent = label; it.children[2].textContent = key || '';
+      if (onclick) it.addEventListener('click', onclick);
+      return it;
+    };
+    const hr = () => cxEl('div', 'cx-hr');
+    if (diagram) menu.append(item('diagram', t('Rediger diagram…'), '', act(() => editDiagramBlock(diagram))), hr());
+    if (link) {
+      const href = link.getAttribute('href') || '';
+      if (/^(https?:|mailto:)/i.test(href)) menu.append(item('openlink', t('Åbn link'), '', act(() => api.openExternal && api.openExternal(href))));
+      menu.append(item('link', t('Kopiér linkadresse'), '', act(() => api.copyText && api.copyText(href))), hr());
+    }
+    menu.append(item('cut', t('Klip'), 'Ctrl+X', edit('cut'), { disabled: !editable || !hasSel }));
+    menu.append(item('copy', t('Kopiér'), 'Ctrl+C', edit('copy'), { disabled: !hasSel }));
+    if (editable) {
+      const ph = cxEl('div', 'cx-pastehead', WDicon('paste') + '<span></span>'); ph.lastChild.textContent = t('Indstillinger for Sæt ind:');
+      const row = cxEl('div', 'cx-pasterow');
+      const pb = (icon, tip, a) => { const b = cxEl('button', '', WDicon(icon)); b.title = tip; b.addEventListener('click', edit(a)); return b; };
+      row.append(pb('paste', t('Sæt ind') + ' (Ctrl+V)', 'paste'), pb('pastetext', t('Behold kun tekst') + ' (Ctrl+Shift+V)', 'pasteAndMatchStyle'));
+      menu.append(ph, row, hr());
+      menu.append(item('link', t('Link…'), 'Ctrl+K', runCmd('link')));
+      const ins = item('insert', t('Indsæt'), '', null, { sub: true });
+      menu.append(ins);
+      menu.append(item('newcomment', t('Ny kommentar'), 'Ctrl+Alt+M', runCmd('comment')));
+      // undermenu
+      let sub = null;
+      const openSub = () => {
+        if (sub) return;
+        ins.classList.add('open');
+        sub = cxEl('div', 'cx-sub');
+        sub.append(item('table', t('Tabel') + '…', '', runCmd('table')), item('image', t('Billede') + '…', '', runCmd('image')),
+          item('diagram', t('Diagram') + '…', '', runCmd('diagram')), item('sigma', t('Formel'), '', runCmd('math')),
+          item('footnote', t('Fodnote'), 'Ctrl+Alt+F', runCmd('footnote')), item('hr', t('Vandret linje'), '', runCmd('hr')));
+        cxLayer.append(sub);
+        const r = ins.getBoundingClientRect(), w = sub.offsetWidth, h = sub.offsetHeight;
+        let x = r.right + 2; if (x + w > innerWidth - 4) x = r.left - w - 2;
+        let y = r.top - 6; if (y + h > innerHeight - 4) y = Math.max(4, innerHeight - h - 4);
+        sub.style.left = x + 'px'; sub.style.top = y + 'px';
+      };
+      const closeSub = () => { if (sub) { sub.remove(); sub = null; ins.classList.remove('open'); } };
+      ins.addEventListener('mouseenter', openSub);
+      ins.addEventListener('click', openSub);
+      menu.addEventListener('mouseover', (e) => { const it = e.target.closest('.cx-item'); if (it && it !== ins) closeSub(); });
+    }
+    menu.append(hr(), item('selectall', t('Markér alt'), 'Ctrl+A', edit('selectAll')));
+    cxLayer.append(menu);
+    document.body.append(cxLayer);
+
+    // --- placering (som i Word: linjen over markøren, menuen under) ---
+    const mw = menu.offsetWidth, mh = menu.offsetHeight;
+    let x = Math.min(ev.clientX, innerWidth - mw - 4), y = ev.clientY + (mini ? 6 : 0);
+    if (y + mh > innerHeight - 4) y = Math.max(4, innerHeight - mh - 4);
+    menu.style.left = Math.max(4, x) + 'px'; menu.style.top = y + 'px';
+    if (mini) {
+      const bw = mini.offsetWidth, bh = mini.offsetHeight;
+      let mx = Math.min(Math.max(4, ev.clientX - 12), innerWidth - bw - 4), my = ev.clientY - bh - 10;
+      if (my < 4) my = Math.min(innerHeight - bh - 4, y + mh + 8);
+      mini.style.left = mx + 'px'; mini.style.top = my + 'px';
+    }
+  }
+  document.addEventListener('contextmenu', (e) => {
+    if (e.target.closest('#ed, #preview')) { e.preventDefault(); showContextMenu(e); }
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cxLayer) { e.preventDefault(); closeContextMenu(); } }, true);
+  window.addEventListener('blur', closeContextMenu);
+  window.addEventListener('resize', closeContextMenu);
+  ed.addEventListener('scroll', closeContextMenu);
+  previewWrap.addEventListener('scroll', closeContextMenu);
 
   /* ---------- opdateringer ---------- */
   let updInfo = null;
