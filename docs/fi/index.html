@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MarkNote – Ilmainen Markdown-editori Windowsille, kuin Word</title>
+<meta name="description" content="Ilmainen Markdown-editori Windows 10:lle ja 11:lle: Wordin tyylinen valintanauha, reaaliaikainen esikatselu, kaaviot ilman koodia ja Word Markdowniksi. Ei tiliä.">
+<link rel="canonical" href="https://cphmartinus.github.io/marknote/fi/">
+<link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/">
+<link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/">
+<link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/">
+<link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/">
+<link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/">
+<link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/">
+<link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/">
+<link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/">
+<link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/">
+<link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/">
+<link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/">
+<link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/">
+<link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/">
+<link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MarkNote">
+<meta property="og:url" content="https://cphmartinus.github.io/marknote/fi/">
+<meta property="og:locale" content="fi_FI">
+<meta property="og:title" content="MarkNote – Ilmainen Markdown-editori Windowsille, kuin Word">
+<meta property="og:description" content="Tavallisia .md-tiedostoja Wordin valintanauhalla, pikavalikolla ja ulkoasulla. Kaaviot ilman koodia, Word Markdowniksi, vienti PDF- ja DOCX-muotoon. Ilmainen ja avointa lähdekoodia.">
+<meta property="og:image" content="https://cphmartinus.github.io/marknote/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="MarkNote, Windowsin Markdown-editori Wordin tyylisellä valintanauhalla">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MarkNote – Ilmainen Markdown-editori Windowsille, kuin Word">
+<meta name="twitter:description" content="Tavallisia .md-tiedostoja Wordin valintanauhalla ja ulkoasulla. Kaaviot ilman koodia, Word Markdowniksi, vienti PDF- ja DOCX-muotoon.">
+<meta name="twitter:image" content="https://cphmartinus.github.io/marknote/social-preview.png">
+<meta name="theme-color" content="#2b579a">
+<link rel="icon" type="image/png" href="../icon.png">
+<link rel="apple-touch-icon" href="../icon.png">
+<link rel="sitemap" type="application/xml" href="../sitemap.xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "SoftwareApplication",
+ "name": "MarkNote",
+ "description": "Ilmainen avoimen lähdekoodin Markdown-editori ja -katseluohjelma Windowsille: Wordin tyylinen valintanauha, reaaliaikainen esikatselu, WYSIWYG-muokkaus, visuaalinen Mermaid-kaavioeditori, Word–Markdown-muunnos ja vienti PDF- ja DOCX-muotoon.",
+ "url": "https://cphmartinus.github.io/marknote/fi/",
+ "applicationCategory": "BusinessApplication",
+ "applicationSubCategory": "Markdown editor",
+ "operatingSystem": "Windows 10, Windows 11",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "downloadUrl": "https://github.com/Cphmartinus/marknote/releases/latest",
+ "installUrl": "https://github.com/Cphmartinus/marknote/releases/latest",
+ "license": "https://opensource.org/licenses/MIT",
+ "image": "https://cphmartinus.github.io/marknote/icon.png",
+ "video": {
+  "@type": "VideoObject",
+  "name": "MarkNote kahdessa minuutissa",
+  "description": "Kahden minuutin esittely MarkNotesta selostuksella: reaaliaikainen esikatselu, muokkaus suoraan sivulla, Wordin tyylinen pikavalikko, kaavioeditori, Word-tiedostojen avaaminen, vienti, etsi ja korvaa, lukutila, teemat ja kielet.",
+  "thumbnailUrl": [
+   "https://cphmartinus.github.io/marknote/marknote-tour.jpg"
+  ],
+  "contentUrl": "https://cphmartinus.github.io/marknote/marknote-tour.mp4",
+  "embedUrl": "https://cphmartinus.github.io/marknote/fi/#video",
+  "uploadDate": "2026-11-18",
+  "duration": "PT2M3S",
+  "inLanguage": "en"
+ },
+ "screenshot": [
+  "https://cphmartinus.github.io/marknote/story-write.webp",
+  "https://cphmartinus.github.io/marknote/diagram-editor.webp",
+  "https://cphmartinus.github.io/marknote/context-menu.webp"
+ ],
+ "featureList": [
+  "Wordin tyylinen valintanauha ja pikavalikko",
+  "Reaaliaikainen esikatselu ja lukutila",
+  "WYSIWYG-muokkaus",
+  "Visuaalinen kaavioeditori Mermaid-vuokaavioille, sekvenssi-, ympyrä- ja Gantt-kaavioille",
+  ".docx- ja .html-tiedostojen avaaminen Markdownina",
+  "Vienti PDF-, DOCX-, HTML- ja Markdown-muotoon",
+  "Taulukot, alaviitteet ja LaTeX-kaavat",
+  "Versiohistoria ja välilehdet",
+  "13 kieltä"
+ ],
+ "inLanguage": [
+  "en",
+  "da",
+  "de",
+  "fr",
+  "es",
+  "it",
+  "nl",
+  "pt",
+  "pl",
+  "sv",
+  "nb",
+  "fi",
+  "is"
+ ],
+ "sameAs": [
+  "https://github.com/Cphmartinus/marknote"
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "inLanguage": "fi",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Onko MarkNote ilmainen?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "On. MarkNote on ilmainen ja avointa lähdekoodia MIT-lisenssillä. Ei tiliä, tilausta, mainoksia eikä maksullista versiota."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Miten avaan .md-tiedoston Windowsissa?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Asenna MarkNote tiedostolla MarkNote-Setup.exe. Sen jälkeen Markdown-tiedostot avautuvat MarkNoteen kaksoisnapsauttamalla. Voit myös valita Tiedosto → Avaa tai vetää tiedoston ikkunaan."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Voinko muuntaa Word-asiakirjan Markdowniksi?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Voit. Avaa .docx- tai .html-tiedosto MarkNotessa, niin se muunnetaan Markdowniksi kuvineen. Voit myös toimia toisin päin ja viedä Markdownin aidoksi Word-asiakirjaksi tai PDF:ksi."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Pitääkö minun osata Markdown-syntaksi?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Ei tarvitse. Voit muotoilla valintanauhalla ja pikavalikolla, kirjoittaa suoraan muotoiltuun sivuun ja rakentaa kaavioita visuaalisessa editorissa. MarkNote kirjoittaa Markdownin puolestasi, ja työkaluvihjeet näyttävät syntaksin, jos haluat oppia sen."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Tukeeko MarkNote Mermaid-kaavioita?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Tukee. Vuokaaviot, sekvenssikaaviot, ympyräkaaviot ja Gantt-kaaviot voi rakentaa kaavioeditorissa ilman koodia, ja ne tallennetaan tiedostoon Mermaid-muodossa. Muut Mermaid-kaaviotyypit voi kirjoittaa koodina."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Miksi Windows näyttää SmartScreen-varoituksen?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "MarkNotea ei ole vielä koodiallekirjoitettu, joten Windows ei tunnista julkaisijaa. Valitse Lisätietoja → Suorita silti. Lähdekoodi on julkinen, ja GitHub Actions kääntää jokaisen version tästä koodista."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Toimiiko MarkNote ilman verkkoyhteyttä?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Toimii. Kaikki tapahtuu omalla tietokoneellasi. Ainoa verkkopyyntö on valinnainen uusien versioiden tarkistus GitHubista, korkeintaan kerran päivässä, ja sen voi poistaa käytöstä."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Onko Macille tai Linuxille omaa versiota?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Ei tällä hetkellä. MarkNote on tehty Windows 10:lle ja Windows 11:lle."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Miten voin tukea kehittäjää?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "MarkNote on ilmainen ja pysyy ilmaisena. Jos se säästää aikaasi, voit tarjota kehittäjälle kahvin Ko-fissa. Myös virheiden ilmoittaminen, ominaisuuksien ehdottaminen ja MarkNotesta kertominen muille auttaa."
+   }
+  }
+ ]
+}
+</script>
+<link rel="preload" href="../fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* ---------- fonts (self-hosted, SIL OFL) ---------- */
+  @font-face { font-family: "Instrument Serif"; src: url(../fonts/instrument-serif-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Instrument Serif"; src: url(../fonts/instrument-serif-latin-ext-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "Instrument Serif"; src: url(../fonts/instrument-serif-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Instrument Serif"; src: url(../fonts/instrument-serif-latin-ext-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(../fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(../fonts/ibm-plex-sans-latin-ext-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(../fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(../fonts/ibm-plex-sans-latin-ext-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(../fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(../fonts/ibm-plex-sans-latin-ext-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(../fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(../fonts/ibm-plex-mono-latin-ext-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(../fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(../fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+
+  /* ---------- tokens: one hue (Word blue), paper canvas, one marker accent ---------- */
+  :root {
+    --paper: #f3f5f9; --paper-2: #e8ecf4; --card: #ffffff;
+    --ink: #0e1a2f; --ink-2: #44506a; --rule: #d3dae6;
+    --blue: #2b579a; --blue-deep: #17345f; --blue-soft: #dfe7f4;
+    --marker: #ffe066; --word: #2b579a;
+    --on-blue: #ffffff; --on-blue-2: #c9d7ee;
+    --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+    --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", Consolas, monospace;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    --u: 8px;
+    --wrap: 1180px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #0b1322; --paper-2: #111c30; --card: #142038; --ink: #e9eef7; --ink-2: #a5b1c7; --rule: #24324d; --blue: #7aa5ef; --blue-soft: #1a2b48; --marker: #c9a521; --word: #1f4580; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--sans); overflow-x: hidden; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 calc(var(--u) * 3); }
+  .mono { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; }
+  .serif { font-family: var(--serif); font-weight: 400; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+  /* marker sweep (==highlight==) */
+  .mk { background: linear-gradient(transparent 58%, var(--marker) 58%, var(--marker) 92%, transparent 92%) no-repeat 0 0 / 0% 100%; transition: background-size 1.1s var(--ease) .35s; padding: 0 .06em; }
+  .mk.in { background-size: 100% 100%; }
+
+  /* scroll progress */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--marker); transform-origin: 0 50%; transform: scaleX(0); z-index: 60; }
+
+  /* ---------- sticky bar ---------- */
+  .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transform: translateY(-100%); transition: transform .6s var(--ease); background: color-mix(in srgb, var(--paper) 82%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
+  .bar.on { transform: none; }
+  .bar .wrap { display: flex; align-items: center; height: 60px; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -.01em; }
+  .brand img { width: 28px; height: 28px; border-radius: 6px; }
+  .bar nav { margin-left: auto; display: flex; gap: 22px; align-items: center; font-size: 15px; }
+  .bar nav a { text-decoration: none; color: var(--ink-2); }
+  .bar nav a:hover { color: var(--ink); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; transition: transform .5s var(--ease), background-color .3s, box-shadow .5s var(--ease); will-change: transform; }
+  .btn svg { width: 18px; height: 18px; transition: transform .5s var(--ease); }
+  .btn:hover svg { transform: translateY(2px); }
+  .btn.solid { background: var(--blue); color: #fff; box-shadow: 0 10px 30px -12px rgba(43,87,154,.65); }
+  .btn.solid:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(43,87,154,.7); }
+  .btn.ghost { border: 1px solid var(--rule); color: var(--ink); }
+  .btn.ghost:hover { background: var(--card); }
+  .btn.sm { padding: 9px 16px; font-size: 14.5px; }
+  .on-blue .btn.solid { background: #fff; color: var(--blue-deep); }
+  .on-blue .btn.ghost { color: #fff; border-color: rgba(255,255,255,.35); }
+  .on-blue .btn.ghost:hover { background: rgba(255,255,255,.08); }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: calc(var(--u) * 3) 0 0; background: var(--word); color: var(--on-blue); overflow: hidden; isolation: isolate; }
+  .hero::before, .outro::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+    background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 48px 48px; mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 70%); }
+  .hero .top { display: flex; align-items: center; gap: 20px; }
+  .hero .top nav { margin-left: auto; display: flex; gap: 26px; font-size: 15px; }
+  .hero .top nav a { text-decoration: none; color: var(--on-blue-2); }
+  .hero .top nav a:hover { color: #fff; }
+  .hero-body { padding: clamp(48px, 7vw, 88px) 0 clamp(40px, 5vw, 56px); }
+  .eyebrow { color: var(--on-blue-2); display: flex; font-size: 12.5px; line-height: 1.6; letter-spacing: .08em; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .eyebrow i { display: block; width: 36px; height: 1px; background: currentColor; opacity: .6; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(50px, 9.4vw, 140px); line-height: .94; letter-spacing: -.025em; margin: 0; }
+  h1 .mk { white-space: nowrap; }
+  @media (max-width: 640px) { h1 .mk { white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; } }
+  h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
+  h1 .line > span { display: inline-block; transform: translateY(105%); transition: transform 1.25s var(--ease); }
+  h1 em { font-style: italic; color: #fff; }
+  .loaded h1 .line > span { transform: none; }
+  .loaded h1 .line:nth-child(3) > span { transition-delay: .09s; }
+  .loaded h1 .line:nth-child(4) > span { transition-delay: .18s; }
+  .hero .mk { background-image: linear-gradient(transparent 80%, var(--marker) 80%, var(--marker) 88%, transparent 88%); transition-delay: 1.05s; }
+  .hero-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; margin-top: clamp(32px, 5vw, 56px); }
+  .lead { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; color: var(--on-blue-2); margin: 0; max-width: 34em; }
+  .lead strong { color: #fff; font-weight: 500; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .meta { margin-top: 22px; color: var(--on-blue-2); opacity: .9; }
+  .fade { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
+  .loaded .fade { opacity: 1; transform: none; }
+  .loaded .fade.d1 { transition-delay: .45s; } .loaded .fade.d2 { transition-delay: .58s; } .loaded .fade.d3 { transition-delay: .7s; }
+
+  .stage { perspective: 1600px; padding-bottom: 0; }
+  .screen { --tilt: 16deg; --lift: 0px; max-width: 1040px; margin: 0 auto; transform-origin: 50% 0; transform: rotateX(var(--tilt)) translateY(var(--lift)) scale(.97); will-change: transform; border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 -10px 80px -10px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.12); opacity: 0; transition: opacity 1.2s var(--ease) .55s; background: #fff; }
+  .loaded .screen { opacity: 1; }
+  .screen img, .screen video { width: 100%; height: auto; display: block; }
+
+  /* ---------- section heads ---------- */
+  section { padding: clamp(80px, 11vw, 150px) 0; position: relative; }
+  .kicker { color: var(--blue); display: flex; gap: 14px; align-items: center; margin-bottom: 22px; }
+  .kicker b { font-weight: 500; color: var(--ink-2); }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.6vw, 84px); line-height: 1; letter-spacing: -.02em; margin: 0 0 22px; max-width: 14ch; }
+  h2 em { color: var(--blue); }
+  .sub { color: var(--ink-2); font-size: 19px; max-width: 34em; margin: 0; }
+
+  /* reveal */
+  [data-r] { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1.2s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+  [data-r].in { opacity: 1; transform: none; }
+
+  /* ---------- story (sticky scrollytelling) ---------- */
+  .story { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); margin-top: clamp(48px, 7vw, 90px); }
+  .steps { display: flex; flex-direction: column; }
+  .step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding: 20px 0; opacity: .32; transition: opacity .7s var(--ease); }
+  .step.active { opacity: 1; }
+  .step .no { font-family: var(--mono); color: var(--blue); font-size: 13px; letter-spacing: .1em; margin-bottom: 14px; }
+  .step h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.04; margin: 0 0 14px; letter-spacing: -.01em; }
+  .step p { color: var(--ink-2); margin: 0; max-width: 28em; }
+  .step .inline-shot { display: none; }
+  .plates { position: sticky; top: 14vh; height: 72vh; display: flex; align-items: center; }
+  .plates .frame { position: relative; width: 100%; aspect-ratio: 5 / 3; border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 30px 80px -30px rgba(14,26,47,.45), 0 0 0 1px var(--rule); }
+  .plates img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; opacity: 0; transform: scale(1.04); transition: opacity .9s var(--ease), transform 1.4s var(--ease); }
+  .plates img.on { opacity: 1; transform: none; }
+  .dots { position: absolute; right: -28px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; }
+  .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--rule); transition: background .4s, transform .6s var(--ease); }
+  .dots i.on { background: var(--blue); transform: scale(1.6); }
+
+  /* ---------- index of features ---------- */
+  .alt { background: var(--paper-2); }
+  .index { margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(32px, 5vw, 72px); }
+  .row { display: grid; grid-template-columns: 56px 1fr; gap: 6px 18px; padding: 26px 0 28px; border-bottom: 1px solid var(--rule); position: relative; }
+  .row::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: 0 50%; transition: transform .9s var(--ease); }
+  .row:hover::after { transform: scaleX(1); }
+  .row .n { font-family: var(--mono); font-size: 13px; color: var(--blue); padding-top: 7px; letter-spacing: .06em; }
+  .row h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0; letter-spacing: -.005em; }
+  .row h3 small { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: var(--marker); padding: 2px 6px; border-radius: 3px; margin-left: 8px; vertical-align: 6px; }
+  .row p { grid-column: 2; margin: 0; color: var(--ink-2); font-size: 16px; }
+  .row code { font-family: var(--mono); font-size: .88em; background: var(--blue-soft); padding: 1px 5px; border-radius: 3px; }
+
+  /* ---------- languages marquee ---------- */
+  .langs { padding: clamp(56px, 7vw, 90px) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; }
+  .langs .lbl { margin-bottom: 26px; color: var(--ink-2); }
+  .marquee { display: flex; width: max-content; animation: slide 46s linear infinite; }
+  .marquee span { font-family: var(--serif); font-size: clamp(44px, 6.4vw, 96px); line-height: 1; padding-right: .6em; white-space: nowrap; letter-spacing: -.015em; }
+  .marquee span:nth-child(odd) { font-style: italic; color: var(--blue); }
+  .marquee span::after { content: "·"; padding-left: .6em; color: var(--rule); font-style: normal; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- statement (privacy) ---------- */
+  .statement { background: var(--blue-deep); color: #fff; }
+  @media (prefers-color-scheme: dark) { .statement { background: #08101d; } }
+  .statement .kicker { color: var(--marker); }
+  .statement .kicker b { color: #b9c7e2; }
+  .statement h2 { max-width: 13ch; font-size: clamp(48px, 7.6vw, 120px); }
+  .statement h2 em { color: var(--marker); }
+  .statement .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid rgba(255,255,255,.15); padding-top: 32px; }
+  .statement .cols h3 { font-family: var(--mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 10px; color: #fff; }
+  .statement .cols p { margin: 0; color: #b9c7e2; font-size: 16px; }
+  .statement a { color: #fff; }
+
+  /* ---------- get started ---------- */
+  .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); margin-top: clamp(40px, 6vw, 72px); counter-reset: s; }
+  .start-grid div { border-top: 2px solid var(--ink); padding-top: 22px; }
+  .start-grid .big { font-family: var(--serif); font-size: 72px; line-height: .8; color: var(--blue); display: block; margin-bottom: 18px; }
+  .start-grid h3 { margin: 0 0 8px; font-size: 19px; font-weight: 600; }
+  .start-grid p { margin: 0; color: var(--ink-2); font-size: 16px; }
+  .start-grid code { font-family: var(--mono); font-size: .86em; background: var(--blue-soft); padding: 1px 5px; border-radius: 3px; }
+  .finale { margin-top: clamp(48px, 7vw, 88px); display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+  .finale .note { color: var(--ink-2); font-size: 15.5px; }
+
+  footer { border-top: 1px solid var(--rule); padding: 36px 0 44px; color: var(--ink-2); font-size: 15px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 28px; }
+  footer a { color: var(--ink-2); }
+
+  /* ---------- word-by-word headline rise ---------- */
+  .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .07em .16em .03em; margin: 0 -.07em -.16em -.03em; }
+  .split .w > span { display: inline-block; transform: translateY(110%); transition: transform 1.1s var(--ease); transition-delay: calc(var(--i) * 45ms + var(--d, 0) * 80ms); }
+  .split.in .w > span { transform: none; }
+  h2.split[data-r] { opacity: 1; transform: none; }
+
+  /* ---------- the setter: Markdown being typeset as you scroll ---------- */
+  .setter { padding: 0; }
+  .setter-track { height: 330vh; position: relative; }
+  .setter-pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; overflow: hidden; }
+  .setter-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: center; width: 100%; }
+  .setter h2 { font-size: clamp(36px, 4.4vw, 66px); }
+  .meter { margin-top: 30px; display: flex; align-items: center; gap: 14px; color: var(--ink-2); }
+  .meter .track { flex: 0 0 140px; height: 2px; background: var(--rule); position: relative; overflow: hidden; }
+  .meter .fill { position: absolute; inset: 0; background: var(--blue); transform-origin: 0 50%; transform: scaleX(0); transition: transform .7s var(--ease); }
+  .sheet { background: var(--card); border-radius: 12px; box-shadow: 0 40px 90px -40px rgba(14,26,47,.5), 0 0 0 1px var(--rule); overflow: hidden; }
+  .sheet-bar { display: flex; align-items: center; gap: 8px; padding: 11px 16px; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+  .sheet-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rule); }
+  .sheet-bar .name { margin-left: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sheet-bar .mode { margin-left: auto; display: flex; gap: 2px; background: var(--paper); border-radius: 999px; padding: 3px; flex: none; }
+  .sheet-bar .mode span { padding: 3px 11px; border-radius: 999px; transition: background-color .5s var(--ease), color .5s; }
+  .sheet-bar .mode span.on { background: var(--blue); color: #fff; }
+  @media (prefers-color-scheme: dark) { .sheet-bar .mode span.on { color: #0b1322; } }
+  .sheet-body { padding: clamp(20px, 3vw, 38px) clamp(20px, 3.4vw, 46px) clamp(14px, 2.4vw, 30px); }
+  .ln { display: grid; align-items: center; margin: 0 0 14px; }
+  .ln > * { grid-area: 1 / 1; min-width: 0; transition: opacity .55s var(--ease), transform .9s var(--ease), filter .55s var(--ease); }
+  .ln .raw { font-family: var(--mono); font-size: 14px; line-height: 1.55; white-space: pre-wrap; color: var(--ink); }
+  .ln .raw .t { color: var(--blue); font-weight: 500; }
+  .ln .raw .c { color: var(--ink-2); }
+  .ln .out { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+  .ln.set .raw { opacity: 0; transform: translateY(-12px); filter: blur(6px); }
+  .ln.set .out { opacity: 1; transform: none; filter: none; }
+  .ln.next .raw > :last-child::after, .ln.next .raw.solo::after { content: ""; display: inline-block; width: 2px; height: 1.15em; background: var(--blue); vertical-align: -3px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .out.o-h1 { font-family: var(--serif); font-size: clamp(32px, 3.3vw, 46px); line-height: 1.04; letter-spacing: -.01em; }
+  .out.o-p { font-size: 16.5px; color: var(--ink-2); }
+  .out.o-p strong { color: var(--ink); font-weight: 600; }
+  .out.o-h2 { font-family: var(--serif); font-size: clamp(24px, 2.3vw, 30px); color: var(--blue); line-height: 1.1; }
+  .out.o-task { display: flex; align-items: center; gap: 10px; font-size: 16.5px; }
+  .box { width: 17px; height: 17px; border-radius: 4px; border: 1.5px solid var(--ink-2); display: inline-grid; place-items: center; flex: none; }
+  .box.x { background: var(--blue); border-color: var(--blue); }
+  .box.x::after { content: ""; width: 8px; height: 4px; border: solid var(--card); border-width: 0 0 2px 2px; transform: translateY(-1px) rotate(-45deg); }
+  .hl { background: var(--marker); color: #0e1a2f; padding: 0 3px; border-radius: 2px; }
+  .out.o-quote { border-left: 3px solid var(--blue); padding: 1px 0 1px 16px; font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.3; }
+  .out.o-flow svg { width: 100%; max-width: 420px; height: auto; display: block; }
+  .o-flow rect { fill: var(--blue-soft); stroke: var(--blue); stroke-width: 1.5; }
+  .o-flow text { fill: var(--ink); font: 500 14px var(--sans); }
+  .o-flow path { stroke: var(--ink-2); stroke-width: 1.5; fill: none; }
+  .o-flow polygon { fill: var(--ink-2); }
+
+  /* ---------- story extras: big step numeral + dots outside the frame ---------- */
+  .frame-wrap { position: relative; width: 100%; }
+  .frame-wrap .frame { position: relative; z-index: 1; }
+  .bign { position: absolute; right: -.04em; top: -.62em; font-family: var(--serif); font-size: clamp(120px, 13vw, 200px); line-height: 1; color: var(--blue); z-index: 0; height: 1em; width: 2em; text-align: right; pointer-events: none; }
+  .bign span { position: absolute; right: 0; top: 0; opacity: 0; transform: translateY(30%); transition: opacity .7s var(--ease), transform 1s var(--ease); }
+  .bign span.on { opacity: 1; transform: none; }
+  .bign span.gone { transform: translateY(-30%); }
+  .frame-wrap .dots { right: -26px; }
+
+  /* ---------- outro ---------- */
+  .outro { background: var(--word); color: #fff; overflow: hidden; position: relative; isolation: isolate; }
+  .outro .kicker { color: var(--marker); }
+  .outro .kicker b { color: var(--on-blue-2); }
+  .outro h2 { font-size: clamp(66px, 13vw, 200px); line-height: .9; max-width: none; margin: 0 0 clamp(32px, 4vw, 48px); letter-spacing: -.03em; }
+  .outro h2 em { color: #fff; }
+  .outro .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .outro .note { color: var(--on-blue-2); margin: 24px 0 0; font-size: 15.5px; }
+  .outro .note a { color: #fff; }
+  .marquee { will-change: transform; }
+
+  /* ---------- FAQ ---------- */
+  .faq { margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--rule); max-width: 920px; }
+  .faq details { border-bottom: 1px solid var(--rule); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 24px 0; font-family: var(--serif); font-size: clamp(22px, 2.3vw, 30px); line-height: 1.15; transition: color .3s; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--mono); font-size: 22px; color: var(--blue); flex: none; transition: transform .6s var(--ease); }
+  .faq summary:hover { color: var(--blue); }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq .a { padding: 0 48px 26px 0; color: var(--ink-2); }
+  .faq .a p { margin: 0; max-width: 40em; }
+  @supports (interpolate-size: allow-keywords) {
+    .faq { interpolate-size: allow-keywords; }
+    .faq details::details-content { height: 0; overflow: clip; transition: height .6s var(--ease), content-visibility .6s allow-discrete; }
+    .faq details[open]::details-content { height: auto; }
+  }
+  .start-grid a, .faq .a a { color: var(--blue); }
+
+  /* ---------- two-minute tour video ---------- */
+  .tourvid { padding: clamp(64px, 8vw, 110px) 0 clamp(16px, 3vw, 40px); }
+  .tv-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px 48px; margin-bottom: clamp(28px, 4vw, 48px); }
+  .tv-head h2 { margin-bottom: 0; }
+  .tv-head .sub { max-width: 24em; }
+  .tv-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #0e1a2f; box-shadow: 0 40px 90px -40px rgba(14,26,47,.55), 0 0 0 1px var(--rule); }
+  .tv-frame video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .tv-play { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; border: 0; padding: 0; cursor: pointer; color: #fff;
+    background: linear-gradient(rgba(14,26,47,.12), rgba(14,26,47,.42)); font: 500 12.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; transition: background-color .5s var(--ease); }
+  .tv-play .tri { width: clamp(74px, 8vw, 104px); aspect-ratio: 1; border-radius: 50%; background: var(--word); position: relative;
+    box-shadow: 0 0 0 6px rgba(255,255,255,.92), 0 24px 60px -12px rgba(0,0,0,.6); transition: transform .6s var(--ease); }
+  .tv-play .tri::after { content: ""; position: absolute; left: 55%; top: 50%; transform: translate(-50%, -50%); border-style: solid; border-width: 16px 0 16px 27px; border-color: transparent transparent transparent #fff; }
+  .tv-play:hover .tri, .tv-play:focus-visible .tri { transform: scale(1.08); }
+  .tv-play .lbl { background: rgba(14,26,47,.86); padding: 8px 15px; border-radius: 999px; }
+  .tv-frame.playing .tv-play { display: none; }
+
+  /* ---------- language menu, footer languages, language suggestion ---------- */
+  .lang { position: relative; }
+  .lang summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 7px; padding: 6px 9px; border-radius: 8px; font-size: 15px; color: var(--ink-2); }
+  .lang summary::-webkit-details-marker { display: none; }
+  .lang summary svg { width: 17px; height: 17px; }
+  .lang summary:hover, .lang[open] summary { background: var(--paper-2); color: var(--ink); }
+  .hero .lang summary { color: var(--on-blue-2); }
+  .hero .lang summary:hover, .hero .lang[open] summary { background: rgba(255,255,255,.1); color: #fff; }
+  .lang .ln-code { display: none; font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; }
+  .lang-list { position: absolute; right: 0; top: calc(100% + 8px); z-index: 70; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; min-width: 290px; padding: 8px;
+    background: var(--card); border: 1px solid var(--rule); border-radius: 12px; box-shadow: 0 24px 60px -24px rgba(14,26,47,.5); }
+  .lang-list a { display: block; padding: 8px 12px; border-radius: 7px; text-decoration: none; color: var(--ink) !important; font-size: 14.5px; }
+  .lang-list a:hover { background: var(--paper-2); }
+  .lang-list a[aria-current] { color: var(--blue) !important; font-weight: 600; }
+  .flangs { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; padding-top: 6px; }
+  .flangs a { color: var(--ink-2); text-decoration: none; }
+  .flangs a:hover { text-decoration: underline; }
+  .flangs a[aria-current] { color: var(--ink); font-weight: 600; }
+  .suggest { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 90; display: flex; align-items: center; gap: 14px; max-width: calc(100vw - 24px);
+    background: var(--ink); color: var(--paper); padding: 10px 10px 10px 20px; border-radius: 999px; font-size: 15px; box-shadow: 0 18px 50px -12px rgba(0,0,0,.45); animation: sugIn .7s var(--ease); }
+  .suggest[hidden] { display: none; }
+  .suggest .s-b { background: var(--blue); color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+  @media (prefers-color-scheme: dark) { .suggest .s-b { color: #0b1322; } }
+  .suggest .s-x { background: none; border: 0; color: inherit; font-size: 22px; line-height: 1; padding: 4px 8px; cursor: pointer; opacity: .7; }
+  .suggest .s-x:hover { opacity: 1; }
+  @keyframes sugIn { from { opacity: 0; transform: translate(-50%, 20px); } }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .hero-foot { grid-template-columns: 1fr; gap: 28px; }
+    .story { grid-template-columns: 1fr; }
+    .plates { display: none; }
+    .step { min-height: 0; opacity: 1; padding: 0 0 56px; }
+    .step .inline-shot { display: block; margin-top: 22px; border-radius: 10px; box-shadow: 0 20px 50px -24px rgba(14,26,47,.45), 0 0 0 1px var(--rule); }
+    .index { grid-template-columns: 1fr; }
+    .statement .cols, .start-grid { grid-template-columns: 1fr; }
+    .setter-grid { grid-template-columns: 1fr; gap: 22px; }
+    .setter .sub { display: none; }
+    .meter { margin-top: 14px; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 16px; }
+    .hero .top nav a.hide-sm, .bar nav a.hide-sm { display: none; }
+    .lang .ln-full { display: none; }
+    .lang .ln-code { display: inline; }
+    .lang-list { min-width: min(290px, calc(100vw - 32px)); }
+    .suggest { font-size: 14px; width: calc(100vw - 24px); border-radius: 16px; padding: 12px 8px 12px 16px; gap: 10px; bottom: 12px; }
+    .suggest .s-t { flex: 1; min-width: 0; }
+    .row { grid-template-columns: 40px 1fr; }
+    .row h3 { font-size: 24px; }
+    .setter h2 { font-size: 34px; margin-bottom: 0; }
+    .tv-play { gap: 10px; font-size: 10.5px; }
+    .tv-play .tri { width: 56px; box-shadow: 0 0 0 4px rgba(255,255,255,.92), 0 14px 36px -10px rgba(0,0,0,.6); }
+    .tv-play .tri::after { border-width: 11px 0 11px 18px; }
+    .tv-play .lbl { padding: 6px 11px; }
+    .ln { margin-bottom: 10px; }
+    .ln .raw { font-size: 12px; }
+    .out.o-p, .out.o-task { font-size: 15px; }
+    .out.o-quote { font-size: 19px; }
+    .sheet-bar .name { display: none; }
+  }
+
+  /* ---------- reduced motion: everything visible, nothing moves ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    h1 .line > span, .fade, [data-r], .screen { transform: none !important; opacity: 1 !important; }
+    .mk { background-size: 100% 100%; }
+    .step { opacity: 1; }
+    .progress { display: none; }
+    .setter-track { height: auto; }
+    .setter-pin { position: static; height: auto; padding: clamp(80px, 11vw, 150px) 0; }
+    .ln.next .raw > :last-child::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+
+<header class="bar" aria-label="Sivusto">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="../icon.png" alt="">MarkNote</a>
+    <nav>
+      <a href="#story" class="hide-sm">Esittely</a>
+      <a href="#features" class="hide-sm">Ominaisuudet</a>
+      <a href="#faq" class="hide-sm">Kysymykset</a>
+      <a href="https://github.com/Cphmartinus/marknote" class="hide-sm">GitHub</a>
+      <details class="lang"><summary aria-label="Kieli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg><span class="ln-full">Suomi</span><span class="ln-code">FI</span></summary><div class="lang-list"><a href="../" hreflang="en" lang="en" data-setlang="en">English</a><a href="../da/" hreflang="da" lang="da" data-setlang="da">Dansk</a><a href="../de/" hreflang="de" lang="de" data-setlang="de">Deutsch</a><a href="../fr/" hreflang="fr" lang="fr" data-setlang="fr">Français</a><a href="../es/" hreflang="es" lang="es" data-setlang="es">Español</a><a href="../it/" hreflang="it" lang="it" data-setlang="it">Italiano</a><a href="../nl/" hreflang="nl" lang="nl" data-setlang="nl">Nederlands</a><a href="../pt/" hreflang="pt" lang="pt" data-setlang="pt">Português</a><a href="../pl/" hreflang="pl" lang="pl" data-setlang="pl">Polski</a><a href="../sv/" hreflang="sv" lang="sv" data-setlang="sv">Svenska</a><a href="../nb/" hreflang="nb" lang="nb" data-setlang="nb">Norsk</a><a href="../fi/" hreflang="fi" lang="fi" data-setlang="fi" aria-current="page">Suomi</a><a href="../is/" hreflang="is" lang="is" data-setlang="is">Íslenska</a></div></details>
+      <a class="btn solid sm" data-dl href="https://github.com/Cphmartinus/marknote/releases/latest">Lataa</a>
+    </nav>
+  </div>
+</header>
+
+<header class="hero on-blue" id="top">
+  <div class="wrap">
+    <div class="top">
+      <a class="brand" href="#top"><img src="../icon.png" alt="">MarkNote</a>
+      <nav>
+        <a href="#story">Esittely</a>
+        <a href="#features" class="hide-sm">Ominaisuudet</a>
+        <a href="#faq" class="hide-sm">Kysymykset</a>
+        <a href="https://github.com/Cphmartinus/marknote" class="hide-sm">GitHub</a>
+        <details class="lang"><summary aria-label="Kieli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg><span class="ln-full">Suomi</span><span class="ln-code">FI</span></summary><div class="lang-list"><a href="../" hreflang="en" lang="en" data-setlang="en">English</a><a href="../da/" hreflang="da" lang="da" data-setlang="da">Dansk</a><a href="../de/" hreflang="de" lang="de" data-setlang="de">Deutsch</a><a href="../fr/" hreflang="fr" lang="fr" data-setlang="fr">Français</a><a href="../es/" hreflang="es" lang="es" data-setlang="es">Español</a><a href="../it/" hreflang="it" lang="it" data-setlang="it">Italiano</a><a href="../nl/" hreflang="nl" lang="nl" data-setlang="nl">Nederlands</a><a href="../pt/" hreflang="pt" lang="pt" data-setlang="pt">Português</a><a href="../pl/" hreflang="pl" lang="pl" data-setlang="pl">Polski</a><a href="../sv/" hreflang="sv" lang="sv" data-setlang="sv">Svenska</a><a href="../nb/" hreflang="nb" lang="nb" data-setlang="nb">Norsk</a><a href="../fi/" hreflang="fi" lang="fi" data-setlang="fi" aria-current="page">Suomi</a><a href="../is/" hreflang="is" lang="is" data-setlang="is">Íslenska</a></div></details>
+      </nav>
+    </div>
+
+    <div class="hero-body">
+      <h1>
+        <span class="eyebrow mono fade"><i></i>Ilmainen Markdown-editori Windowsille · Avointa lähdekoodia</span>
+        <span class="line"><span>Markdown,</span></span>
+        <span class="line"><span><em>taitettuna</em> kuin</span></span>
+        <span class="line"><span><span class="mk" data-mk>Word-asiakirja.</span></span></span>
+      </h1>
+      <div class="hero-foot">
+        <div>
+          <p class="lead fade d1">Markdown-editori ja -katseluohjelma, jossa on Wordista tuttu valintanauha, pikavalikko ja sininen otsikkorivi, ja pinnan alla <strong>tavallisia <code style="font-family:var(--mono);font-size:.9em">.md</code>-tiedostoja</strong>. Tee kaavioita ilman koodia, muunna Word-asiakirjat Markdowniksi ja vie PDF- ja DOCX-muotoon.</p>
+          <p class="meta mono fade d3"><span data-ver>Windows 10 &amp; 11</span> · MIT-lisenssi · Ei tiliä · Ei telemetriaa</p>
+        </div>
+        <div class="cta fade d2">
+          <a class="btn solid" data-dl href="https://github.com/Cphmartinus/marknote/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>Lataa Windowsille</a>
+          <a class="btn ghost" href="#video">Katso 2 minuutin esittely</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="screen" id="screen"><video id="demo" muted loop playsinline preload="auto" width="960" height="576" poster="../demo-poster.webp" aria-label="MarkNote-esittely: Markdownin kirjoittaminen rinnakkain, vuokaavion rakentaminen kaavioeditorissa, Wordin tyylisen pikavalikon avaaminen ja siirtyminen lukutilaan"><source src="../demo.webm" type="video/webm"><source src="../demo.mp4" type="video/mp4"><img src="../demo.gif" width="960" height="576" alt="MarkNote-esittely: Markdownin kirjoittaminen rinnakkain, vuokaavion rakentaminen kaavioeditorissa, Wordin tyylisen pikavalikon avaaminen ja siirtyminen lukutilaan"></video></div>
+  </div>
+</header>
+
+<main>
+  <section class="tourvid" id="video" aria-labelledby="video-h">
+    <div class="wrap">
+      <div class="tv-head">
+        <div>
+          <p class="kicker mono" data-r>— <b>Kahden minuutin esittely</b></p>
+          <h2 id="video-h" data-r style="--d:1">Katso se <em>toiminnassa</em>.</h2>
+        </div>
+        <p class="sub" data-r style="--d:2">Kaikki ominaisuudet kahdessa minuutissa, englanninkielisellä selostuksella ja tekstityksellä.</p>
+      </div>
+      <div class="tv-frame" data-r style="--d:2">
+        <video id="tour" controls preload="none" playsinline width="1920" height="1080" poster="../marknote-tour.webp" aria-label="MarkNote kahdessa minuutissa: ominaisuuksien esittely selostuksella">
+          <source src="../marknote-tour.mp4" type="video/mp4">
+          <track kind="subtitles" src="../marknote-tour.en.vtt" srclang="en" label="English">
+          <a href="../marknote-tour.mp4">Lataa kahden minuutin esittely (MP4)</a>
+        </video>
+        <button class="tv-play" type="button" aria-label="Toista kahden minuutin esittely"><span class="tri" aria-hidden="true"></span><span class="lbl">Toista · 2:03 · Äänen kanssa</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="setter" aria-labelledby="setter-h">
+    <div class="setter-track">
+      <div class="setter-pin">
+        <div class="wrap setter-grid">
+          <div>
+            <p class="kicker mono" data-r>01 <b>— Idea</b></p>
+            <h2 id="setter-h" data-r style="--d:1">Kirjoita pelkkää tekstiä.<br> <em>Saat sivun.</em></h2>
+            <p class="sub" data-r style="--d:2">Tiedosto pysyy yksinkertaisena Markdownina, jota mikä tahansa ohjelma osaa lukea. MarkNote taittaa sen asiakirjaksi sitä mukaa kuin kirjoitat.</p>
+            <div class="meter mono" aria-hidden="true"><span class="track"><span class="fill"></span></span><span class="count">Taitettu 0 / 7 riviä</span></div>
+          </div>
+          <div class="sheet" data-r style="--d:2">
+            <div class="sheet-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="name">neljannesvuosikatsaus.md</span><span class="mode" aria-hidden="true"><span class="on">Markdown</span><span>Sivu</span></span></div>
+            <div class="sheet-body">
+              <div class="ln"><div class="raw"><span class="t"># </span><span>Neljännesvuosikatsaus</span></div><div class="out o-h1">Neljännesvuosikatsaus</div></div>
+              <div class="ln"><div class="raw"><span>Tiedosto pysyy </span><span class="t">**</span><span>pelkkänä Markdownina</span><span class="t">**</span><span>.</span></div><div class="out o-p">Tiedosto pysyy <strong>pelkkänä Markdownina</strong>.</div></div>
+              <div class="ln"><div class="raw"><span class="t">## </span><span>Päätökset</span></div><div class="out o-h2">Päätökset</div></div>
+              <div class="ln"><div class="raw"><span class="t">- [x] </span><span>Hyväksy </span><span class="t">==</span><span>budjetti</span><span class="t">==</span><span></span></div><div class="out o-task"><i class="box x"></i><span>Hyväksy <span class="hl">budjetti</span></span></div></div>
+              <div class="ln"><div class="raw"><span class="t">- [ ] </span><span>Julkaise ohjeistus</span></div><div class="out o-task"><i class="box"></i><span>Julkaise ohjeistus</span></div></div>
+              <div class="ln"><div class="raw"><span class="t">&gt; </span><span>Pelkkä teksti ei vanhene koskaan.</span></div><div class="out o-quote">Pelkkä teksti ei vanhene koskaan.</div></div>
+              <div class="ln"><div class="raw"><span class="c">```mermaid
+flowchart LR
+</span><span>  Luonnos </span><span class="t">--&gt;</span><span> Tarkistus </span><span class="t">--&gt;</span><span> Julkaisu
+</span><span class="c">```</span></div><div class="out o-flow"><svg viewBox="0 0 420 54" role="img" aria-label="Vuokaavio: Luonnos, Tarkistus, Julkaisu"><rect x="1" y="5" width="100" height="44" rx="22"/><text x="51" y="32" text-anchor="middle">Luonnos</text><path d="M101 27H151"/><polygon points="159,27 150,22 150,32"/><rect x="160" y="5" width="100" height="44" rx="6"/><text x="210" y="32" text-anchor="middle">Tarkistus</text><path d="M260 27H310"/><polygon points="318,27 309,22 309,32"/><rect x="319" y="5" width="100" height="44" rx="22"/><text x="369" y="32" text-anchor="middle">Julkaisu</text></svg></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="wrap">
+      <p class="kicker mono" data-r>02 <b>— Näin se toimii</b></p>
+      <h2 data-r style="--d:1">Pelkästä tekstistä <em>valmiiksi sivuksi</em>.</h2>
+      <p class="sub" data-r style="--d:2">Neljä hetkeä, joissa Markdown tuntuu tekstinkäsittelyohjelmalta.</p>
+
+      <div class="story">
+        <div class="steps">
+          <article class="step" data-step="0">
+            <p class="no">01 / KIRJOITA</p>
+            <h3>Kirjoita Markdownia, näe asiakirja.</h3>
+            <p>Vasemmalla Markdown, oikealla muotoiltu sivu. Kirjoita kumpaan tahansa ruutuun, niin toinen seuraa mukana, ja voit työskennellä haluamallasi tavalla.</p>
+            <img class="inline-shot" src="../story-write.webp" width="1800" height="1080" alt="Reaaliaikainen esikatselu, jossa Markdown on vasemmalla ja muotoiltu asiakirja oikealla" loading="lazy">
+          </article>
+          <article class="step" data-step="1">
+            <p class="no">02 / KAAVIO</p>
+            <h3>Kaaviot ilman riviäkään koodia.</h3>
+            <p>Lisää vaiheita, valitse muodot ja värit, yhdistä ne ja nimeä nuolet. Vuokaaviot, sekvenssikaaviot, ympyrä- ja Gantt-kaaviot piirtyvät sitä mukaa kuin kirjoitat.</p>
+            <img class="inline-shot" src="../diagram-editor.webp" width="1200" height="720" alt="Kaavioeditori, jossa vaiheet ja yhteydet ovat vasemmalla ja piirretty vuokaavio oikealla" loading="lazy">
+          </article>
+          <article class="step" data-step="2">
+            <p class="no">03 / MUOTOILE</p>
+            <h3>Hiiren kakkospainike, aivan kuten Wordissa.</h3>
+            <p>Minityökalurivi otsikoille, lihavoinnille, korostukselle ja luetteloille, liittämisasetukset, Lisää-valikko ja Uusi kommentti juuri siinä, missä hiiri jo on.</p>
+            <img class="inline-shot" src="../context-menu.webp" width="1200" height="720" alt="Wordin tyylinen pikavalikko, jossa on muotoilurivi ja liittämisasetukset" loading="lazy">
+          </article>
+          <article class="step" data-step="3">
+            <p class="no">04 / JAA</p>
+            <h3>Lue se ja lähetä Wordina tai PDF:nä.</h3>
+            <p>Lukutila näyttää asiakirjan sivuna. Vie aitoon DOCX-muotoon, PDF:ksi tai erilliseksi verkkosivuksi kaavioineen ja kaavoineen.</p>
+            <img class="inline-shot" src="../story-read.webp" width="1800" height="1080" alt="Lukutila, jossa muotoiltu asiakirja näkyy sivuna ja Vienti ja työkalut -välilehti on auki" loading="lazy">
+          </article>
+        </div>
+        <div class="plates" aria-hidden="true">
+         <div class="frame-wrap">
+          <div class="bign"><span class="on">01</span><span>02</span><span>03</span><span>04</span></div>
+          <div class="frame">
+            <img src="../story-write.webp" alt="" class="on">
+            <img src="../diagram-editor.webp" alt="" loading="lazy">
+            <img src="../context-menu.webp" alt="" loading="lazy">
+            <img src="../story-read.webp" alt="" loading="lazy">
+          </div>
+          <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="features">
+    <div class="wrap">
+      <p class="kicker mono" data-r>03 <b>— Kaikki mukana</b></p>
+      <h2 data-r style="--d:1">Kaikki, mitä Markdown-editori tarvitsee, <em>yhdessä paikassa</em>.</h2>
+      <div class="index">
+        <div class="row" data-r><span class="n">01</span><h3>Kolme näkymää</h3><p>Raaka Markdown syntaksivärein, reaaliaikainen esikatselu rinnakkain ja selkeä lukutila.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">02</span><h3>Kaavioeditori <small>Uutta</small></h3><p>Vuokaaviot, sekvenssikaaviot, ympyrä- ja Gantt-kaaviot yksinkertaisista taulukoista, tallennettuna Mermaid-muotoon.</p></div>
+        <div class="row" data-r><span class="n">03</span><h3>Kaikki Wordin tapaan</h3><p>Valintanauha, sininen otsikkorivi, pikavalikko minityökalurivillä ja työkaluvihjeet, jotka opettavat syntaksin.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">04</span><h3>Word Markdowniksi</h3><p>Avaa <code>.docx</code>- tai <code>.html</code>-tiedosto, niin se muunnetaan Markdowniksi kuvineen.</p></div>
+        <div class="row" data-r><span class="n">05</span><h3>Vienti PDF- ja Word-muotoon</h3><p>PDF, aito Word-asiakirja (.docx), erillinen verkkosivu tai pelkkä <code>.md</code>.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">06</span><h3>Taulukot, alaviitteet, kaavat</h3><p>Vuorovaikutteinen taulukkotyökalu, suhteelliset kuvapolut, alaviitteet, piilotetut kommentit ja LaTeX.</p></div>
+        <div class="row" data-r><span class="n">07</span><h3>Älä koskaan menetä työtäsi</h3><p>Automaattiset tilannevedokset, jotka voi palauttaa, ja useita asiakirjoja auki yhtä aikaa välilehdillä.</p></div>
+        <div class="row" data-r style="--d:1"><span class="n">08</span><h3>Pysyy ajan tasalla <small>Uutta</small></h3><p>MarkNote kertoo, kun uusi versio on julkaistu, ja asennusohjelma osaa päivittää itsensä.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="langs" aria-label="Saatavilla 13 kielellä">
+    <div class="wrap"><p class="lbl mono" data-r>04 — Puhuu 13 kieltä ja noudattaa Windowsin asetusta</p></div>
+    <div class="marquee" aria-hidden="true">
+      <span>Dansk</span><span>English</span><span>Deutsch</span><span>Français</span><span>Español</span><span>Italiano</span><span>Nederlands</span><span>Português</span><span>Polski</span><span>Svenska</span><span>Norsk</span><span>Suomi</span><span>Íslenska</span>
+      <span>Dansk</span><span>English</span><span>Deutsch</span><span>Français</span><span>Español</span><span>Italiano</span><span>Nederlands</span><span>Português</span><span>Polski</span><span>Svenska</span><span>Norsk</span><span>Suomi</span><span>Íslenska</span>
+    </div>
+    <p class="wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tanska, englanti, saksa, ranska, espanja, italia, hollanti, portugali, puola, ruotsi, norja, suomi ja islanti.</p>
+  </div>
+
+  <section class="statement">
+    <div class="wrap">
+      <p class="kicker mono" data-r>05 <b>— Tietosuoja</b></p>
+      <h2 data-r style="--d:1">Sanasi pysyvät <em>sinun</em>.</h2>
+      <div class="cols">
+        <div data-r><h3>Omalla tietokoneellasi</h3><p>MarkNote toimii täysin ilman verkkoyhteyttä. Asiakirjoja luetaan ja kirjoitetaan vain, kun avaat tai tallennat ne.</p></div>
+        <div data-r style="--d:1"><h3>Ei tiliä, ei seurantaa</h3><p>Ei telemetriaa, ei analytiikkaa, ei mainoksia. Ei mitään, mihin rekisteröityä.</p></div>
+        <div data-r style="--d:2"><h3>Yksi kysymys päivässä</h3><p>Korkeintaan kerran päivässä ohjelma kysyy GitHubilta, onko uutta versiota. Sen voi poistaa käytöstä. <a href="https://github.com/Cphmartinus/marknote/blob/main/PRIVACY.md">Tietosuojakäytäntö</a> (englanniksi)</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <p class="kicker mono" data-r>06 <b>— Aloita</b></p>
+      <h2 data-r style="--d:1">Valmiina <em>minuutissa</em>.</h2>
+      <div class="start-grid">
+        <div data-r><span class="big">1</span><h3>Lataa</h3><p>Suosittelemme tiedostoa <code>MarkNote-Setup.exe</code>: nopein käynnistys, avaa <code>.md</code>-tiedostot ja asentaa tulevat päivitykset itse. Etkö halua asentaa mitään? Hae siirrettävä exe-versio <a href="https://github.com/Cphmartinus/marknote/releases">kaikista latauksista</a>.</p></div>
+        <div data-r style="--d:1"><span class="big">2</span><h3>Käynnistä MarkNote</h3><p>Ohjelmaa ei ole vielä koodiallekirjoitettu, joten Windows voi näyttää SmartScreen-varoituksen ensimmäisellä kerralla. Valitse <strong>Lisätietoja → Suorita silti</strong>.</p></div>
+        <div data-r style="--d:2"><span class="big">3</span><h3>Kirjoita</h3><p>Avaa Markdown- tai Word-tiedosto tai ala vain kirjoittaa. Saat ohjeen painamalla <code>F1</code>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="faq">
+    <div class="wrap">
+      <p class="kicker mono" data-r>07 <b>— Kysymykset</b></p>
+      <h2 data-r style="--d:1">Kysymyksiä MarkNotesta, <em>vastauksineen</em>.</h2>
+      <div class="faq">
+        <details data-r><summary>Onko MarkNote ilmainen?</summary><div class="a"><p>On. MarkNote on ilmainen ja avointa lähdekoodia MIT-lisenssillä. Ei tiliä, tilausta, mainoksia eikä maksullista versiota.</p></div></details>
+        <details data-r><summary>Miten avaan .md-tiedoston Windowsissa?</summary><div class="a"><p>Asenna MarkNote tiedostolla MarkNote-Setup.exe. Sen jälkeen Markdown-tiedostot avautuvat MarkNoteen kaksoisnapsauttamalla. Voit myös valita Tiedosto → Avaa tai vetää tiedoston ikkunaan.</p></div></details>
+        <details data-r><summary>Voinko muuntaa Word-asiakirjan Markdowniksi?</summary><div class="a"><p>Voit. Avaa .docx- tai .html-tiedosto MarkNotessa, niin se muunnetaan Markdowniksi kuvineen. Voit myös toimia toisin päin ja viedä Markdownin aidoksi Word-asiakirjaksi tai PDF:ksi.</p></div></details>
+        <details data-r><summary>Pitääkö minun osata Markdown-syntaksi?</summary><div class="a"><p>Ei tarvitse. Voit muotoilla valintanauhalla ja pikavalikolla, kirjoittaa suoraan muotoiltuun sivuun ja rakentaa kaavioita visuaalisessa editorissa. MarkNote kirjoittaa Markdownin puolestasi, ja työkaluvihjeet näyttävät syntaksin, jos haluat oppia sen.</p></div></details>
+        <details data-r><summary>Tukeeko MarkNote Mermaid-kaavioita?</summary><div class="a"><p>Tukee. Vuokaaviot, sekvenssikaaviot, ympyräkaaviot ja Gantt-kaaviot voi rakentaa kaavioeditorissa ilman koodia, ja ne tallennetaan tiedostoon Mermaid-muodossa. Muut Mermaid-kaaviotyypit voi kirjoittaa koodina.</p></div></details>
+        <details data-r><summary>Miksi Windows näyttää SmartScreen-varoituksen?</summary><div class="a"><p>MarkNotea ei ole vielä koodiallekirjoitettu, joten Windows ei tunnista julkaisijaa. Valitse Lisätietoja → Suorita silti. Lähdekoodi on julkinen, ja GitHub Actions kääntää jokaisen version tästä koodista.</p></div></details>
+        <details data-r><summary>Toimiiko MarkNote ilman verkkoyhteyttä?</summary><div class="a"><p>Toimii. Kaikki tapahtuu omalla tietokoneellasi. Ainoa verkkopyyntö on valinnainen uusien versioiden tarkistus GitHubista, korkeintaan kerran päivässä, ja sen voi poistaa käytöstä.</p></div></details>
+        <details data-r><summary>Onko Macille tai Linuxille omaa versiota?</summary><div class="a"><p>Ei tällä hetkellä. MarkNote on tehty Windows 10:lle ja Windows 11:lle.</p></div></details>
+        <details data-r><summary>Miten voin tukea kehittäjää?</summary><div class="a"><p>MarkNote on ilmainen ja pysyy ilmaisena. Jos se säästää aikaasi, voit tarjota kehittäjälle kahvin <a href="https://ko-fi.com/martincph" rel="noopener">Ko-fissa</a>. Myös virheiden ilmoittaminen, ominaisuuksien ehdottaminen ja MarkNotesta kertominen muille auttaa.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="outro on-blue">
+    <div class="wrap">
+      <p class="kicker mono" data-r>— <b>Ilmainen, pysyvästi</b></p>
+      <h2 data-r>Ala <em>kirjoittaa</em>.</h2>
+      <div class="cta" data-r style="--d:2">
+        <a class="btn solid" data-dl href="https://github.com/Cphmartinus/marknote/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>Lataa Windowsille</a>
+        <a class="btn ghost" href="https://github.com/Cphmartinus/marknote">Katso lähdekoodi</a>
+      </div>
+      <p class="note mono" data-ver data-r style="--d:3">Uusin versio · Windows 10 &amp; 11 · 64-bittinen</p>
+      <p class="note" data-r style="--d:3">Käyttöoppaat Word-muodossa: <a href="../MarkNote-user-guide.docx">englanniksi</a> · <a href="../MarkNote-vejledning.docx">tanskaksi</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>MarkNote · MIT-lisenssi · Fontit: Instrument Serif &amp; IBM Plex (SIL OFL)</span>
+    <span><a href="https://github.com/Cphmartinus/marknote">Lähdekoodi</a> · <a href="https://github.com/Cphmartinus/marknote/issues">Ilmoita ongelmasta</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CHANGELOG.md">Muutosloki</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CODE_SIGNING_POLICY.md">Koodin allekirjoituskäytäntö</a></span>
+    <nav class="flangs" aria-label="Kieli"><a href="../" hreflang="en" lang="en" data-setlang="en">English</a><a href="../da/" hreflang="da" lang="da" data-setlang="da">Dansk</a><a href="../de/" hreflang="de" lang="de" data-setlang="de">Deutsch</a><a href="../fr/" hreflang="fr" lang="fr" data-setlang="fr">Français</a><a href="../es/" hreflang="es" lang="es" data-setlang="es">Español</a><a href="../it/" hreflang="it" lang="it" data-setlang="it">Italiano</a><a href="../nl/" hreflang="nl" lang="nl" data-setlang="nl">Nederlands</a><a href="../pt/" hreflang="pt" lang="pt" data-setlang="pt">Português</a><a href="../pl/" hreflang="pl" lang="pl" data-setlang="pl">Polski</a><a href="../sv/" hreflang="sv" lang="sv" data-setlang="sv">Svenska</a><a href="../nb/" hreflang="nb" lang="nb" data-setlang="nb">Norsk</a><a href="../fi/" hreflang="fi" lang="fi" data-setlang="fi" aria-current="page">Suomi</a><a href="../is/" hreflang="is" lang="is" data-setlang="is">Íslenska</a></nav>
+  </div>
+</footer>
+<div class="suggest" id="suggest" hidden role="region" aria-live="polite"><span class="s-t"></span><a class="s-b" href="#"></a><button class="s-x" type="button">×</button></div>
+<script>
+(function () {
+  var page = "fi", D = {"en":{"t":"This page is also available in English.","b":"Show in English","x":"Close","u":"../"},"da":{"t":"Denne side findes også på dansk.","b":"Vis på dansk","x":"Luk","u":"../da/"},"de":{"t":"Diese Seite gibt es auch auf Deutsch.","b":"Auf Deutsch anzeigen","x":"Schließen","u":"../de/"},"fr":{"t":"Cette page existe aussi en français.","b":"Afficher en français","x":"Fermer","u":"../fr/"},"es":{"t":"Esta página también está disponible en español.","b":"Ver en español","x":"Cerrar","u":"../es/"},"it":{"t":"Questa pagina è disponibile anche in italiano.","b":"Mostra in italiano","x":"Chiudi","u":"../it/"},"nl":{"t":"Deze pagina is ook in het Nederlands beschikbaar.","b":"Toon in het Nederlands","x":"Sluiten","u":"../nl/"},"pt":{"t":"Esta página também está disponível em português.","b":"Ver em português","x":"Fechar","u":"../pt/"},"pl":{"t":"Ta strona jest dostępna także po polsku.","b":"Pokaż po polsku","x":"Zamknij","u":"../pl/"},"sv":{"t":"Den här sidan finns också på svenska.","b":"Visa på svenska","x":"Stäng","u":"../sv/"},"nb":{"t":"Denne siden finnes også på norsk.","b":"Vis på norsk","x":"Lukk","u":"../nb/"},"fi":{"t":"Tämä sivu on saatavilla myös suomeksi.","b":"Näytä suomeksi","x":"Sulje","u":"../fi/"},"is":{"t":"Þessi síða er líka til á íslensku.","b":"Sýna á íslensku","x":"Loka","u":"../is/"}};
+  var store = function (k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-setlang]'); if (a) store('mn.lang', a.getAttribute('data-setlang'));
+    document.querySelectorAll('details.lang[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+  if (store('mn.lang')) return;
+  var want = null, langs = navigator.languages || [navigator.language || ''];
+  for (var i = 0; i < langs.length && !want; i++) {
+    var l = String(langs[i]).toLowerCase().split('-')[0]; if (l === 'no' || l === 'nn') l = 'nb';
+    if (D[l]) want = l;
+  }
+  if (!want || want === page) return;
+  var box = document.getElementById('suggest'), d = D[want];
+  box.setAttribute('lang', want);
+  box.querySelector('.s-t').textContent = d.t;
+  var b = box.querySelector('.s-b'); b.textContent = d.b; b.href = d.u; b.setAttribute('data-setlang', want);
+  var x = box.querySelector('.s-x'); x.setAttribute('aria-label', d.x);
+  x.addEventListener('click', function () { store('mn.lang', page); box.hidden = true; });
+  setTimeout(function () { box.hidden = false; }, 1200);
+})();
+</script>
+
+<script>
+var L = {"lines":"Taitettu {k} / {n} riviä","ver":"Versio {v} · {mb} Mt · Windows 10 ja 11"};
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+
+  /* 1. load sequence: wait for fonts (max 700 ms), then play the hero timeline */
+  var go = function () { document.body.classList.add('loaded'); setTimeout(function () { var m = document.querySelector('.hero [data-mk]'); if (m) m.classList.add('in'); }, 50); };
+  if (document.fonts && document.fonts.ready && !reduce) { Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 700); })]).then(go); } else go();
+
+  /* 2a. split section headlines into words that rise one by one */
+  function split(el) {
+    var i = 0;
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    (function walk(node) {
+      [].slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var f = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function (w) {
+            if (!w) return;
+            if (/^\s+$/.test(w)) { f.appendChild(document.createTextNode(' ')); return; }
+            var o = document.createElement('span'), s = document.createElement('span');
+            o.className = 'w'; o.setAttribute('aria-hidden', 'true'); s.textContent = w; s.style.setProperty('--i', i++);
+            o.appendChild(s); f.appendChild(o);
+          });
+          node.replaceChild(f, c);
+        } else if (c.nodeType === 1) walk(c);
+      });
+    })(el);
+    el.classList.add('split');
+  }
+  if (!reduce) document.querySelectorAll('main h2').forEach(split);
+
+  /* 1b. demo video plays only when motion is welcome */
+  var demo = document.getElementById('demo');
+  if (demo && !reduce && demo.play) { var pr = demo.play(); if (pr && pr['catch']) pr['catch'](function () {}); }
+
+  /* 1c. two-minute tour: our own play button, then the browser's controls */
+  var tour = document.getElementById('tour'), tourBtn = document.querySelector('.tv-play');
+  if (tour && tourBtn) {
+    tour.controls = false;
+    var startTour = function () { tour.controls = true; tour.parentNode.classList.add('playing'); if (demo && demo.pause) demo.pause(); };
+    tourBtn.addEventListener('click', function () { startTour(); var pt = tour.play(); if (pt && pt['catch']) pt['catch'](function () {}); });
+    tour.addEventListener('play', startTour);
+  }
+
+  /* 2. reveal once on scroll */
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' }) : null;
+  document.querySelectorAll('[data-r], .mk:not([data-mk])').forEach(function (el) { if (io && !reduce) io.observe(el); else el.classList.add('in'); });
+
+  /* 3. scroll-linked: hero screen un-tilts, progress bar, sticky bar */
+  var screen = document.getElementById('screen'), bar = document.querySelector('.bar'), prog = document.querySelector('.progress');
+  var ticking = false;
+  var track = document.querySelector('.setter-track'), lines = document.querySelectorAll('.ln'),
+      fill = document.querySelector('.meter .fill'), count = document.querySelector('.meter .count'),
+      modes = document.querySelectorAll('.sheet-bar .mode span'), lastK = -1;
+  function setter() {
+    if (!track) return;
+    var n = lines.length, k = n;
+    if (!reduce) {
+      var r = track.getBoundingClientRect(), span = r.height - window.innerHeight;
+      var p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+      k = Math.max(0, Math.min(n, Math.floor((p - 0.04) / 0.8 * (n + 1))));
+    }
+    if (k === lastK) return; lastK = k;
+    lines.forEach(function (l, i) { l.classList.toggle('set', i < k); l.classList.toggle('next', i === k); });
+    fill.style.transform = 'scaleX(' + (k / n) + ')';
+    count.textContent = L.lines.replace('{k}', k).replace('{n}', n);
+    modes[0].classList.toggle('on', k < n); modes[1].classList.toggle('on', k === n);
+  }
+  function onScroll() {
+    ticking = false;
+    setter();
+    var y = window.scrollY, vh = window.innerHeight;
+    var max = document.documentElement.scrollHeight - vh;
+    if (prog) prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    bar.classList.toggle('on', y > vh * 0.75);
+    if (!reduce && screen) {
+      var r = screen.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.9)));
+      var e = 1 - Math.pow(1 - p, 3);
+      screen.style.setProperty('--tilt', (16 * (1 - e)).toFixed(2) + 'deg');
+      screen.style.transform = 'rotateX(' + (16 * (1 - e)).toFixed(2) + 'deg) scale(' + (0.97 + 0.03 * e).toFixed(4) + ')';
+    }
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* 4. scrollytelling: the step in the middle of the viewport picks the plate */
+  var nums = document.querySelectorAll('.bign span'), plates = document.querySelectorAll('.plates img'), dots = document.querySelectorAll('.dots i'), steps = document.querySelectorAll('.step');
+  function activate(i) {
+    steps.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    plates.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+    dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+    nums.forEach(function (d, k) { d.classList.toggle('on', k === i); d.classList.toggle('gone', k < i); });
+  }
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) activate(+e.target.getAttribute('data-step')); });
+    }, { rootMargin: '-48% 0px -48% 0px' });
+    steps.forEach(function (s) { so.observe(s); });
+  }
+  activate(0);
+
+  /* 6. download buttons fetch the installer of the latest release directly (falls back to the releases page) */
+  if (window.fetch) {
+    fetch('https://api.github.com/repos/Cphmartinus/marknote/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rel) {
+        if (!rel || !rel.assets) return;
+        var a = rel.assets.filter(function (x) { return /^MarkNote-Setup-.*\.exe$/i.test(x.name); })[0];
+        if (!a || a.browser_download_url.indexOf('https://github.com/Cphmartinus/marknote/releases/download/') !== 0) return;
+        document.querySelectorAll('a[data-dl]').forEach(function (el) { el.href = a.browser_download_url; el.setAttribute('download', ''); });
+        document.querySelectorAll('[data-ver]').forEach(function (el) { el.textContent = L.ver.replace('{v}', String(rel.tag_name).replace(/^v/, '')).replace('{mb}', Math.round(a.size / 1048576)); });
+      })['catch'](function () {});
+  }
+
+  /* 5. language marquee drifts on its own and speeds up while you scroll */
+  var mq = document.querySelector('.marquee');
+  if (mq && !reduce && window.requestAnimationFrame) {
+    mq.style.animation = 'none';
+    var x = 0, half = 0, lastY = window.scrollY, boost = 0, seen = false;
+    var measure = function () { half = mq.scrollWidth / 2; };
+    measure(); window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }).observe(mq); else seen = true;
+    (function loop() {
+      var y = window.scrollY; boost = boost * 0.9 + Math.min(60, Math.abs(y - lastY)) * 0.1; lastY = y;
+      if (seen && half) { x -= 0.45 + boost * 0.55; if (x <= -half) x += half; mq.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0)'; }
+      requestAnimationFrame(loop);
+    })();
+  }
+})();
+</script>
+</body>
+</html>

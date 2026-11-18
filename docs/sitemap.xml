@@ -1,12 +1,350 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://cphmartinus.github.io/marknote/</loc>
     <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
     <video:video>
       <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
       <video:title>MarkNote in two minutes</video:title>
-      <video:description>A two-minute tour of MarkNote, a free Markdown editor for Windows with a Word-style ribbon, live preview, a diagram editor and export to Word and PDF.</video:description>
+      <video:description>A two-minute tour of MarkNote with voice-over: live preview, editing in the page, the Word-style right-click menu, the diagram editor, opening Word files, export, find and replace, reading mode, themes and languages.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/da/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote på to minutter</video:title>
+      <video:description>En rundtur i MarkNote på to minutter med speak: live-visning, redigering direkte på siden, den Word-agtige højrekliksmenu, diagrameditoren, åbning af Word-filer, eksport, søg og erstat, læsevisning, temaer og sprog.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/de/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote in zwei Minuten</video:title>
+      <video:description>Ein Rundgang durch MarkNote in zwei Minuten mit Sprecher: Live-Vorschau, Bearbeiten direkt in der Seite, das Kontextmenü im Word-Stil, der Diagramm-Editor, Word-Dateien öffnen, Export, Suchen und Ersetzen, Lesemodus, Designs und Sprachen.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/fr/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote en deux minutes</video:title>
+      <video:description>Une visite de MarkNote en deux minutes avec voix off : aperçu en direct, édition dans la page, menu contextuel façon Word, éditeur de diagrammes, ouverture de fichiers Word, export, rechercher et remplacer, mode lecture, thèmes et langues.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/es/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote en dos minutos</video:title>
+      <video:description>Un recorrido por MarkNote en dos minutos con locución: vista previa en vivo, edición en la página, el menú contextual al estilo Word, el editor de diagramas, abrir archivos de Word, exportar, buscar y reemplazar, modo lectura, temas e idiomas.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/it/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote in due minuti</video:title>
+      <video:description>Un tour di MarkNote in due minuti con voce narrante: anteprima dal vivo, modifica nella pagina, il menu contestuale in stile Word, l’editor dei diagrammi, apertura di file Word, esportazione, trova e sostituisci, modalità lettura, temi e lingue.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/nl/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote in twee minuten</video:title>
+      <video:description>Een rondleiding door MarkNote in twee minuten met voice-over: live voorbeeld, bewerken in de pagina, het snelmenu in Word-stijl, de diagrameditor, Word-bestanden openen, exporteren, zoeken en vervangen, leesmodus, thema’s en talen.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/pt/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote em dois minutos</video:title>
+      <video:description>Uma visita ao MarkNote em dois minutos com narração: pré-visualização em direto, edição na página, o menu de contexto ao estilo do Word, o editor de diagramas, abrir ficheiros Word, exportar, localizar e substituir, modo de leitura, temas e idiomas.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/pl/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote w dwie minuty</video:title>
+      <video:description>Dwuminutowa prezentacja MarkNote z lektorem: podgląd na żywo, edycja na stronie, menu kontekstowe w stylu Worda, edytor diagramów, otwieranie plików Word, eksport, znajdowanie i zamienianie, tryb czytania, motywy i języki.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/sv/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote på två minuter</video:title>
+      <video:description>En rundtur i MarkNote på två minuter med speakerröst: liveförhandsvisning, redigering direkt i sidan, snabbmenyn i Word-stil, diagramredigeraren, öppna Word-filer, export, sök och ersätt, läsläge, teman och språk.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/nb/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote på to minutter</video:title>
+      <video:description>En omvisning i MarkNote på to minutter med speakerstemme: forhåndsvisning i sanntid, redigering direkte på siden, hurtigmenyen i Word-stil, diagramredigereren, åpne Word-filer, eksport, søk og erstatt, lesemodus, temaer og språk.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/fi/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote kahdessa minuutissa</video:title>
+      <video:description>Kahden minuutin esittely MarkNotesta selostuksella: reaaliaikainen esikatselu, muokkaus suoraan sivulla, Wordin tyylinen pikavalikko, kaavioeditori, Word-tiedostojen avaaminen, vienti, etsi ja korvaa, lukutila, teemat ja kielet.</video:description>
+      <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+      <video:publication_date>2026-11-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://cphmartinus.github.io/marknote/is/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/"/>
+    <xhtml:link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/"/>
+    <video:video>
+      <video:thumbnail_loc>https://cphmartinus.github.io/marknote/marknote-tour.jpg</video:thumbnail_loc>
+      <video:title>MarkNote á tveimur mínútum</video:title>
+      <video:description>Tveggja mínútna kynning á MarkNote með þul: lifandi forskoðun, ritvinnsla beint á síðunni, flýtivalmyndin í Word-stíl, skýringarmyndaritillinn, opnun Word-skráa, útflutningur, leita og skipta út, lesháttur, þemu og tungumál.</video:description>
       <video:content_loc>https://cphmartinus.github.io/marknote/marknote-tour.mp4</video:content_loc>
       <video:duration>123</video:duration>
       <video:publication_date>2026-11-18</video:publication_date>

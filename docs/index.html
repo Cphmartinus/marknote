@@ -6,10 +6,25 @@
 <title>MarkNote – Free Markdown Editor for Windows, like Word</title>
 <meta name="description" content="Free Markdown editor for Windows 10 and 11 with a Word-style ribbon, live preview, diagrams without code and Word to Markdown. Download free, no account needed.">
 <link rel="canonical" href="https://cphmartinus.github.io/marknote/">
+<link rel="alternate" hreflang="en" href="https://cphmartinus.github.io/marknote/">
+<link rel="alternate" hreflang="da" href="https://cphmartinus.github.io/marknote/da/">
+<link rel="alternate" hreflang="de" href="https://cphmartinus.github.io/marknote/de/">
+<link rel="alternate" hreflang="fr" href="https://cphmartinus.github.io/marknote/fr/">
+<link rel="alternate" hreflang="es" href="https://cphmartinus.github.io/marknote/es/">
+<link rel="alternate" hreflang="it" href="https://cphmartinus.github.io/marknote/it/">
+<link rel="alternate" hreflang="nl" href="https://cphmartinus.github.io/marknote/nl/">
+<link rel="alternate" hreflang="pt" href="https://cphmartinus.github.io/marknote/pt/">
+<link rel="alternate" hreflang="pl" href="https://cphmartinus.github.io/marknote/pl/">
+<link rel="alternate" hreflang="sv" href="https://cphmartinus.github.io/marknote/sv/">
+<link rel="alternate" hreflang="nb" href="https://cphmartinus.github.io/marknote/nb/">
+<link rel="alternate" hreflang="fi" href="https://cphmartinus.github.io/marknote/fi/">
+<link rel="alternate" hreflang="is" href="https://cphmartinus.github.io/marknote/is/">
+<link rel="alternate" hreflang="x-default" href="https://cphmartinus.github.io/marknote/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MarkNote">
 <meta property="og:url" content="https://cphmartinus.github.io/marknote/">
+<meta property="og:locale" content="en_GB">
 <meta property="og:title" content="MarkNote – Free Markdown Editor for Windows, like Word">
 <meta property="og:description" content="Plain .md files with the ribbon, right-click menu and look of Word. Diagrams without code, Word to Markdown, export to PDF and DOCX. Free and open source.">
 <meta property="og:image" content="https://cphmartinus.github.io/marknote/social-preview.png">
@@ -44,7 +59,19 @@
  "installUrl": "https://github.com/Cphmartinus/marknote/releases/latest",
  "license": "https://opensource.org/licenses/MIT",
  "image": "https://cphmartinus.github.io/marknote/icon.png",
- "video": {"@type": "VideoObject", "name": "MarkNote in two minutes", "description": "A two-minute tour of MarkNote with voice-over: live preview, editing in the page, the Word-style right-click menu, the diagram editor, opening Word files, export, find and replace, reading mode, themes and languages.", "thumbnailUrl": ["https://cphmartinus.github.io/marknote/marknote-tour.jpg"], "contentUrl": "https://cphmartinus.github.io/marknote/marknote-tour.mp4", "embedUrl": "https://cphmartinus.github.io/marknote/#video", "uploadDate": "2026-11-18", "duration": "PT2M3S", "inLanguage": "en"},
+ "video": {
+  "@type": "VideoObject",
+  "name": "MarkNote in two minutes",
+  "description": "A two-minute tour of MarkNote with voice-over: live preview, editing in the page, the Word-style right-click menu, the diagram editor, opening Word files, export, find and replace, reading mode, themes and languages.",
+  "thumbnailUrl": [
+   "https://cphmartinus.github.io/marknote/marknote-tour.jpg"
+  ],
+  "contentUrl": "https://cphmartinus.github.io/marknote/marknote-tour.mp4",
+  "embedUrl": "https://cphmartinus.github.io/marknote/#video",
+  "uploadDate": "2026-11-18",
+  "duration": "PT2M3S",
+  "inLanguage": "en"
+ },
  "screenshot": [
   "https://cphmartinus.github.io/marknote/story-write.webp",
   "https://cphmartinus.github.io/marknote/diagram-editor.webp",
@@ -85,6 +112,7 @@
 {
  "@context": "https://schema.org",
  "@type": "FAQPage",
+ "inLanguage": "en",
  "mainEntity": [
   {
    "@type": "Question",
@@ -155,7 +183,7 @@
    "name": "How can I support the developer?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "MarkNote is free and always will be. If it saves you time, you can buy the developer a coffee on Ko-fi: https://ko-fi.com/martincph. Reporting bugs, suggesting features and telling others about MarkNote helps too."
+    "text": "MarkNote is free and always will be. If it saves you time, you can buy the developer a coffee on Ko-fi. Reporting bugs, suggesting features and telling others about MarkNote helps too."
    }
   }
  ]
@@ -165,13 +193,20 @@
 <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* ---------- fonts (self-hosted, SIL OFL) ---------- */
-  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
-  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; }
-  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; }
-  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
-  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-ext-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Instrument Serif"; src: url(fonts/instrument-serif-latin-ext-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-ext-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-ext-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Sans"; src: url(fonts/ibm-plex-sans-latin-ext-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-ext-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "IBM Plex Mono"; src: url(fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
 
   /* ---------- tokens: one hue (Word blue), paper canvas, one marker accent ---------- */
   :root {
@@ -242,6 +277,7 @@
   .eyebrow i { display: block; width: 36px; height: 1px; background: currentColor; opacity: .6; }
   h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(50px, 9.4vw, 140px); line-height: .94; letter-spacing: -.025em; margin: 0; }
   h1 .mk { white-space: nowrap; }
+  @media (max-width: 640px) { h1 .mk { white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; } }
   h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
   h1 .line > span { display: inline-block; transform: translateY(105%); transition: transform 1.25s var(--ease); }
   h1 em { font-style: italic; color: #fff; }
@@ -442,6 +478,33 @@
   .tv-play .lbl { background: rgba(14,26,47,.86); padding: 8px 15px; border-radius: 999px; }
   .tv-frame.playing .tv-play { display: none; }
 
+  /* ---------- language menu, footer languages, language suggestion ---------- */
+  .lang { position: relative; }
+  .lang summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 7px; padding: 6px 9px; border-radius: 8px; font-size: 15px; color: var(--ink-2); }
+  .lang summary::-webkit-details-marker { display: none; }
+  .lang summary svg { width: 17px; height: 17px; }
+  .lang summary:hover, .lang[open] summary { background: var(--paper-2); color: var(--ink); }
+  .hero .lang summary { color: var(--on-blue-2); }
+  .hero .lang summary:hover, .hero .lang[open] summary { background: rgba(255,255,255,.1); color: #fff; }
+  .lang .ln-code { display: none; font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; }
+  .lang-list { position: absolute; right: 0; top: calc(100% + 8px); z-index: 70; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; min-width: 290px; padding: 8px;
+    background: var(--card); border: 1px solid var(--rule); border-radius: 12px; box-shadow: 0 24px 60px -24px rgba(14,26,47,.5); }
+  .lang-list a { display: block; padding: 8px 12px; border-radius: 7px; text-decoration: none; color: var(--ink) !important; font-size: 14.5px; }
+  .lang-list a:hover { background: var(--paper-2); }
+  .lang-list a[aria-current] { color: var(--blue) !important; font-weight: 600; }
+  .flangs { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; padding-top: 6px; }
+  .flangs a { color: var(--ink-2); text-decoration: none; }
+  .flangs a:hover { text-decoration: underline; }
+  .flangs a[aria-current] { color: var(--ink); font-weight: 600; }
+  .suggest { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 90; display: flex; align-items: center; gap: 14px; max-width: calc(100vw - 24px);
+    background: var(--ink); color: var(--paper); padding: 10px 10px 10px 20px; border-radius: 999px; font-size: 15px; box-shadow: 0 18px 50px -12px rgba(0,0,0,.45); animation: sugIn .7s var(--ease); }
+  .suggest[hidden] { display: none; }
+  .suggest .s-b { background: var(--blue); color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+  @media (prefers-color-scheme: dark) { .suggest .s-b { color: #0b1322; } }
+  .suggest .s-x { background: none; border: 0; color: inherit; font-size: 22px; line-height: 1; padding: 4px 8px; cursor: pointer; opacity: .7; }
+  .suggest .s-x:hover { opacity: 1; }
+  @keyframes sugIn { from { opacity: 0; transform: translate(-50%, 20px); } }
+
   /* ---------- responsive ---------- */
   @media (max-width: 900px) {
     .hero-foot { grid-template-columns: 1fr; gap: 28px; }
@@ -459,6 +522,11 @@
     body { font-size: 16px; }
     .wrap { padding: 0 16px; }
     .hero .top nav a.hide-sm, .bar nav a.hide-sm { display: none; }
+    .lang .ln-full { display: none; }
+    .lang .ln-code { display: inline; }
+    .lang-list { min-width: min(290px, calc(100vw - 32px)); }
+    .suggest { font-size: 14px; width: calc(100vw - 24px); border-radius: 16px; padding: 12px 8px 12px 16px; gap: 10px; bottom: 12px; }
+    .suggest .s-t { flex: 1; min-width: 0; }
     .row { grid-template-columns: 40px 1fr; }
     .row h3 { font-size: 24px; }
     .setter h2 { font-size: 34px; margin-bottom: 0; }
@@ -499,6 +567,7 @@
       <a href="#features" class="hide-sm">Features</a>
       <a href="#faq" class="hide-sm">FAQ</a>
       <a href="https://github.com/Cphmartinus/marknote" class="hide-sm">GitHub</a>
+      <details class="lang"><summary aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg><span class="ln-full">English</span><span class="ln-code">EN</span></summary><div class="lang-list"><a href="./" hreflang="en" lang="en" data-setlang="en" aria-current="page">English</a><a href="da/" hreflang="da" lang="da" data-setlang="da">Dansk</a><a href="de/" hreflang="de" lang="de" data-setlang="de">Deutsch</a><a href="fr/" hreflang="fr" lang="fr" data-setlang="fr">Français</a><a href="es/" hreflang="es" lang="es" data-setlang="es">Español</a><a href="it/" hreflang="it" lang="it" data-setlang="it">Italiano</a><a href="nl/" hreflang="nl" lang="nl" data-setlang="nl">Nederlands</a><a href="pt/" hreflang="pt" lang="pt" data-setlang="pt">Português</a><a href="pl/" hreflang="pl" lang="pl" data-setlang="pl">Polski</a><a href="sv/" hreflang="sv" lang="sv" data-setlang="sv">Svenska</a><a href="nb/" hreflang="nb" lang="nb" data-setlang="nb">Norsk</a><a href="fi/" hreflang="fi" lang="fi" data-setlang="fi">Suomi</a><a href="is/" hreflang="is" lang="is" data-setlang="is">Íslenska</a></div></details>
       <a class="btn solid sm" data-dl href="https://github.com/Cphmartinus/marknote/releases/latest">Download</a>
     </nav>
   </div>
@@ -512,7 +581,8 @@
         <a href="#story">Tour</a>
         <a href="#features" class="hide-sm">Features</a>
         <a href="#faq" class="hide-sm">FAQ</a>
-        <a href="https://github.com/Cphmartinus/marknote">GitHub</a>
+        <a href="https://github.com/Cphmartinus/marknote" class="hide-sm">GitHub</a>
+        <details class="lang"><summary aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg><span class="ln-full">English</span><span class="ln-code">EN</span></summary><div class="lang-list"><a href="./" hreflang="en" lang="en" data-setlang="en" aria-current="page">English</a><a href="da/" hreflang="da" lang="da" data-setlang="da">Dansk</a><a href="de/" hreflang="de" lang="de" data-setlang="de">Deutsch</a><a href="fr/" hreflang="fr" lang="fr" data-setlang="fr">Français</a><a href="es/" hreflang="es" lang="es" data-setlang="es">Español</a><a href="it/" hreflang="it" lang="it" data-setlang="it">Italiano</a><a href="nl/" hreflang="nl" lang="nl" data-setlang="nl">Nederlands</a><a href="pt/" hreflang="pt" lang="pt" data-setlang="pt">Português</a><a href="pl/" hreflang="pl" lang="pl" data-setlang="pl">Polski</a><a href="sv/" hreflang="sv" lang="sv" data-setlang="sv">Svenska</a><a href="nb/" hreflang="nb" lang="nb" data-setlang="nb">Norsk</a><a href="fi/" hreflang="fi" lang="fi" data-setlang="fi">Suomi</a><a href="is/" hreflang="is" lang="is" data-setlang="is">Íslenska</a></div></details>
       </nav>
     </div>
 
@@ -577,7 +647,7 @@
               <div class="ln"><div class="raw"><span class="t"># </span><span>Quarterly review</span></div><div class="out o-h1">Quarterly review</div></div>
               <div class="ln"><div class="raw"><span>The file stays </span><span class="t">**</span><span>plain Markdown</span><span class="t">**</span><span>.</span></div><div class="out o-p">The file stays <strong>plain Markdown</strong>.</div></div>
               <div class="ln"><div class="raw"><span class="t">## </span><span>Decisions</span></div><div class="out o-h2">Decisions</div></div>
-              <div class="ln"><div class="raw"><span class="t">- [x] </span><span>Approve the </span><span class="t">==</span><span>budget</span><span class="t">==</span></div><div class="out o-task"><i class="box x"></i><span>Approve the <span class="hl">budget</span></span></div></div>
+              <div class="ln"><div class="raw"><span class="t">- [x] </span><span>Approve the </span><span class="t">==</span><span>budget</span><span class="t">==</span><span></span></div><div class="out o-task"><i class="box x"></i><span>Approve the <span class="hl">budget</span></span></div></div>
               <div class="ln"><div class="raw"><span class="t">- [ ] </span><span>Publish the guidelines</span></div><div class="out o-task"><i class="box"></i><span>Publish the guidelines</span></div></div>
               <div class="ln"><div class="raw"><span class="t">&gt; </span><span>Plain text never goes out of date.</span></div><div class="out o-quote">Plain text never goes out of date.</div></div>
               <div class="ln"><div class="raw"><span class="c">```mermaid
@@ -726,10 +796,37 @@ flowchart LR
   <div class="wrap">
     <span>MarkNote · MIT licence · Fonts: Instrument Serif &amp; IBM Plex (SIL OFL)</span>
     <span><a href="https://github.com/Cphmartinus/marknote">Source code</a> · <a href="https://github.com/Cphmartinus/marknote/issues">Report an issue</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CHANGELOG.md">Changelog</a> · <a href="https://github.com/Cphmartinus/marknote/blob/main/CODE_SIGNING_POLICY.md">Code signing policy</a></span>
+    <nav class="flangs" aria-label="Language"><a href="./" hreflang="en" lang="en" data-setlang="en" aria-current="page">English</a><a href="da/" hreflang="da" lang="da" data-setlang="da">Dansk</a><a href="de/" hreflang="de" lang="de" data-setlang="de">Deutsch</a><a href="fr/" hreflang="fr" lang="fr" data-setlang="fr">Français</a><a href="es/" hreflang="es" lang="es" data-setlang="es">Español</a><a href="it/" hreflang="it" lang="it" data-setlang="it">Italiano</a><a href="nl/" hreflang="nl" lang="nl" data-setlang="nl">Nederlands</a><a href="pt/" hreflang="pt" lang="pt" data-setlang="pt">Português</a><a href="pl/" hreflang="pl" lang="pl" data-setlang="pl">Polski</a><a href="sv/" hreflang="sv" lang="sv" data-setlang="sv">Svenska</a><a href="nb/" hreflang="nb" lang="nb" data-setlang="nb">Norsk</a><a href="fi/" hreflang="fi" lang="fi" data-setlang="fi">Suomi</a><a href="is/" hreflang="is" lang="is" data-setlang="is">Íslenska</a></nav>
   </div>
 </footer>
+<div class="suggest" id="suggest" hidden role="region" aria-live="polite"><span class="s-t"></span><a class="s-b" href="#"></a><button class="s-x" type="button">×</button></div>
+<script>
+(function () {
+  var page = "en", D = {"en":{"t":"This page is also available in English.","b":"Show in English","x":"Close","u":"./"},"da":{"t":"Denne side findes også på dansk.","b":"Vis på dansk","x":"Luk","u":"da/"},"de":{"t":"Diese Seite gibt es auch auf Deutsch.","b":"Auf Deutsch anzeigen","x":"Schließen","u":"de/"},"fr":{"t":"Cette page existe aussi en français.","b":"Afficher en français","x":"Fermer","u":"fr/"},"es":{"t":"Esta página también está disponible en español.","b":"Ver en español","x":"Cerrar","u":"es/"},"it":{"t":"Questa pagina è disponibile anche in italiano.","b":"Mostra in italiano","x":"Chiudi","u":"it/"},"nl":{"t":"Deze pagina is ook in het Nederlands beschikbaar.","b":"Toon in het Nederlands","x":"Sluiten","u":"nl/"},"pt":{"t":"Esta página também está disponível em português.","b":"Ver em português","x":"Fechar","u":"pt/"},"pl":{"t":"Ta strona jest dostępna także po polsku.","b":"Pokaż po polsku","x":"Zamknij","u":"pl/"},"sv":{"t":"Den här sidan finns också på svenska.","b":"Visa på svenska","x":"Stäng","u":"sv/"},"nb":{"t":"Denne siden finnes også på norsk.","b":"Vis på norsk","x":"Lukk","u":"nb/"},"fi":{"t":"Tämä sivu on saatavilla myös suomeksi.","b":"Näytä suomeksi","x":"Sulje","u":"fi/"},"is":{"t":"Þessi síða er líka til á íslensku.","b":"Sýna á íslensku","x":"Loka","u":"is/"}};
+  var store = function (k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-setlang]'); if (a) store('mn.lang', a.getAttribute('data-setlang'));
+    document.querySelectorAll('details.lang[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+  if (store('mn.lang')) return;
+  var want = null, langs = navigator.languages || [navigator.language || ''];
+  for (var i = 0; i < langs.length && !want; i++) {
+    var l = String(langs[i]).toLowerCase().split('-')[0]; if (l === 'no' || l === 'nn') l = 'nb';
+    if (D[l]) want = l;
+  }
+  if (!want || want === page) return;
+  var box = document.getElementById('suggest'), d = D[want];
+  box.setAttribute('lang', want);
+  box.querySelector('.s-t').textContent = d.t;
+  var b = box.querySelector('.s-b'); b.textContent = d.b; b.href = d.u; b.setAttribute('data-setlang', want);
+  var x = box.querySelector('.s-x'); x.setAttribute('aria-label', d.x);
+  x.addEventListener('click', function () { store('mn.lang', page); box.hidden = true; });
+  setTimeout(function () { box.hidden = false; }, 1200);
+})();
+</script>
 
 <script>
+var L = {"lines":"{k} / {n} lines set","ver":"Version {v} · {mb} MB · Windows 10 & 11"};
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;
@@ -797,7 +894,7 @@ flowchart LR
     if (k === lastK) return; lastK = k;
     lines.forEach(function (l, i) { l.classList.toggle('set', i < k); l.classList.toggle('next', i === k); });
     fill.style.transform = 'scaleX(' + (k / n) + ')';
-    count.textContent = k + ' / ' + n + ' lines set';
+    count.textContent = L.lines.replace('{k}', k).replace('{n}', n);
     modes[0].classList.toggle('on', k < n); modes[1].classList.toggle('on', k === n);
   }
   function onScroll() {
@@ -844,7 +941,7 @@ flowchart LR
         var a = rel.assets.filter(function (x) { return /^MarkNote-Setup-.*\.exe$/i.test(x.name); })[0];
         if (!a || a.browser_download_url.indexOf('https://github.com/Cphmartinus/marknote/releases/download/') !== 0) return;
         document.querySelectorAll('a[data-dl]').forEach(function (el) { el.href = a.browser_download_url; el.setAttribute('download', ''); });
-        document.querySelectorAll('[data-ver]').forEach(function (el) { el.textContent = 'Version ' + String(rel.tag_name).replace(/^v/, '') + ' · ' + Math.round(a.size / 1048576) + ' MB · Windows 10 & 11'; });
+        document.querySelectorAll('[data-ver]').forEach(function (el) { el.textContent = L.ver.replace('{v}', String(rel.tag_name).replace(/^v/, '')).replace('{mb}', Math.round(a.size / 1048576)); });
       })['catch'](function () {});
   }
 
