@@ -2,6 +2,12 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
+## Unreleased
+
+- Fixed: MarkNote could hang on the loading screen after installation (until Windows was restarted) when a second copy was started while another was running or still loading
+- The window is now always shown within 15 seconds, and a load error shows a message instead of a loading screen that never closes
+- A small local start-up log (`startup.log` in MarkNote's data folder) helps troubleshoot start-up problems
+
 ## 1.2.0 – 2026-11-17
 
 - Visual diagram editor: create flowcharts, sequence diagrams, pie charts and Gantt charts by filling in tables, with a live preview. Diagrams the editor cannot read open on the Code tab

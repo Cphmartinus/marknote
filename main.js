@@ -114,18 +114,45 @@ ipcMain.handle('lang:set', (_e, { spell, strings, lang }) => {
 let forceClose = false;
 let pendingOpen = null;
 
+/* ---------- opstartslog (lokal, til fejlsøgning) ---------- */
+const t0 = Date.now();
+function log(msg) {
+  try {
+    const dir = app.getPath('userData');
+    fs.mkdirSync(dir, { recursive: true });
+    const file = path.join(dir, 'startup.log');
+    if (msg === 'start') { try { if (fs.statSync(file).size > 200000) fs.unlinkSync(file); } catch (_) {} }
+    fs.appendFileSync(file, new Date().toISOString() + ' [' + process.pid + '] +' + (Date.now() - t0) + 'ms ' + msg + '\n');
+  } catch (_) {}
+}
+
 /* ---------- start ---------- */
-if (!app.requestSingleInstanceLock()) {
-  app.quit();
+const gotLock = app.requestSingleInstanceLock();
+log('start v' + app.getVersion() + (gotLock ? '' : ' (anden kopi – lukker)'));
+if (!gotLock) {
+  // En anden MarkNote kører allerede: den får besked via 'second-instance'. Luk straks, uden vinduer.
+  app.exit(0);
 } else {
   app.on('second-instance', (_e, argv) => {
-    if (win) {
+    log('second-instance');
+    if (win && !win.isDestroyed()) {
+      if (!win.isVisible() && rendererReady) { closeSplash(); win.show(); }
       if (win.isMinimized()) win.restore();
-      win.focus();
+      if (win.isVisible()) win.focus(); else if (splash && !splash.isDestroyed()) splash.focus();
       const f = fileFromArgv(argv.slice(1));
-      if (f) win.webContents.send('app:open-path', f);
+      if (f) { if (rendererReady) win.webContents.send('app:open-path', f); else pendingOpen = f; }
     }
   });
+}
+let rendererReady = false;
+let shown = false;
+function showMain(reason) {
+  if (shown || !win || win.isDestroyed()) return;
+  shown = true;
+  log('show main (' + reason + ')');
+  closeSplash();
+  win.show();
+  win.focus();
 }
 
 function fileFromArgv(argv) {
@@ -150,8 +177,25 @@ function createWindow() {
   win.webContents.session.setSpellCheckerLanguages(['da', 'en-US']);
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   win.once('ready-to-show', () => {
+    log('ready-to-show');
     const wait = Math.max(0, SPLASH_MIN_MS - (Date.now() - splashShownAt));
-    setTimeout(() => { closeSplash(); if (win) { win.show(); win.focus(); } }, wait);
+    setTimeout(() => showMain('ready'), wait);
+  });
+  // Sikkerhedsnet: vis vinduet senest efter 15 sekunder, selv hvis noget hænger
+  setTimeout(() => showMain('timeout'), 15000);
+  win.webContents.on('did-fail-load', (_e, code, desc) => {
+    log('did-fail-load ' + code + ' ' + desc);
+    showMain('fail');
+    dialog.showErrorBox('MarkNote', 'MarkNote could not load its window (' + desc + ').');
+  });
+  win.webContents.on('render-process-gone', (_e, d) => {
+    log('render-process-gone ' + (d && d.reason));
+    rendererReady = false;
+    closeSplash();
+    if (d && d.reason !== 'clean-exit' && win && !win.isDestroyed()) {
+      const r = dialog.showMessageBoxSync({ type: 'error', title: 'MarkNote', message: 'MarkNote stopped unexpectedly.', buttons: ['Reload', 'Close'], defaultId: 0, cancelId: 1, noLink: true });
+      if (r === 0) win.reload(); else { forceClose = true; app.quit(); }
+    }
   });
 
   win.webContents.setWindowOpenHandler(({ url }) => {
@@ -163,11 +207,14 @@ function createWindow() {
     openExternal(url);
   });
   win.on('close', (e) => {
-    if (!forceClose) { e.preventDefault(); win.webContents.send('app:request-close'); }
+    // Spørg kun om ugemte dokumenter, hvis vinduet er indlæst og kan svare
+    if (!forceClose && rendererReady && !win.webContents.isCrashed()) { e.preventDefault(); win.webContents.send('app:request-close'); }
   });
   win.on('closed', () => (win = null));
-  win.webContents.once('did-finish-load', () => {
-    if (pendingOpen) win.webContents.send('app:open-path', pendingOpen);
+  win.webContents.on('did-finish-load', () => {
+    rendererReady = true;
+    log('did-finish-load');
+    if (pendingOpen) { win.webContents.send('app:open-path', pendingOpen); pendingOpen = null; }
   });
 }
 
@@ -197,6 +244,8 @@ function showSplash() {
 function closeSplash() { if (splash && !splash.isDestroyed()) splash.destroy(); splash = null; }
 
 app.whenReady().then(() => {
+  if (!gotLock) return;
+  log('ready');
   pendingOpen = fileFromArgv(process.argv.slice(1));
   showSplash();
   createWindow();
