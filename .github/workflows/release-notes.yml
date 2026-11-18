@@ -1,0 +1,23 @@
+name: Update release notes
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag, e.g. v1.2.4'
+        required: true
+permissions:
+  contents: write
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace the release notes with release-notes/v<version>.md
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          FILE="release-notes/v${TAG#v}.md"
+          test -f "$FILE" || { echo "Missing $FILE"; exit 1; }
+          gh release edit "$TAG" --notes-file "$FILE"

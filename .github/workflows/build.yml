@@ -30,5 +30,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.version != '' && inputs.version || github.ref_name }}
         run: |
+          TAG="v${TAG#v}"
           if [ -f "release-notes/$TAG.md" ]; then NOTES=(--notes-file "release-notes/$TAG.md"); else NOTES=(--generate-notes); fi
           gh release create "$TAG" dist/*.exe docs/MarkNote-user-guide.docx docs/MarkNote-vejledning.docx --target "${{ github.sha }}" --title "MarkNote $TAG" "${NOTES[@]}"
