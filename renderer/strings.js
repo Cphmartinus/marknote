@@ -5233,5 +5233,20 @@ window.WD_STRINGS = [
 "Lenke…",
 "Linkki…",
 "Tengill…"
+],
+[
+"Diagrammets trin",
+"Steps",
+"Schritte",
+"Étapes",
+"Pasos",
+"Passi",
+"Stappen",
+"Passos",
+"Kroki",
+"Steg",
+"Trinn",
+"Vaiheet",
+"Skref"
 ]
 ];

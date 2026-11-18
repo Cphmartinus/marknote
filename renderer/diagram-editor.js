@@ -330,7 +330,7 @@
           const box = [...form.querySelectorAll('.dg-row.dg-nodes:not(.dg-head)')][m.nodes.indexOf(n)];
           const inp = box && box.querySelector('.dg-in'); if (inp) { inp.focus(); inp.select(); }
         }));
-        form.append(section(t('Trin'), nodesBox));
+        form.append(section(t('Diagrammets trin'), nodesBox));
 
         const lines = [['arrow', t('Pil')], ['dotted', t('Stiplet pil')], ['thick', t('Tyk pil')], ['line', t('Uden pil')]];
         const edgesBox = el('div', { class: 'dg-rows' });
