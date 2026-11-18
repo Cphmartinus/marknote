@@ -2,7 +2,7 @@
 
 All notable changes to MarkNote are listed here. Release notes for each version are in [`release-notes/`](release-notes).
 
-## Unreleased
+## 1.2.3 – 2026-11-18
 
 - Fixed: start-up sometimes took about 15 seconds on Windows because the window waited for a signal that does not always arrive while it is hidden. The window is now shown as soon as its content has loaded
 

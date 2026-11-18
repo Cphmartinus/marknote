@@ -1,6 +1,6 @@
 {
   "name": "marknote",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Markdown-læser og -editor i Microsoft Word-stil",
   "main": "main.js",
   "scripts": {
